@@ -9,7 +9,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.safetynet.SafetyNet;
+import com.google.android.gms.safetynet.SafetyNetApi;
 
 import java.sql.Date;
 
@@ -19,7 +27,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class RegisterActivity3 extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity3 extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.ConnectionCallbacks{
      String cinadd;
      String adradd;
      String teldadd;
@@ -46,6 +54,8 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
     String nom = "";
     String prenom = "";
     String sexe = "";
+    GoogleApiClient googleApiClient;
+    String Key ="6Ld2YnQaAAAAAKjcJIcpKYDBofusqkXq1CYmdu1O";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -137,10 +147,25 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
 
 
         }
+   googleApiClient = new GoogleApiClient.Builder(this)
+           .addApi(SafetyNet.API)
+           .addConnectionCallbacks(RegisterActivity3.this)
+           .build();
+        googleApiClient.connect();
     }
     @Override
     public void onClick(View v) {
+    SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient,Key)
+    .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>(){
+        @Override
+        public  void  onResult (@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult){
+            Status status= recaptchaTokenResult.getStatus();
+            if ((status != null) && status.isSuccess()) {
         ajouter();
+            }
+        }
+
+    });
 
     }
 
@@ -178,7 +203,7 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
             radioButton = (RadioButton) findViewById(selectedId);
             String habadd = radioButton.getText().toString().trim();
 
-            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.24:80/").addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
             Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd, societeadd, fonctionadd, telpadd, faxadd, langueadd, prefadd, paiementadd, habadd, classehadd, assistanceadd, typeadd);
             addUser.enqueue(new Callback<user>() {
@@ -193,6 +218,16 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
             });
 
         }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }
 
