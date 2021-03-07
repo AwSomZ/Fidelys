@@ -155,24 +155,26 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
     }
     @Override
     public void onClick(View v) {
-    SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient,Key)
-    .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>(){
-        @Override
-        public  void  onResult (@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult){
-            Status status= recaptchaTokenResult.getStatus();
-            if ((status != null) && status.isSuccess()) {
-        ajouter();
-            }
-        }
+        if (checkBox.isChecked() == false) {
+            checkBox.setError("You have To agree");
+        } else {
+            SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
+                    .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {
+                        @Override
+                        public void onResult(@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult) {
+                            Status status = recaptchaTokenResult.getStatus();
+                            if ((status != null) && status.isSuccess()) {
+                                ajouter();
+                            }
+                        }
 
-    });
+                    });
+        }
 
     }
 
     private void ajouter() {
-        if (checkBox.isChecked() == false) {
-            checkBox.setError("You have To agree");
-        } else {
+
             //assistance
             int selectedId = r6.getCheckedRadioButtonId();
             radioButton = (RadioButton) findViewById(selectedId);
@@ -218,7 +220,7 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
             });
 
         }
-    }
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {

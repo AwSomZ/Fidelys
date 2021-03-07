@@ -97,8 +97,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         radioButton = (RadioButton) findViewById(selectedId);
         String sexeadd = radioButton.getText().toString().trim();
 
-        if(emailadd.isEmpty()){
+        if(emailadd.isEmpty()) {
             email.setError("Veuillez taper votre Email");
+        }else if (android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()!=true) {
+            email.setError("Email Not Matching Format");
         }else if(nomadd.isEmpty()){
             nom.setError("Veuillez taper votre Nom");
         }else if(prenomadd.isEmpty()){
