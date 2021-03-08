@@ -123,7 +123,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         } else if (telpadd.isEmpty()) {
             telp.setError("Please enter your telp");
         } else if (cinadd.isEmpty()) {
-            telp.setError("Please enter your cin");
+            cin.setError("Please enter your cin");
         }else if (villeadd.isEmpty()) {
             ville.setError("Please enter your ville");
         } else if (paysadd.isEmpty()) {

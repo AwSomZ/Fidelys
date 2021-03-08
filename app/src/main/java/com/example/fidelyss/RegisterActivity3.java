@@ -157,6 +157,7 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (checkBox.isChecked() == false) {
             checkBox.setError("You have To agree");
+            Toast.makeText(RegisterActivity3.this, "You have To agree ", Toast.LENGTH_LONG).show();
         } else {
             SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
                     .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {

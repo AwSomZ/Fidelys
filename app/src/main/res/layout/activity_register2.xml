@@ -258,6 +258,7 @@
             android:id="@+id/fr"
             android:layout_width="142dp"
             android:layout_height="24dp"
+            android:checked="true"
             android:text="@string/Francais"
             android:textColor="@color/black"
             android:buttonTint="@color/red"
