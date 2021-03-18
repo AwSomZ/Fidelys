@@ -37,4 +37,11 @@ public interface ApiHandler {
             @Field("assistance") String var23,
             @Field("type") String var24
     );
+
+        @FormUrlEncoded
+        @POST("fidelysapi/login.php")
+        Call<client> selectUser(
+            @Field("id") String var1,
+            @Field("pin") String var2
+        );
 }

@@ -113,33 +113,32 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
 
 
 
-
-        if (adradd.isEmpty()) {
-            adr.setError("Please enter your adress");
-        } else if (teldadd.isEmpty()) {
-            teld.setError("Please enter your teld");
-        } else if (telmadd.isEmpty()) {
-            telm.setError("Please enter your telp");
-        } else if (telpadd.isEmpty()) {
-            telp.setError("Please enter your telp");
-        } else if (cinadd.isEmpty()) {
+          if (cinadd.isEmpty()) {
             cin.setError("Please enter your cin");
-        }else if (villeadd.isEmpty()) {
-            ville.setError("Please enter your ville");
-        } else if (paysadd.isEmpty()) {
-            pays.setError("Please enter your pays");
-        } else if (cpadd.isEmpty()) {
-            cp.setError("Please enter your zip code");
-        } else if (nationaliteadd.isEmpty()) {
-            nationalite.setError("Please enter your nationality");
-        } else if (fonctionadd.isEmpty()) {
-            fonction.setError("Please enter your fonction");
-        } else if (societeadd.isEmpty()) {
-            societe.setError("Please enter your societe");
-        } else if (faxadd.isEmpty()) {
-            fax.setError("Please enter your fax");
+          } else if (nationaliteadd.isEmpty()) {
+              nationalite.setError("Please enter your nationality");
+          } else if (adradd.isEmpty()) {
+            adr.setError("Please enter your adress");
+          } else if (paysadd.isEmpty()) {
+              pays.setError("Please enter your pays");
+          } else if (villeadd.isEmpty()) {
+              ville.setError("Please enter your ville");
+          } else if (cpadd.isEmpty()) {
+              cp.setError("Please enter your zip code");
+          } else if (telmadd.isEmpty()) {
+              telm.setError("Please enter your telp");
+          } else if (teldadd.isEmpty()) {
+              teld.setError("Please enter your teld");
+          } else if (societeadd.isEmpty()) {
+              societe.setError("Please enter your societe");
+          } else if (fonctionadd.isEmpty()) {
+              fonction.setError("Please enter your fonction");
+          } else if (telpadd.isEmpty()) {
+              telp.setError("Please enter your telp");
+          } else if (faxadd.isEmpty()) {
+              fax.setError("Please enter your fax");
         } else if (langueadd.isEmpty()) {
-            langue.setError("Please enter your langue");
+              langue.setError("Please enter your langue");
         } else {
 
             Intent intent = new Intent(this, RegisterActivity3.class);

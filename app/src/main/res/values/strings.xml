@@ -29,5 +29,7 @@
     <string name="Anglais">Anglais</string>
     <string name="Envoyer">Envoyer</string>
     <string name="carte_de_cr_dit">Carte de crédit</string>
+    <string name="Login">Login</string>
+    <string name="identifiant">Identifiant</string>
 
 </resources>
