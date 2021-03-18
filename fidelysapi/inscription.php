@@ -20,8 +20,14 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
     $telp=$_POST['telprofessionnel'];
     $fax=$_POST['fax'];
     $langue=$_POST['langue'];
-	$sql="insert into  user (id, sexe, nom, prenom, datenaiss, email, nationalite, adressedomicile, ville, codepostal, pays, teldomicile, telmobile, societe, fonction, telprofessionnel, fax, langue) VALUES
-      ('$id','$sexe','$nom','$prenom','$datenaiss','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm','$societe','$fonction','$telp','$fax','$langue');";
+    $preference=$_POST['preference'];
+    $paiement=$_POST['paiement'];
+    $habitude=$_POST['habitude'];
+    $classeh=$_POST['classeh'];
+    $assistance=$_POST['assistance'];
+    $type=$_POST['type'];
+	$sql="insert into  user (id, sexe, nom, prenom, datenaiss, email, nationalite, adressedomicile, ville, codepostal, pays, teldomicile, telmobile, societe, fonction, telprofessionnel, fax, langue, preference, paiement, habitude, classeh, assistance, type) VALUES
+      ('$id','$sexe','$nom','$prenom','$datenaiss','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm','$societe','$fonction','$telp','$fax','$langue','$preference','$paiement','$habitude','$classeh','$assistance','$type');";
 	$res=$bd->exec($sql);
 
 }
