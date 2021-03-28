@@ -206,13 +206,14 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
             radioButton = (RadioButton) findViewById(selectedId);
             String habadd = radioButton.getText().toString().trim();
 
-            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.43.74:80/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.14:80/").addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
             Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd, societeadd, fonctionadd, telpadd, faxadd, langueadd, prefadd, paiementadd, habadd, classehadd, assistanceadd, typeadd);
             addUser.enqueue(new Callback<user>() {
                 public void onResponse(Response<user> response, Retrofit retrofit) {
                     Toast.makeText(RegisterActivity3.this, "user successfully registred ", Toast.LENGTH_LONG).show();
-                    finish();
+                    Intent intent = new Intent(RegisterActivity3.this, Redirection.class);
+                    startActivity(intent);
                 }
 
                 public void onFailure(Throwable t) {

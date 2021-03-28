@@ -13,9 +13,11 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.sql.Date;
 import java.util.Calendar;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
@@ -56,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 DatePickerDialog dialog;
                 dialog = new DatePickerDialog(RegisterActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
                 dialog.show();
             }
         });
@@ -65,8 +68,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onDateSet(DatePicker datePicker, int year, int month, int day){
                 month= month+1;
                 Log.d(TAG, "onDateSet: yyyy-mm-dd "+ year +"-"+month+"-"+day);
-                String date= year+"-"+month+"-"+day;
-                mDisplayDate.setText(date);
+                if (2021-year<2){
+                    Toast.makeText(RegisterActivity.this, "you are too young ", Toast.LENGTH_LONG).show();
+
+                    ((Button)findViewById(R.id.button)).setEnabled(false);
+                }
+                else {((Button)findViewById(R.id.button)).setEnabled(true);}
+
+                    String date = year + "-" + month + "-" + day;
+                    mDisplayDate.setText(date);
+
+
+
             }
         };
     }
@@ -96,6 +109,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         int selectedId = radioGroup.getCheckedRadioButtonId();
         radioButton = (RadioButton) findViewById(selectedId);
         String sexeadd = radioButton.getText().toString().trim();
+        java.util.Date date= Date.valueOf(dateadd);
 
         if(emailadd.isEmpty()) {
             email.setError("Veuillez taper votre Email");
@@ -105,7 +119,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             nom.setError("Veuillez taper votre Nom");
         }else if(prenomadd.isEmpty()){
             prenom.setError("Veuillez taper votre Prenom");
-        }else if(sexeadd.isEmpty()){
+        }
+
+    else if(sexeadd.isEmpty()){
             sexe.setError("Veuillez choisir votre sexe");
         }
         else{

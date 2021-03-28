@@ -20,6 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.144" />
+
     <TextView
         android:id="@+id/typead"
         android:layout_width="wrap_content"
@@ -28,9 +29,10 @@
         android:textColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/type"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.051"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.938" />
+        app:layout_constraintVertical_bias="0.933" />
 
     <RadioGroup
         android:id="@+id/type"
@@ -39,7 +41,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.26">
@@ -47,9 +49,9 @@
 
         <RadioButton
             android:id="@+id/ind"
-            android:buttonTint="@color/red"
             android:layout_width="144dp"
             android:layout_height="24dp"
+            android:buttonTint="@color/red"
             android:checked="true"
             android:text="@string/ind"
             android:textColor="@color/black"
@@ -81,18 +83,19 @@
         android:textColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/pref"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.055"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.978" />
 
     <RadioGroup
         android:id="@+id/pref"
-        android:layout_width="412dp"
-        android:layout_height="29dp"
+        android:layout_width="397dp"
+        android:layout_height="32dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.545">
@@ -102,9 +105,9 @@
             android:id="@+id/hub"
             android:layout_width="135dp"
             android:layout_height="36dp"
-            android:text="Côté hublot"
             android:buttonTint="@color/red"
             android:checked="true"
+            android:text="Côté hublot"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -146,21 +149,23 @@
         android:textColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/payment"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.969" />
+        app:layout_constraintVertical_bias="0.965" />
+
 
     <RadioGroup
         android:id="@+id/payment"
-        android:layout_width="419dp"
-        android:layout_height="33dp"
+        android:layout_width="389dp"
+        android:layout_height="31dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.445">
+        app:layout_constraintVertical_bias="0.447">
 
 
         <RadioButton
@@ -168,8 +173,8 @@
             android:layout_width="142dp"
             android:layout_height="24dp"
             android:buttonTint="@color/red"
-            android:text="@string/carte_de_cr_dit"
             android:checked="true"
+            android:text="@string/carte_de_cr_dit"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -212,11 +217,10 @@
         android:textColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/classh"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.979" />
-
+        app:layout_constraintVertical_bias="0.974" />
 
     <RadioGroup
         android:id="@+id/classh"
@@ -225,7 +229,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.164"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.639">
@@ -236,8 +240,8 @@
             android:layout_width="142dp"
             android:layout_height="24dp"
             android:buttonTint="@color/red"
-            android:text="Business"
             android:checked="true"
+            android:text="Business"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -268,9 +272,10 @@
         android:textColor="@color/red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.683" />
+        app:layout_constraintVertical_bias="0.682" />
 
     <RadioGroup
         android:id="@+id/habitude"
@@ -279,7 +284,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.74">
@@ -290,9 +295,9 @@
             android:layout_width="142dp"
             android:layout_height="24dp"
             android:buttonTint="@color/red"
+            android:checked="true"
             android:text="Seul"
             android:textColor="@color/black"
-            android:checked="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.24"
@@ -322,10 +327,10 @@
         android:textColor="@color/red"
         app:layout_constraintBottom_toTopOf="@+id/assistance"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.563"
+        app:layout_constraintHorizontal_bias="0.145"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.951" />
 
     <RadioGroup
         android:id="@+id/assistance"
@@ -334,20 +339,20 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.849"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351">
+        app:layout_constraintVertical_bias="0.361">
 
 
         <RadioButton
             android:id="@+id/oui"
             android:layout_width="142dp"
             android:layout_height="24dp"
-            android:text="Oui"
-            android:checked="true"
-            android:textColor="@color/black"
             android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="Oui"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.24"
@@ -403,6 +408,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/red"
         android:text="@string/Annuler"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.707"

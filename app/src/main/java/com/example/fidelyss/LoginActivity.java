@@ -30,6 +30,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         cin= (EditText) findViewById(R.id.logincin);
         pin= (EditText) findViewById(R.id.loginpin);
         ((Button) findViewById(R.id.login)).setOnClickListener(this);
+
+
+
     }
     @Override
     public void onClick(View v)
@@ -42,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String cinadd = cin.getText().toString().trim();
         String pinadd = pin.getText().toString().trim();
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.14:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
         Call<client> find = api.selectUser(cinadd,pinadd);
         find.enqueue(new Callback<client>() {
@@ -50,14 +53,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onResponse(Response<client> response, Retrofit retrofit)
             {
                 if(response.body() != null ){
-                    Toast.makeText(LoginActivity.this, "Welcome "+response.body().getNom() , Toast.LENGTH_LONG).show();
-                    SharedPreferences sharedPreferences =  LoginActivity.this.getSharedPreferences("sharedpre", Context.MODE_PRIVATE);
+
+                    SharedPreferences sharedPreferences =  LoginActivity.this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("nom",response.body().getNom());
                     editor.putString("prenom",response.body().getPrenom());
-                    editor.putString("cin", response.body().getId());
-                    Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                    editor.putString("cin", response.body().getCin());
+                    editor.putString("id", response.body().getId());
+                    editor.putString("sexe", response.body().getSexe());
+                    editor.commit();
+                    Intent intent= new Intent(LoginActivity.this, MouvementActivity.class);
                     startActivity(intent);
+
                 }
                 else{
                     System.out.println("/"+cinadd);

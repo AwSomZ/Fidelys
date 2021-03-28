@@ -3,14 +3,17 @@ package com.example.fidelyss;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegisterActivity2 extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity2 extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener {
     public EditText cin;
     public EditText adr;
     public EditText teld;
@@ -37,6 +40,12 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
     String prenom = "";
     String sexe = "";
     String date="";
+    String paysadd;
+    String f=null;
+    String td=null;
+    String tp=null;
+    String fa=null;
+    String s=null;
 
 
 
@@ -50,7 +59,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         telm = (EditText) findViewById(R.id.telmobile);
         telp = (EditText) findViewById(R.id.telpro);
         ville = (EditText) findViewById(R.id.ville);
-        pays = (EditText) findViewById(R.id.pays);
+        //pays = (EditText) findViewById(R.id.pays);
         cp = (EditText) findViewById(R.id.codepostal);
         nationalite = (EditText) findViewById(R.id.nationality);
         fonction = (EditText) findViewById(R.id.fonction);
@@ -60,31 +69,50 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         radioGroup = (RadioGroup) findViewById(R.id.langue);
 
 
-        ((Button)findViewById(R.id.envoyer)).setOnClickListener(this);
+        Spinner pays = (Spinner) findViewById(R.id.pays);
+        pays.setOnItemSelectedListener(this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.country_arrays, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pays.setAdapter(adapter);
+        pays.setOnItemSelectedListener(this);
+
+
+        ((Button) findViewById(R.id.envoyer)).setOnClickListener(this);
         Intent intent = getIntent();
-        if (intent != null){
+        if (intent != null) {
 
 
-
-            if (intent.hasExtra("email")){
+            if (intent.hasExtra("email")) {
                 email = intent.getStringExtra("email");
             }
-            if (intent.hasExtra("nom")){
+            if (intent.hasExtra("nom")) {
                 nom = intent.getStringExtra("nom");
             }
-            if (intent.hasExtra("prenom")){
+            if (intent.hasExtra("prenom")) {
                 prenom = intent.getStringExtra("prenom");
             }
-            if (intent.hasExtra("sexe")){
+            if (intent.hasExtra("sexe")) {
                 sexe = intent.getStringExtra("sexe");
             }
-            if (intent.hasExtra("date")){
-                date=intent.getStringExtra("date");
+            if (intent.hasExtra("date")) {
+                date = intent.getStringExtra("date");
 
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+         paysadd = parent.getItemAtPosition(position).toString().trim();
+
 
     }
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
+
     @Override
     public void onClick(View v) {
         etape2();
@@ -93,13 +121,13 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
 
     private void etape2() {
 
+
         String cinadd = cin.getText().toString().trim();
         String adradd = adr.getText().toString().trim();
         String teldadd = teld.getText().toString().trim();
         String telmadd = telm.getText().toString().trim();
         String telpadd = telp.getText().toString().trim();
         String villeadd = ville.getText().toString().trim();
-        String paysadd = pays.getText().toString().trim();
         String cpadd = cp.getText().toString().trim();
         String nationaliteadd = nationalite.getText().toString().trim();
         String fonctionadd = fonction.getText().toString().trim();
@@ -125,21 +153,9 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
               ville.setError("Please enter your ville");
           } else if (cpadd.isEmpty()) {
               cp.setError("Please enter your zip code");
-          } else if (telmadd.isEmpty()) {
-              telm.setError("Please enter your telp");
-          } else if (teldadd.isEmpty()) {
-              teld.setError("Please enter your teld");
-          } else if (societeadd.isEmpty()) {
-              societe.setError("Please enter your societe");
-          } else if (fonctionadd.isEmpty()) {
-              fonction.setError("Please enter your fonction");
-          } else if (telpadd.isEmpty()) {
-              telp.setError("Please enter your telp");
-          } else if (faxadd.isEmpty()) {
-              fax.setError("Please enter your fax");
-        } else if (langueadd.isEmpty()) {
+          } else if (langueadd.isEmpty()) {
               langue.setError("Please enter your langue");
-        } else {
+          } else {
 
             Intent intent = new Intent(this, RegisterActivity3.class);
             intent.putExtra("email", email);

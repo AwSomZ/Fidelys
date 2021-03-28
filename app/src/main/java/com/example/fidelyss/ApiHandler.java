@@ -44,4 +44,11 @@ public interface ApiHandler {
             @Field("id") String var1,
             @Field("pin") String var2
         );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/mouvements.php")
+    Call<mouvement> getMvt(
+            @Field("client") String var1
+    );
+
 }

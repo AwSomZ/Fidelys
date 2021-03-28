@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".MouvementActivity">
+
+
+    <TableLayout
+
+        android:layout_width="410dp"
+        android:layout_height="383dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/border"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:text="Identifiant:"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/identifiant"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@color/lred"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:text="Titre:"
+                android:background="@drawable/border"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/titre"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@color/lred"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:background="@drawable/border"
+                android:textAlignment="center"
+                android:text="Nom prénom:"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/np"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@color/lred"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
+
+
+        </TableRow>
+
+        <TableRow
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="9dp"
+                android:textAlignment="center"
+                android:background="@drawable/border"
+                android:text="Solde de depart (en Miles Prime):"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/solde"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:background="@color/lred"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+
+                android:textSize="20dp" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingTop="30dp"
+                android:text="Statut actuel:"
+                android:textAlignment="center"
+                android:background="@drawable/border"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+
+            <ImageView
+                android:id="@+id/img"
+                android:textAlignment="center"
+                android:layout_width="166dp"
+                android:background="@color/lred"
+                android:textColor="@color/white"
+                android:layout_height="91dp" />
+        </TableRow>
+
+        <TableRow
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+
+            <TextView
+
+                android:layout_width="189dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/lred"
+                android:textAlignment="center"
+
+                android:padding="10dp"
+                android:text="Votre solde à ce jour:"
+                android:textColor="@color/white"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/sold"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

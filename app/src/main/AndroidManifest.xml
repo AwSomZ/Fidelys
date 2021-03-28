@@ -12,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fidelyss">
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".MouvementActivity"></activity>
+        <activity android:name=".Redirection" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity3" />
         <activity android:name=".RegisterActivity2" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
