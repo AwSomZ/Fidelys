@@ -1,69 +1,67 @@
 package com.example.fidelyss;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.GsonConverterFactory;
-import retrofit.Response;
-import retrofit.Retrofit;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MouvementActivity extends AppCompatActivity {
-    SharedPreferences sharedPreferences;
-    TextView identifiant;
-    TextView np;
-    TextView solde;
-    TextView titre;
-    ImageView img;
-    TextView sold;
+    BottomNavigationView bottomNavigationView;
+    Fragment unFrgment = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mouvement);
-        identifiant = findViewById(R.id.identifiant);
-        titre= findViewById(R.id.titre);
-        np = findViewById(R.id.np);
-        solde=findViewById(R.id.solde);
-        sold = findViewById(R.id.sold);
-        img=findViewById(R.id.img);
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.14:80/").addConverterFactory(GsonConverterFactory.create()).build();
-        ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-        sharedPreferences = getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("id","");
-        String sexe = sharedPreferences.getString("sexe","");
-        String npp= sharedPreferences.getString("nom","")+" "+sharedPreferences.getString("prenom","");
 
-        identifiant.setText(id);
-        np.setText(npp);
-        titre.setText(sexe);
-        Call<mouvement> addUser = api.getMvt(id);
-        addUser.enqueue(new Callback<mouvement>() {
 
-            public void onResponse(Response<mouvement> response, Retrofit retrofit){
-                if(response.body() != null ){
-                    int s= response.body().getSolde();
-                    if (s<=6000)
-                    {img.setImageResource(R.drawable.classic);}
-                    else if ((s<=12000) && (s>6000))
-                    {img.setImageResource(R.drawable.silver);}
-                    else if (s >12000)
-                    {img.setImageResource(R.drawable.gold);}
-                    solde.setText(String.valueOf(s));
-                    sold.setText(String.valueOf(s));
-                    Toast.makeText(MouvementActivity.this, " ", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            public void onFailure(Throwable t) {
-                Toast.makeText(MouvementActivity.this, "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        bottomNavigationView=(BottomNavigationView) findViewById(R.id.botton_navigation);
+        bottomNavigationView.getMenu().getItem(0).setChecked(true);
+        unFrgment = new MouvementFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
+        bottomNavigationView.setOnNavigationItemSelectedListener(naviglistener);
     }
+
+    public BottomNavigationView.OnNavigationItemSelectedListener naviglistener=new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @SuppressLint("NonConstantResourceId")
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment unFrgment = null;
+            switch (item.getItemId()) {
+                case R.id.mouvement:
+                    unFrgment = new MouvementFragment();
+                    break;
+
+
+
+                case R.id.achat:
+                    unFrgment = new MouvementFragment();
+                    break;
+
+                case R.id.conversion:
+                    unFrgment = new MouvementFragment();
+                    break;
+
+                case R.id.logout:
+                    Intent intent =new Intent(MouvementActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    break;
+
+            }
+            String URL = "http://192.168.1.27:80/";
+            Bundle bundle = new Bundle();
+            bundle.putString("url", URL);
+            //unFrgment.getArguments();
+            unFrgment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
+            return true;
+        }};
+
+
 }

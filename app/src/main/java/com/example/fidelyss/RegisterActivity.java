@@ -45,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mDisplayDate = (TextView) findViewById(R.id.tvDate) ;
 
         ((Button)findViewById(R.id.button)).setOnClickListener(this);
+        ((TextView) findViewById(R.id.signin)).setOnClickListener(this);
 
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -89,10 +90,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         Intent intent;
 
+        switch (v.getId()) {
+            case R.id.button: sendInfo();
+                break;
+            case R.id.signin:intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                break;
+        }
 
 
 
-        sendInfo();
 
 
 

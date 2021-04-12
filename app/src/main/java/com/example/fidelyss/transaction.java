@@ -1,21 +1,32 @@
 package com.example.fidelyss;
 
-public class mouvement {
-  private   int id;
-  private int solde;
+import java.util.Date;
+
+public class transaction {
+    private int id;
     private int debit;
     private int credit;
-  private String client;
+    private Date date;
+    private String client;
 
-    public mouvement(int id, int solde, int debit, int credit, String client) {
+    public transaction(int id, int debit, int credit, Date date, String client) {
         this.id = id;
-        this.solde = solde;
         this.debit = debit;
         this.credit = credit;
+        this.date = date;
         this.client = client;
     }
 
-    public mouvement() {
+    public transaction() {
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getDebit() {
@@ -34,27 +45,19 @@ public class mouvement {
         this.credit = credit;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getSolde() {
-        return solde;
-    }
-
-    public void setSolde(int solde) {
-        this.solde = solde;
-    }
-
     public String getClient() {
         return client;
     }
 
     public void setClient(String client) {
         this.client = client;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

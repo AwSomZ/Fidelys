@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         cin= (EditText) findViewById(R.id.logincin);
         pin= (EditText) findViewById(R.id.loginpin);
         ((Button) findViewById(R.id.login)).setOnClickListener(this);
+        ((TextView) findViewById(R.id.signup)).setOnClickListener(this);
 
 
 
@@ -37,7 +39,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v)
     {
-        login();
+        Intent intent;
+
+        switch (v.getId()) {
+            case R.id.login: login();
+                break;
+            case R.id.signup:intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     private void login()
@@ -45,7 +55,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String cinadd = cin.getText().toString().trim();
         String pinadd = pin.getText().toString().trim();
         Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.14:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
         Call<client> find = api.selectUser(cinadd,pinadd);
         find.enqueue(new Callback<client>() {

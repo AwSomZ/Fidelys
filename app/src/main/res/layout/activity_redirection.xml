@@ -7,6 +7,7 @@
     android:background="@drawable/background"
     tools:context=".Redirection">
 
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="343dp"

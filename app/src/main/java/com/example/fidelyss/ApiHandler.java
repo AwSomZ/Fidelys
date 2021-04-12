@@ -1,6 +1,7 @@
 package com.example.fidelyss;
 
 import java.util.Date;
+import java.util.List;
 
 import retrofit.Call;
 import retrofit.http.Field;
@@ -48,6 +49,12 @@ public interface ApiHandler {
     @FormUrlEncoded
     @POST("fidelysapi/mouvements.php")
     Call<mouvement> getMvt(
+            @Field("client") String var1
+    );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/transactions.php")
+    Call<List<transaction>> getTransaction(
             @Field("client") String var1
     );
 

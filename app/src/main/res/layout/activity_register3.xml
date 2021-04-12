@@ -44,7 +44,7 @@
         app:layout_constraintHorizontal_bias="0.188"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26">
+        app:layout_constraintVertical_bias="0.267">
 
 
         <RadioButton
@@ -90,21 +90,21 @@
 
     <RadioGroup
         android:id="@+id/pref"
-        android:layout_width="397dp"
-        android:layout_height="32dp"
+        android:layout_width="389dp"
+        android:layout_height="31dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.727"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545">
+        app:layout_constraintVertical_bias="0.544">
 
 
         <RadioButton
             android:id="@+id/hub"
-            android:layout_width="135dp"
-            android:layout_height="36dp"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
             android:buttonTint="@color/red"
             android:checked="true"
             android:text="Côté hublot"
@@ -342,7 +342,7 @@
         app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.361">
+        app:layout_constraintVertical_bias="0.364">
 
 
         <RadioButton
@@ -391,28 +391,17 @@
 
     <Button
         android:id="@+id/add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Envoyer"
-        android:textColor="@color/red"
+        android:layout_width="289dp"
+        android:layout_height="49dp"
+        android:background="@drawable/button"
+        android:text="Créer"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/bottom_nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.941" />
 
-    <Button
-        android:id="@+id/annuler"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/red"
-        android:text="@string/Annuler"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.707"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
 </androidx.constraintlayout.widget.ConstraintLayout>
