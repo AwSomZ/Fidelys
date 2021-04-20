@@ -34,11 +34,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.button:
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
 
                 break;
             case R.id.login:
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
+
                 break;}
 
     }

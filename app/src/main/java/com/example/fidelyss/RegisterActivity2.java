@@ -177,7 +177,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
             intent.putExtra("langueadd", langueadd);
             intent.putExtra("cinadd", cinadd);
             startActivity(intent);
-
+              overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
         }
     }
 }

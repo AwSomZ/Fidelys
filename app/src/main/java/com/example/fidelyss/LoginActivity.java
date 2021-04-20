@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.signup:intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
 
                 break;
         }
@@ -78,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.commit();
                     Intent intent= new Intent(LoginActivity.this, MouvementActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
 
 
                 }
@@ -93,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(LoginActivity.this, "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, "wuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
             }
         });

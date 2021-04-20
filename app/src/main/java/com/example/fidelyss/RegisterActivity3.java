@@ -214,10 +214,11 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
                     Toast.makeText(RegisterActivity3.this, "user successfully registred ", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(RegisterActivity3.this, Redirection.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
                 }
 
                 public void onFailure(Throwable t) {
-                    Toast.makeText(RegisterActivity3.this, "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity3.this, "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             });
 

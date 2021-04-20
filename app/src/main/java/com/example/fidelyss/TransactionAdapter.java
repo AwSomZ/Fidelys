@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder>  {
     private Context context;
+    Activity activity = (Activity) context;
     String value;
     String depends;
     String color;
@@ -29,6 +31,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     public TransactionAdapter(Context context, List<transaction> listeTransaction) {
         this.context = context;
+        activity=(Activity) context;
         this.listeTransaction = listeTransaction;
 
     }
@@ -117,6 +120,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             editor.commit();
 
             context.startActivity(intent);
+            activity.overridePendingTransition(R.anim.zoom_in,0);
 
         }});
 

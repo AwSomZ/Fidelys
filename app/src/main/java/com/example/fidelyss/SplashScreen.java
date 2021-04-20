@@ -18,6 +18,7 @@ Handler handler;
             public void run() {
                 Intent intent=new Intent(SplashScreen.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
                 finish();
             }
         },3000);

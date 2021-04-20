@@ -120,7 +120,7 @@ public class MouvementFragment extends Fragment {
             }
 
             public void onFailure(Throwable t) {
-                Toast.makeText(MouvementFragment.this.getActivity(), "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MouvementFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
         return v;

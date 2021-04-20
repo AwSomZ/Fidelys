@@ -82,7 +82,7 @@ RadioButton radioButton;
                }
 
                public void onFailure(Throwable t) {
-                   Toast.makeText(MilesFragment.this.getActivity(), "failed" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                   Toast.makeText(MilesFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                }
            });
 
