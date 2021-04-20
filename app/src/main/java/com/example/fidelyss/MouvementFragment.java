@@ -58,7 +58,7 @@ public class MouvementFragment extends Fragment {
 
 
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
@@ -75,7 +75,7 @@ public class MouvementFragment extends Fragment {
 
                 if (response.body() != null) {
 
-                    int s = response.body().getSolde();
+                    int s = response.body().getMilesprime();
 
                     String se= Integer.toString(s);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -88,14 +88,14 @@ public class MouvementFragment extends Fragment {
 
                     // api call on response on failure
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
                     ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                     Call<List<transaction>>addUser = api.getTransaction(id);
                     addUser.enqueue(new Callback<List<transaction>>(){
 
                         public void onResponse(Response<List<transaction>> response, Retrofit retrofit) {
                             List<transaction> listtransaction =new ArrayList<transaction>();
-                            if(response.isSuccess())
+                            if(response.body()!= null)
                             {
                                 listtransaction= (List<transaction>)response.body();
                                 recyclerViewUser = v.findViewById(R.id.rv1);

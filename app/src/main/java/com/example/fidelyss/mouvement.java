@@ -2,36 +2,18 @@ package com.example.fidelyss;
 
 public class mouvement {
   private   int id;
-  private int solde;
-    private int debit;
-    private int credit;
+  private int milesprime;
+  private int milesstatut;
   private String client;
 
-    public mouvement(int id, int solde, int debit, int credit, String client) {
+    public mouvement(int id, int milesprime, int milesstatut, String client) {
         this.id = id;
-        this.solde = solde;
-        this.debit = debit;
-        this.credit = credit;
+        this.milesprime = milesprime;
+        this.milesstatut = milesstatut;
         this.client = client;
     }
 
     public mouvement() {
-    }
-
-    public int getDebit() {
-        return debit;
-    }
-
-    public void setDebit(int debit) {
-        this.debit = debit;
-    }
-
-    public int getCredit() {
-        return credit;
-    }
-
-    public void setCredit(int credit) {
-        this.credit = credit;
     }
 
     public int getId() {
@@ -42,12 +24,20 @@ public class mouvement {
         this.id = id;
     }
 
-    public int getSolde() {
-        return solde;
+    public int getMilesprime() {
+        return milesprime;
     }
 
-    public void setSolde(int solde) {
-        this.solde = solde;
+    public void setMilesprime(int milesprime) {
+        this.milesprime = milesprime;
+    }
+
+    public int getMilesstatut() {
+        return milesstatut;
+    }
+
+    public void setMilesstatut(int milesstatut) {
+        this.milesstatut = milesstatut;
     }
 
     public String getClient() {
@@ -58,3 +48,4 @@ public class mouvement {
         this.client = client;
     }
 }
+

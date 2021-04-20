@@ -14,7 +14,7 @@
         android:layout_width="374dp"
         android:layout_height="60dp"
         android:padding="5dp"
-
+        android:fontFamily="@font/soda"
         android:text="Tammar Mohamed Salah"
         android:textAlignment="center"
         android:textColor="@color/white"
@@ -34,7 +34,7 @@
         android:text="M"
         android:textAlignment="center"
         android:textColor="@color/white"
-
+        android:fontFamily="@font/soda"
         android:textSize="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +50,7 @@
         android:padding="8dp"
         android:text="000000002"
         android:textAlignment="center"
+        android:fontFamily="@font/soda"
         android:textColor="@color/lred"
         android:textSize="25dp"
 

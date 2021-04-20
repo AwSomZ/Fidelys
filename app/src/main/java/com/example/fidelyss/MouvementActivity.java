@@ -41,7 +41,7 @@ public class MouvementActivity extends AppCompatActivity {
 
 
                 case R.id.achat:
-                    unFrgment = new MouvementFragment();
+                    unFrgment = new MilesFragment();
                     break;
 
                 case R.id.conversion:
@@ -54,7 +54,7 @@ public class MouvementActivity extends AppCompatActivity {
                     break;
 
             }
-            String URL = "http://192.168.1.27:80/";
+            String URL = "http://192.168.1.13:80/";
             Bundle bundle = new Bundle();
             bundle.putString("url", URL);
             //unFrgment.getArguments();

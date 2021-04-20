@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card"
+    android:layout_marginLeft="5sp"
+    android:layout_marginRight="5sp"
+    android:layout_marginBottom="5sp"
+    android:layout_marginTop="170dp"
+    tools:context=".MilesFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hardy"
+        android:text="Achetez des miles "
+        android:textColor="@color/lred"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="374dp"
+        android:layout_height="79dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.239">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:fontFamily="@font/soda"
+            android:text="Nature des Miles:"
+            android:textColor="@color/lred"
+            android:textSize="20sp" />
+
+        <RadioGroup
+            android:id="@+id/milestype"
+            android:layout_width="323dp"
+            android:layout_height="37dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/prime"
+                android:layout_width="126dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/red"
+                android:checked="true"
+                android:fontFamily="@font/soda"
+                android:text="prime" />
+
+            <RadioButton
+                android:id="@+id/statut"
+                android:layout_width="201dp"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/red"
+                android:fontFamily="@font/soda"
+                android:text="statut" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5sp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.031">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:text="Nombre de Miles:"
+            android:textColor="@color/lred"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/quantite"
+            android:layout_width="214dp"
+            android:layout_height="41dp"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="10sp"
+            android:background="@drawable/input"
+            android:fontFamily="@font/soda" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/acheter"
+        android:layout_width="273dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="164dp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/hardy"
+        android:text="Acheter"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/lred"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

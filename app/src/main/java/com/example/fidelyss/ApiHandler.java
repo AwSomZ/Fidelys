@@ -58,4 +58,12 @@ public interface ApiHandler {
             @Field("client") String var1
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/miles.php")
+    Call<String> buyMiles(
+            @Field("client") String var1,
+            @Field("quantite") String var2,
+            @Field("type") String var3
+    );
+
 }

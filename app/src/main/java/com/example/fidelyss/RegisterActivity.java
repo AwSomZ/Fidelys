@@ -95,6 +95,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.signin:intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.translate_in_right, R.anim.translate_out_left);
                 break;
         }
 
