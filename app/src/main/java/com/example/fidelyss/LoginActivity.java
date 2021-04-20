@@ -28,8 +28,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+       
+
         cin= (EditText) findViewById(R.id.logincin);
         pin= (EditText) findViewById(R.id.loginpin);
+
         ((Button) findViewById(R.id.login)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signup)).setOnClickListener(this);
 
@@ -46,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.signup:intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
-                overridePendingTransition(R.anim.translate_in_right, R.anim.translate_out_left);
+
                 break;
         }
     }
@@ -55,8 +58,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     {
         String cinadd = cin.getText().toString().trim();
         String pinadd = pin.getText().toString().trim();
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-mm-dd").create();
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
         Call<client> find = api.selectUser(cinadd,pinadd);
         find.enqueue(new Callback<client>() {
@@ -75,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.commit();
                     Intent intent= new Intent(LoginActivity.this, MouvementActivity.class);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.translate_in_right, R.anim.translate_out_left);
+
 
                 }
                 else{

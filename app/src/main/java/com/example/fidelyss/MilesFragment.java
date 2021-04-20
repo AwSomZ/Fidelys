@@ -70,7 +70,7 @@ RadioButton radioButton;
            System.out.println(selectedId);
            radioButton = (RadioButton) this.getActivity().findViewById(selectedId);
           String milestype = radioButton.getText().toString().trim();
-           Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create()).build();
+           Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create()).build();
            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
            sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
            String id = sharedPreferences.getString("id", "");

@@ -54,7 +54,7 @@ public class MouvementActivity extends AppCompatActivity {
                     break;
 
             }
-            String URL = "http://192.168.1.13:80/";
+            String URL = "http://192.168.1.26:80/";
             Bundle bundle = new Bundle();
             bundle.putString("url", URL);
             //unFrgment.getArguments();

@@ -58,7 +58,7 @@ public class MouvementFragment extends Fragment {
 
 
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
@@ -88,7 +88,7 @@ public class MouvementFragment extends Fragment {
 
                     // api call on response on failure
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.13:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
                     ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                     Call<List<transaction>>addUser = api.getTransaction(id);
                     addUser.enqueue(new Callback<List<transaction>>(){
