@@ -3,7 +3,7 @@
 	include "bd.php";
  	$id=$_POST['client'];
 
-$query=$bd->prepare("select * from  transaction  where client='$id' ");
+$query=$bd->prepare("select * from  transaction  where client='$id' order by  date desc ");
 $query->execute();
 if ($query->rowCount()>0)
 {

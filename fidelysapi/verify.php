@@ -64,7 +64,7 @@ $sq="insert into client (`id`, `pin`, `cin`, `sexe`, `nom`, `prenom`, `datenaiss
 $re=$bd->exec($sq);
 if ($re) {echo 'verified';
 echo'your id is: '; echo $code ; echo' your pin is: '; echo $pin;
-$mvt= "insert into mouvement (`solde`,`client`) values ('6000','$code');";
+$mvt= "insert into mouvement (`milesprime`,`client`) values ('6000','$code');";
 $re=$bd->exec($mvt);
  $delete = "DELETE from user where vkey='$vkey' ";    
 $res=$bd->exec($delete);
