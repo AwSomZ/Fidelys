@@ -120,7 +120,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             editor.commit();
 
             context.startActivity(intent);
-            activity.overridePendingTransition(R.anim.zoom_in,0);
+            activity.overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
 
         }});
 

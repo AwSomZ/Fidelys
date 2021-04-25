@@ -12,22 +12,30 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.text.BreakIterator;
+import java.text.DecimalFormat;
+import java.util.List;
+
 import retrofit.Call;
-import retrofit.Callback;
 import retrofit.GsonConverterFactory;
-import retrofit.Response;
 import retrofit.Retrofit;
 
 
 public class MilesFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
 SharedPreferences sharedPreferences;
 String quantite;
+TextView textView;
+Spinner toCurrency;
+    public static BreakIterator data;
+    List<String> keysList;
 String milestype;
 RadioGroup radioGroup;
+TextView price;
 RadioButton radioButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +44,7 @@ RadioButton radioButton;
 
         View v = inflater.inflate(R.layout.fragment_miles, container, false);
         radioGroup = (RadioGroup) v.findViewById(R.id.milestype);
+        price = (TextView) v.findViewById(R.id.price);
         Spinner quantite = (Spinner) v.findViewById(R.id.quantite);
         quantite.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
@@ -46,6 +55,8 @@ RadioButton radioButton;
 
 
 
+
+
         ((Button) v.findViewById(R.id.acheter)).setOnClickListener(this);
 
 
@@ -53,10 +64,18 @@ RadioButton radioButton;
 
 
     }
+
+
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         quantite = parent.getItemAtPosition(position).toString().trim();
+        Double prix = Integer.valueOf(quantite)*0.07;
+        DecimalFormat df = new DecimalFormat("###.###");
+
+        price.setText(df.format(prix)+"DT");
+
 
 
     }
@@ -75,8 +94,9 @@ RadioButton radioButton;
            sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
            String id = sharedPreferences.getString("id", "");
            Call<String> buy = api.buyMiles(id,quantite,milestype);
-           buy.enqueue(new Callback<String>() {
-               public void onResponse(Response<String> response, Retrofit retrofit) {
+           buy.enqueue(new retrofit.Callback<String>() {
+
+               public void onResponse(retrofit.Response<String> response, Retrofit retrofit) {
                    Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
 
                }

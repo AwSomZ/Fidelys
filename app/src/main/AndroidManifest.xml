@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Fidelyss">
         <activity android:name=".TransacationPopup" android:theme="@style/AppTheme.CustomTheme"></activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".MouvementActivity" />
+        <activity android:name=".MouvementActivity"  android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Redirection" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity3" />

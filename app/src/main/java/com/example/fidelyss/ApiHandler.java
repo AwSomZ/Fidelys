@@ -66,4 +66,32 @@ public interface ApiHandler {
             @Field("type") String var3
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/updateinfo.php")
+    Call<client> updateInf(
+            @Field("id") String var1,
+            @Field("nom") String var2,
+            @Field("prenom") String var3,
+            @Field("sexe") String var4,
+            @Field("datenaiss") String var5
+    );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/updateinfo2.php")
+    Call<client> updateInf2(
+            @Field("id") String var1,
+            @Field("cin") String var2,
+            @Field("adr") String var3,
+            @Field("teld") String var4,
+            @Field("telm") String var5,
+            @Field("telp") String var6,
+            @Field("ville") String var7,
+            @Field("cp") String var8,
+            @Field("nationalite") String var9,
+            @Field("fonction") String var10,
+            @Field("pays") String var11,
+            @Field("societe") String var12,
+            @Field("fax") String var13
+    );
+
 }

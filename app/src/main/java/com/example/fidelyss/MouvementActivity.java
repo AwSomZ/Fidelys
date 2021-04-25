@@ -1,7 +1,6 @@
 package com.example.fidelyss;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -48,16 +47,16 @@ public class MouvementActivity extends AppCompatActivity {
                     unFrgment = new MouvementFragment();
                     break;
 
-                case R.id.logout:
-                    Intent intent =new Intent(MouvementActivity.this, MainActivity.class);
-                    startActivity(intent);
+                case R.id.profile:
+                    unFrgment = new Settings();
                     break;
 
+
+
             }
-            String URL = "http://192.168.1.26:80/";
+            String URL = "http://192.168.1.16:80/";
             Bundle bundle = new Bundle();
             bundle.putString("url", URL);
-            //unFrgment.getArguments();
             unFrgment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
             return true;

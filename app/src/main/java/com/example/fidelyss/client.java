@@ -12,7 +12,7 @@ public class client {
     private Date datenaiss;
     private String email;
     private String nationalite;
-    private String adressdomicile;
+    private String adressedomicile;
     private String ville;
     private String codepostal;
     private String pays;
@@ -30,7 +30,7 @@ public class client {
     private String paiement;
     private String classeh;
 
-    public client(String id, String pin, String cin, String sexe, String nom, String prenom, Date datenaiss, String email, String nationalite, String adressdomicile, String ville, String codepostal, String pays, String teldomicile, String telmobile, String societe, String fonction, String telprofessionnel, String fax, String langue, String preference, String assistance, String habitude, String type, String paiement, String classeh) {
+    public client(String id, String pin, String cin, String sexe, String nom, String prenom, Date datenaiss, String email, String nationalite, String adressedomicile, String ville, String codepostal, String pays, String teldomicile, String telmobile, String societe, String fonction, String telprofessionnel, String fax, String langue, String preference, String assistance, String habitude, String type, String paiement, String classeh) {
         this.id = id;
         this.pin = pin;
         this.cin = cin;
@@ -40,7 +40,7 @@ public class client {
         this.datenaiss = datenaiss;
         this.email = email;
         this.nationalite = nationalite;
-        this.adressdomicile = adressdomicile;
+        this.adressedomicile = adressedomicile;
         this.ville = ville;
         this.codepostal = codepostal;
         this.pays = pays;
@@ -134,12 +134,12 @@ public class client {
         this.nationalite = nationalite;
     }
 
-    public String getAdressdomicile() {
-        return adressdomicile;
+    public String getAdressedomicile() {
+        return adressedomicile;
     }
 
-    public void setAdressdomicile(String adressdomicile) {
-        this.adressdomicile = adressdomicile;
+    public void setAdressedomicile(String adressedomicile) {
+        this.adressedomicile = adressedomicile;
     }
 
     public String getVille() {

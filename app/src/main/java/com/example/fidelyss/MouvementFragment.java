@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,12 +55,15 @@ public class MouvementFragment extends Fragment {
         list.add(new InformationFragment());
         list.add(new CarteFragment());
         pager = v.findViewById(R.id.view_pager);
+        Animation aniFade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
+        pager.setAnimation(aniFade);
         pagerAdapter= new SliderPageAdapter(getFragmentManager(),list);
         pager.setAdapter(pagerAdapter);
 
 
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create()).build();
+
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
@@ -88,7 +93,7 @@ public class MouvementFragment extends Fragment {
 
                     // api call on response on failure
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
                     ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                     Call<List<transaction>>addUser = api.getTransaction(id);
                     addUser.enqueue(new Callback<List<transaction>>(){

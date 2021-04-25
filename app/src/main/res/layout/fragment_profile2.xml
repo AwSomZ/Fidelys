@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="5sp"
+    android:layout_marginRight="5sp"
+    android:layout_marginBottom="5sp"
+    android:layout_marginTop="170dp"
+    tools:context=".Profile2Fragment">
+
+<LinearLayout
+android:layout_marginTop="20dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40dp"
+        android:fontFamily="@font/soda"
+        android:layout_gravity="center"
+        android:textColor="@color/lred"
+        android:text="Informations Géneral"/>
+<TableLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp">
+
+    <TableRow android:layout_marginBottom="5dp" android:background="@color/lred">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/lred"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="CIN"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/lred"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="Societe"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+       >
+
+        <EditText
+            android:id="@+id/cin"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5sp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:fontFamily="@font/soda"
+            android:hint="@string/cin"
+            android:inputType="number"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/societe"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="5sp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:fontFamily="@font/soda"
+            android:hint="Société"
+            android:padding="10dp" />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="Fax"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="@string/Fonction"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/fax"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginRight="5dp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:ems="10"
+
+            android:padding="10dp"
+            android:inputType="phone"
+            android:hint="Fax"
+            android:fontFamily="@font/soda"
+            />
+
+        <EditText
+            android:id="@+id/fonction"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="5sp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:ems="10"
+            android:fontFamily="@font/soda"
+            android:hint="Fonction"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
+    </TableRow>
+    <TableRow android:layout_marginBottom="5dp"
+        android:background="@color/lred">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/lred"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="@string/Nationalité"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/lred"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="@string/Adresse"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/nationality"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="5sp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:layout_marginRight="5dp"
+            android:fontFamily="@font/soda"
+            android:ems="10"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:hint="Nationalité"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            />
+
+        <EditText
+            android:id="@+id/adresse"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="5sp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:hint="Adresse"
+            android:fontFamily="@font/soda"
+            android:padding="10dp"
+            android:inputType="textPostalAddress"
+            />
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="@string/Ville"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="@string/Pays"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/ville"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="5sp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:layout_marginRight="5dp"
+            android:ems="10"
+            android:hint="Ville"
+            android:fontFamily="@font/soda"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:padding="10dp"
+            />
+
+        <Spinner
+            android:id="@+id/pays"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:prompt="@string/Pays"
+            android:layout_marginBottom="5sp"
+            android:fontFamily="@font/soda"
+            android:background="@drawable/input"
+
+            />
+
+    </TableRow>
+    <TableRow android:layout_marginBottom="5dp" android:background="@color/lred">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/lred"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+
+            android:layout_gravity="center"
+            android:text="Telephone Domicile"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/lred"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="Telephone Professionnel"/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/teldomicile"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:layout_marginBottom="5sp"
+            android:layout_marginRight="5dp"
+            android:ems="10"
+            android:hint="@string/teldomicile"
+            android:fontFamily="@font/soda"
+            android:inputType="phone"
+            android:padding="10dp"
+            />
+
+
+        <EditText
+            android:id="@+id/telpro"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:hint="@string/telpro"
+            android:layout_marginBottom="5sp"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:fontFamily="@font/soda"
+            />
+
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="Telephone Mobile"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:layout_gravity="center"
+            android:text="Code Postal "/>
+    </TableRow>
+    <TableRow>
+        <EditText
+            android:id="@+id/telmobile"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:ems="10"
+            android:hint="@string/telmobile"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5sp"
+            android:fontFamily="@font/soda"
+            android:inputType="phone"
+            android:padding="10dp"
+            />
+
+        <EditText
+            android:id="@+id/codepostal"
+            android:layout_width="180dp"
+            android:layout_height="47dp"
+            android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
+            android:background="@drawable/input"
+            android:layout_marginBottom="5sp"
+            android:ems="10"
+            android:hint="@string/codepostal"
+            android:fontFamily="@font/soda"
+            android:inputType="textPostalAddress"
+            android:padding="10dp"
+            />
+    </TableRow>
+</TableLayout>
+
+
+    <Button
+        android:id="@+id/maj"
+        android:layout_width="272dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:background="@drawable/button"
+        android:fontFamily="@font/soda"
+        android:text="Mettre à Jour"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/lred" />
+</LinearLayout>
+
+</ScrollView>
