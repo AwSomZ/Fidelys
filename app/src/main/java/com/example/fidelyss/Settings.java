@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ TextView general;
 TextView logout;
 TextView about;
 TextView email;
+TextView pref;
 
 
     @Override
@@ -27,17 +29,21 @@ TextView email;
        personal= (TextView) v.findViewById(R.id.personal);
        general= (TextView) v.findViewById(R.id.general);
        logout= (TextView) v.findViewById(R.id.Logout);
+       pref= (TextView) v.findViewById(R.id.preferences);
        email= (TextView) v.findViewById(R.id.contact);
+
        about= (TextView) v.findViewById(R.id.about);
 
         Animation aniFade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
         personal.startAnimation(aniFade);
         general.startAnimation(aniFade);
+        pref.startAnimation(aniFade);
         email.startAnimation(aniFade);
         logout.startAnimation(aniFade);
         about.startAnimation(aniFade);
        personal.setOnClickListener(this);
        general.setOnClickListener(this);
+        pref.setOnClickListener(this);
        logout.setOnClickListener(this);
 
     return v;
@@ -50,6 +56,11 @@ TextView email;
             case R.id.personal: unFrgment = new ProfileFragment();
                 break;
                 case R.id.general:unFrgment = new Profile2Fragment();
+                break;
+                case R.id.preferences:unFrgment = new Profile3Fragment();
+                break;
+                case R.id.Logout:Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
                 break;
 
     }

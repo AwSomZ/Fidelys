@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="5sp"
+    android:layout_marginRight="5sp"
+    android:layout_marginBottom="5sp"
+    android:layout_marginTop="170dp"
+    tools:context=".Profile3Fragment">
+
+    <!-- TODO: Update blank fragment layout -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/typead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Type d'adhésion"
+        android:textColor="@color/red"
+         />
+
+    <RadioGroup
+        android:id="@+id/type"
+        android:layout_width="326dp"
+        android:layout_height="24dp"
+        android:orientation="horizontal"
+        >
+
+
+        <RadioButton
+            android:id="@+id/ind"
+            android:layout_width="144dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="@string/ind"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:id="@+id/fam"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="@string/fam"
+            android:textColor="@color/black"
+             />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Préférence de siège"
+        android:textColor="@color/red"
+       />
+
+    <RadioGroup
+        android:id="@+id/pref"
+        android:layout_width="389dp"
+        android:layout_height="31dp"
+        android:orientation="horizontal"
+        >
+
+
+        <RadioButton
+            android:id="@+id/hub"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="Côté hublot"
+            android:textColor="@color/black"
+             />
+
+        <RadioButton
+            android:id="@+id/couloir"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Côté couloir"
+            android:textColor="@color/black"
+             />
+
+        <RadioButton
+            android:id="@+id/indif"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Indifférent"
+            android:textColor="@color/black"
+             />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mode de paiement"
+        android:textColor="@color/red"
+     />
+
+
+    <RadioGroup
+        android:id="@+id/payment"
+        android:layout_width="389dp"
+        android:layout_height="31dp"
+        android:orientation="horizontal"
+        >
+
+
+        <RadioButton
+            android:id="@+id/cc"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="@string/carte_de_cr_dit"
+            android:textColor="@color/black"
+             />
+
+        <RadioButton
+            android:id="@+id/cash"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Cash"
+            android:textColor="@color/black"
+             />
+
+        <RadioButton
+            android:id="@+id/cheque"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Chèque"
+            android:textColor="@color/black"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/classeha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Classe habituelle de voyage"
+        android:textColor="@color/red"
+         />
+
+    <RadioGroup
+        android:id="@+id/classh"
+        android:layout_width="314dp"
+        android:layout_height="24dp"
+        android:orientation="horizontal">
+
+
+        <RadioButton
+            android:id="@+id/business"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="Business"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:id="@+id/economique"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Economique"
+            android:textColor="@color/black"
+            />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/habits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vos habitudes de voyage"
+        android:textColor="@color/red"
+         />
+
+    <RadioGroup
+        android:id="@+id/habitude"
+        android:layout_width="316dp"
+        android:layout_height="25dp"
+        android:orientation="horizontal"
+        >
+
+
+        <RadioButton
+            android:id="@+id/seul"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="Seul"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:id="@+id/accompagne"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Accompagné"
+            android:textColor="@color/black"
+           />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avez-vous besoin d'une assistance particulière ?"
+        android:textColor="@color/red"
+         />
+
+    <RadioGroup
+        android:id="@+id/assistance"
+        android:layout_width="305dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="70sp"
+        android:orientation="horizontal"
+       >
+
+
+        <RadioButton
+            android:id="@+id/oui"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:checked="true"
+            android:text="Oui"
+            android:textColor="@color/black"
+            />
+
+        <RadioButton
+            android:id="@+id/non"
+            android:layout_width="142dp"
+            android:layout_height="24dp"
+            android:buttonTint="@color/red"
+            android:text="Non"
+            android:textColor="@color/black"
+             />
+
+
+    </RadioGroup>
+    <Button
+        android:id="@+id/maj"
+        android:layout_width="272dp"
+        android:layout_height="46dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60sp"
+        android:background="@drawable/button"
+        android:fontFamily="@font/soda"
+        android:text="Mettre à Jour"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/lred" />
+
+
+</LinearLayout>
+
+</ScrollView>

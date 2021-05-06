@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -21,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,12 @@ public class MouvementFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mouvement, container, false);
 
+        Fragment currentFragment = getFragmentManager().findFragmentByTag(this.getTag());
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.detach(currentFragment);
+        fragmentTransaction.attach(currentFragment);
+        fragmentTransaction.commit();
+
         List<Fragment> list= new ArrayList<>();
         list.add(new SoldeFragment());
         list.add(new InformationFragment());
@@ -61,9 +69,9 @@ public class MouvementFragment extends Fragment {
         pager.setAdapter(pagerAdapter);
 
 
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
@@ -80,12 +88,24 @@ public class MouvementFragment extends Fragment {
 
                 if (response.body() != null) {
 
-                    int s = response.body().getMilesprime();
-
+                    int s = response.body().getMilesstatut();
+                    int p = response.body().getMilesprime();
+                    int pl = response.body().getPlafond();
+                    int sc = response.body().getSoldecummule();
                     String se= Integer.toString(s);
+                    String plafond= Integer.toString(pl);
+                    String soldecum= Integer.toString(sc);
+                    String sp= Integer.toString(p);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     System.out.println(se);
-                    editor.putString("solde",se);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                    editor.putString("dateniveau", df.format(response.body().getDate_niveau()));
+                    editor.putString("dateexpiration", df.format(response.body().getDate_expiration()));
+                    editor.putString("milesstatut",se);
+                    editor.putString("statut",response.body().getStatut());
+                    editor.putString("plafond",plafond);
+                    editor.putString("soldecummule",soldecum);
+                    editor.putString("milesprime",sp);
                     editor.commit();
 
 

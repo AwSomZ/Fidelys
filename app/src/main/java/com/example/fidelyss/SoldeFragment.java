@@ -21,7 +21,7 @@ public class SoldeFragment extends Fragment {
         ViewGroup rootView= (ViewGroup)inflater.inflate(R.layout.soldefragment,container,false);
         solde= (TextView) rootView.findViewById(R.id.solde);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-        String sold = sharedPreferences.getString("solde", "") ;
+        String sold = sharedPreferences.getString("milesprime", "") ;
         System.out.println("Votre solde est"+sold);
         solde.setText(sold);
         return rootView;

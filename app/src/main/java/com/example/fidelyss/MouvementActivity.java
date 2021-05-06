@@ -54,9 +54,9 @@ public class MouvementActivity extends AppCompatActivity {
 
 
             }
-            String URL = "http://192.168.1.16:80/";
+            String url = "http://192.168.157.16:80/";
             Bundle bundle = new Bundle();
-            bundle.putString("url", URL);
+            bundle.putString("url", url);
             unFrgment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
             return true;

@@ -112,6 +112,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             }
 
             Intent intent = new Intent(context, TransacationPopup.class);
+            intent.putExtra("depends",depends);
             editor.putString("ref",id);
             editor.putString("value",value);
             editor.putString("depends",depends);

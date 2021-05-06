@@ -87,11 +87,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("pays", response.body().getPays());
                     editor.putString("teld", response.body().getTeldomicile());
                     editor.putString("telp", response.body().getTelprofessionnel());
+                    editor.putString("email", response.body().getEmail());
                     editor.putString("telm", response.body().getTelmobile());
                     editor.putString("adr", response.body().getAdressedomicile());
                     System.out.println("adresse"+response.body().getAdressedomicile());
                     editor.putString("cp", response.body().getCodepostal());
                     editor.putString("ville", response.body().getVille());
+                    editor.putString("classeh", response.body().getClasseh());
+                    editor.putString("habitude", response.body().getHabitude());
+                    editor.putString("pref", response.body().getPreference());
+                    editor.putString("paiement", response.body().getPaiement());
+                    editor.putString("type", response.body().getType());
+                    editor.putString("assistance", response.body().getAssistance());
+
 
 
                     editor.commit();

@@ -206,7 +206,7 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
             radioButton = (RadioButton) findViewById(selectedId);
             String habadd = radioButton.getText().toString().trim();
 
-            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.26:80/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
             Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd, societeadd, fonctionadd, telpadd, faxadd, langueadd, prefadd, paiementadd, habadd, classehadd, assistanceadd, typeadd);
             addUser.enqueue(new Callback<user>() {

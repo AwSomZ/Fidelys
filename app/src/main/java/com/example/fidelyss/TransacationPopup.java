@@ -1,6 +1,7 @@
 package com.example.fidelyss;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -40,8 +41,12 @@ TextView dat;
 
 
 
-
-        if ("crédit" == sharedPreferences.getString("depends", ""))
+        Intent intent = getIntent();
+        if(intent.hasExtra("depends"))
+            {
+                depends=intent.getStringExtra("depends");
+            }
+        if ("crédit" == depends)
         {
             ref.setText(sharedPreferences.getString("ref", ""));
             dep.setText(sharedPreferences.getString("depends", ""));

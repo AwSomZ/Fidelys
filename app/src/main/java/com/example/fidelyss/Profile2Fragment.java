@@ -127,6 +127,7 @@ public void update(){
     } else if (cpadd.isEmpty()) {
         cp.setError("Please enter your zip code");
     }
+
     Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
     ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
     Call<client> editUser = api.updateInf2(sharedPreferences.getString("id",""),cinadd,adradd,teldadd,telmadd,telpadd,villeadd,cpadd,nationaliteadd,fonctionadd,paysadd,societeadd,faxadd);

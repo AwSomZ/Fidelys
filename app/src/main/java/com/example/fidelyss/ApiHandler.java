@@ -64,6 +64,7 @@ public interface ApiHandler {
             @Field("client") String var1,
             @Field("quantite") String var2,
             @Field("type") String var3
+
     );
 
     @FormUrlEncoded
@@ -92,6 +93,26 @@ public interface ApiHandler {
             @Field("pays") String var11,
             @Field("societe") String var12,
             @Field("fax") String var13
+    );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/updateinfo3.php")
+    Call<client> updateInf3(
+            @Field("id") String var1,
+            @Field("classeh") String var2,
+            @Field("type") String var3,
+            @Field("assistance") String var4,
+            @Field("paiement") String var5,
+            @Field("pref") String var6,
+            @Field("habitude") String var7
+    );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/changeemail.php")
+    Call<client> updateEmail(
+            @Field("id") String var1,
+            @Field("email") String var2,
+            @Field("newemail") String var3
     );
 
 }
