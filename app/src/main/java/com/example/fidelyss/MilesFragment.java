@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -17,9 +19,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
-import java.text.BreakIterator;
 import java.text.DecimalFormat;
-import java.util.List;
 
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
@@ -29,11 +29,9 @@ import retrofit.Retrofit;
 public class MilesFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
 SharedPreferences sharedPreferences;
 String quantite;
-TextView textView;
-Spinner toCurrency;
-    public static BreakIterator data;
-    List<String> keysList;
-String milestype;
+CheckBox gift;
+EditText to;
+String id;
 RadioGroup radioGroup;
 TextView price;
 RadioButton radioButton;
@@ -44,16 +42,26 @@ RadioButton radioButton;
 
         View v = inflater.inflate(R.layout.fragment_miles, container, false);
         radioGroup = (RadioGroup) v.findViewById(R.id.milestype);
+        to = (EditText)  v.findViewById(R.id.to);
         price = (TextView) v.findViewById(R.id.price);
+        gift = (CheckBox)  v.findViewById(R.id.show);
         Spinner quantite = (Spinner) v.findViewById(R.id.quantite);
         quantite.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
-                R.array.quantite, android.R.layout.simple_spinner_item);
+        R.array.quantite, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quantite.setAdapter(adapter);
         quantite.setOnItemSelectedListener(this);
-
-
+        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+        id = sharedPreferences.getString("id", "");
+        if (gift.isChecked())
+        {
+            to.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            to.setVisibility(View.GONE);
+        }
 
 
 
@@ -89,10 +97,21 @@ RadioButton radioButton;
            System.out.println(selectedId);
            radioButton = (RadioButton) this.getActivity().findViewById(selectedId);
           String milestype = radioButton.getText().toString().trim();
-           Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
+           if (gift.isChecked())
+           {
+              if (to.getText().toString().trim().isEmpty())
+                  {
+                      to.setError("Vous devez saisir l'id du recepteur");
+                  }
+              else
+                  {
+                      id= to.getText().toString().trim();
+                  }
+
+           }
+           Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create()).build();
            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-           sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-           String id = sharedPreferences.getString("id", "");
+
            Call<String> buy = api.buyMiles(id,quantite,milestype);
            buy.enqueue(new retrofit.Callback<String>() {
 

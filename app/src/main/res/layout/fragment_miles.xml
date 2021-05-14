@@ -11,7 +11,6 @@
     android:layout_marginTop="170dp"
     tools:context=".MilesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,15 +25,15 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="375dp"
+        android:layout_width="match_parent"
         android:layout_height="91dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239">
+        app:layout_constraintVertical_bias="0.19">
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,6 +102,40 @@
             android:drawableStart="@drawable/cart"
             android:background="@drawable/input"
             android:fontFamily="@font/soda" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="381dp"
+        android:layout_height="123dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+        app:layout_constraintVertical_bias="0.25">
+
+        <CheckBox
+            android:id="@+id/show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Envoyé comme cadeau"
+            android:buttonTint="@color/red"/>
+
+        <EditText
+            android:id="@+id/to"
+            android:layout_width="271dp"
+            android:layout_height="47dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:background="@drawable/input"
+            android:hint="Identifiant" />
+
     </LinearLayout>
 
     <ImageView

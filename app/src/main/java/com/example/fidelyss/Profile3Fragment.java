@@ -140,7 +140,7 @@ update3();
         String habaddd = radioButton.getText().toString().trim();
 
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
         Call<client> editUser = api.updateInf3(sharedPreferences.getString("id",""),classehaddd,typeaddd,assistanceaddd,paiementaddd,prefaddd,habaddd);
         editUser.enqueue(new Callback<client>() {

@@ -10,6 +10,20 @@
     android:layout_marginTop="170dp"
     tools:context=".Profile2Fragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hardy"
+        android:text="@string/Email"
+        android:textColor="@color/lred"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.928" />
+
     <EditText
         android:id="@+id/Email"
         android:layout_width="321dp"
@@ -26,7 +40,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404" />
+        app:layout_constraintVertical_bias="0.257" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/card"
+        android:backgroundTint="@color/lred"
+        app:layout_constraintBottom_toTopOf="@+id/maj"
+        app:layout_constraintTop_toBottomOf="@+id/Email"
+        tools:layout_editor_absoluteX="141dp" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/soda"
+            android:background="@color/white"
+            android:text="Un email de confirmation va etre envoyer a votre adresse de base"
+            android:textColor="@color/lred"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/maj"
@@ -42,6 +78,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Email"
-        app:layout_constraintVertical_bias="0.173" />
+        app:layout_constraintVertical_bias="0.488" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

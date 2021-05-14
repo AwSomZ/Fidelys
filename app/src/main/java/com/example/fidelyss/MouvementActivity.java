@@ -48,7 +48,7 @@ public class MouvementActivity extends AppCompatActivity {
                     break;
 
                 case R.id.profile:
-                    unFrgment = new Settings();
+                    unFrgment = new ProfilePageFragment();
                     break;
 
 

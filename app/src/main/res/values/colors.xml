@@ -7,12 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="pink">#FFFFFF</color>
     <color name="red">#F8FF0000</color>
     <color name="lred">#FB2C2C</color>
     <color name="ared">#FA2626</color>
     <color name="bred">#FA1F1F</color>
     <color name="cred">#FA1414</color>
-    <color name="grey">#56353030</color>
+    <color name="grey">#D3CFCF</color>
     <color name="green">#33FF00</color>
 
 </resources>

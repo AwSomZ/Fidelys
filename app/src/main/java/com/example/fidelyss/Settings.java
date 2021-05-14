@@ -65,7 +65,7 @@ TextView pref;
 
     }
 
-        String URL = "http://192.168.1.16:80/";
+        String URL = "http://192.168.1.27:80/";
         Bundle bundle = new Bundle();
         bundle.putString("url", URL);
         unFrgment.setArguments(bundle);

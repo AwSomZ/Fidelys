@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -52,11 +51,7 @@ public class MouvementFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mouvement, container, false);
 
-        Fragment currentFragment = getFragmentManager().findFragmentByTag(this.getTag());
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.detach(currentFragment);
-        fragmentTransaction.attach(currentFragment);
-        fragmentTransaction.commit();
+
 
         List<Fragment> list= new ArrayList<>();
         list.add(new SoldeFragment());
@@ -71,7 +66,7 @@ public class MouvementFragment extends Fragment {
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
@@ -113,7 +108,7 @@ public class MouvementFragment extends Fragment {
 
                     // api call on response on failure
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+                    Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
                     ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                     Call<List<transaction>>addUser = api.getTransaction(id);
                     addUser.enqueue(new Callback<List<transaction>>(){
