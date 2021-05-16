@@ -99,7 +99,7 @@ private SharedPreferences sharedPreferences;
                 unFrgment = new Profile2Fragment();
                 break;
         }
-        String URL = "http://192.168.1.27:80/";
+        String URL = "http://192.168.1.20:80/";
         Bundle bundle = new Bundle();
         bundle.putString("url", URL);
         unFrgment.setArguments(bundle);

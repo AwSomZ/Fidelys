@@ -40,7 +40,7 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
         Call<client> editUser = api.updateEmail(sharedPreferences.getString("id",""),emailadd,email.getText().toString().trim());
         editUser.enqueue(new Callback<client>() {

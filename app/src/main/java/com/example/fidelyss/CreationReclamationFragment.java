@@ -66,7 +66,7 @@ String descriptionadd;
               description.setError("Ajouter une description");
            }
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
         Call<reclamation> buy = api.submitComplaint(client,titreadd,descriptionadd);
@@ -78,7 +78,7 @@ String descriptionadd;
 
             @Override
             public void onFailure(Throwable t) {
-                Toast.makeText(CreationReclamationFragment.this.getActivity(), "Echec d'envoie ", Toast.LENGTH_LONG).show();
+                Toast.makeText(CreationReclamationFragment.this.getActivity(), "Echec d'envoie "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
 

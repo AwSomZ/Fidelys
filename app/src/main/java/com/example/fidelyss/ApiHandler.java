@@ -116,7 +116,7 @@ public interface ApiHandler {
     );
 
     @FormUrlEncoded
-    @POST("fidelysapi/changeemail.php")
+    @POST("fidelysapi/reclamation.php")
     Call<reclamation> submitComplaint(
             @Field("client") String var1,
             @Field("titre") String var2,

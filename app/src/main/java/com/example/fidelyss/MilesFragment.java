@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,7 +27,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
 
-public class MilesFragment extends Fragment implements View.OnClickListener,AdapterView.OnItemSelectedListener {
+public class MilesFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
 SharedPreferences sharedPreferences;
 String quantite;
 CheckBox gift;
@@ -54,6 +55,7 @@ RadioButton radioButton;
         quantite.setOnItemSelectedListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         id = sharedPreferences.getString("id", "");
+        gift.setOnCheckedChangeListener(this);
         if (gift.isChecked())
         {
             to.setVisibility(View.VISIBLE);
@@ -109,7 +111,7 @@ RadioButton radioButton;
                   }
 
            }
-           Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.27:80/").addConverterFactory(GsonConverterFactory.create()).build();
+           Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
            Call<String> buy = api.buyMiles(id,quantite,milestype);
@@ -127,4 +129,17 @@ RadioButton radioButton;
 
 
        }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (b)
+        {
+            to.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            to.setVisibility(View.GONE);
+        }
+
+    }
 }

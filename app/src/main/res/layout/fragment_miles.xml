@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19">
+        app:layout_constraintVertical_bias="0.142">
 
         <TextView
             android:layout_width="wrap_content"
@@ -110,44 +110,45 @@
         android:id="@+id/linearLayout4"
         android:layout_width="381dp"
         android:layout_height="123dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:layout_constraintVertical_bias="0.25">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <CheckBox
             android:id="@+id/show"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Envoyé comme cadeau"
-            android:buttonTint="@color/red"/>
+            android:layout_gravity="left"
+            android:buttonTint="@color/red"
+            android:text="Envoyé comme cadeau" />
 
         <EditText
             android:id="@+id/to"
-            android:layout_width="271dp"
-            android:layout_height="47dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:padding="10dp"
-            android:visibility="gone"
             android:background="@drawable/input"
-            android:hint="Identifiant" />
+            android:hint="Identifiant"
+            android:padding="10dp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="239dp"
-        android:layout_height="57dp"
+        android:layout_width="146dp"
+        android:layout_height="49dp"
         android:src="@drawable/clicktopay"
         app:layout_constraintBottom_toTopOf="@+id/price"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.381"
+        app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
