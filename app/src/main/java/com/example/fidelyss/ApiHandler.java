@@ -115,4 +115,12 @@ public interface ApiHandler {
             @Field("newemail") String var3
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/changeemail.php")
+    Call<reclamation> submitComplaint(
+            @Field("client") String var1,
+            @Field("titre") String var2,
+            @Field("description") String var3
+    );
+
 }

@@ -286,8 +286,16 @@
         <item>9000</item>
         <item>10000</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="reclamation">
+        <item>Demande de duplication du carte</item>
+        <item>Code Pin Oublie</item>
+        <item>Demande Revision Statut</item>
+        <item>Carte Non Paravenue</item>
+        <item>Voyage Non Comptabilise</item>
+        <item>Autre</item>
+
+    </string-array>
 
 
 </resources>
