@@ -123,4 +123,10 @@ public interface ApiHandler {
             @Field("description") String var3
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/reclamationencours.php")
+    Call<List<reclamation>> getReclamationEncours(
+            @Field("client") String var1
+    );
+
 }
