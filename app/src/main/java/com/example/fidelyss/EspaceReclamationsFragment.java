@@ -1,16 +1,20 @@
 package com.example.fidelyss;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,25 +29,33 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 
-public class EspaceReclamationsFragment extends Fragment {
+public class EspaceReclamationsFragment extends Fragment implements View.OnClickListener {
 
-    private PagerAdapter pagerAdapter;
+    TextView error;
+    ImageView ajouter;
     private RecyclerView recyclerViewUser;
     private RecyclerView.LayoutManager layoutManager;
     private SharedPreferences sharedPreferences;
+    private RecyclerView recyclerViewUser2;
+    private RecyclerView.LayoutManager layoutManager2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
       View v= inflater.inflate(R.layout.fragment_espace_reclamations, container, false);
-        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-        String id = sharedPreferences.getString("id", "");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
-        ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-        Call<List<reclamation>> getreclamationencours = api.getReclamationEncours(id);
-        getreclamationencours.enqueue(new Callback<List<reclamation>>(){
+      error = (TextView) v.findViewById(R.id.error);
+      ajouter =(ImageView) v.findViewById(R.id.ajouter);
+        Animation aniFade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
+        ajouter.setAnimation(aniFade);
+      sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+      String id = sharedPreferences.getString("id", "");
+      ajouter.setOnClickListener(this);
+      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+      Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+      ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+      Call<List<reclamation>> getreclamationencours = api.getReclamationEncours(id);
+      getreclamationencours.enqueue(new Callback<List<reclamation>>(){
 
             @Override
             public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
@@ -57,12 +69,42 @@ public class EspaceReclamationsFragment extends Fragment {
                     ReclamationEncoursAdapter adapter = new ReclamationEncoursAdapter(getActivity(), listReclamationEncours);
                     recyclerViewUser.setAdapter(adapter);
                 }
+                else {error.setVisibility(View.VISIBLE);}
             }
 
             @Override
             public void onFailure(Throwable t) {
 
             }});
-    return v;
+        Call<List<reclamation>> getreclamationresolu = api.getReclamationResolu(id);
+        getreclamationresolu.enqueue(new Callback<List<reclamation>>(){
+
+            @Override
+            public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
+                if(response.body()!= null) {
+                    List<reclamation> listReclamationResolu = new ArrayList<reclamation>();
+                    listReclamationResolu = (List<reclamation>) response.body();
+                    recyclerViewUser2 = v.findViewById(R.id.resolu);
+                    layoutManager2 = new LinearLayoutManager(getActivity());
+                    recyclerViewUser2.setLayoutManager(layoutManager2);
+                    recyclerViewUser2.setHasFixedSize(true);
+                    ReclamationEncoursAdapter adapter = new ReclamationEncoursAdapter(getActivity(), listReclamationResolu);
+                    recyclerViewUser2.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }});
+            return v;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(this.getContext(), CreationReclamationActivity.class);
+
+        startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
     }
 }

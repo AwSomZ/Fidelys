@@ -129,4 +129,10 @@ public interface ApiHandler {
             @Field("client") String var1
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/reclamationresolu.php")
+    Call<List<reclamation>> getReclamationResolu(
+            @Field("client") String var1
+    );
+
 }
