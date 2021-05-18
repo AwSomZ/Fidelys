@@ -63,7 +63,8 @@ public interface ApiHandler {
     Call<String> buyMiles(
             @Field("client") String var1,
             @Field("quantite") String var2,
-            @Field("type") String var3
+            @Field("type") String var3,
+            @Field("id") String var4
 
     );
 

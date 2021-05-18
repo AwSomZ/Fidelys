@@ -33,6 +33,7 @@ String quantite;
 CheckBox gift;
 EditText to;
 String id;
+String client;
 RadioGroup radioGroup;
 TextView price;
 RadioButton radioButton;
@@ -54,7 +55,9 @@ RadioButton radioButton;
         quantite.setAdapter(adapter);
         quantite.setOnItemSelectedListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+
         id = sharedPreferences.getString("id", "");
+        client = sharedPreferences.getString("id", "");
         gift.setOnCheckedChangeListener(this);
         if (gift.isChecked())
         {
@@ -114,7 +117,7 @@ RadioButton radioButton;
            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
-           Call<String> buy = api.buyMiles(id,quantite,milestype);
+           Call<String> buy = api.buyMiles(id,quantite,milestype,client);
            buy.enqueue(new retrofit.Callback<String>() {
 
                public void onResponse(retrofit.Response<String> response, Retrofit retrofit) {

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Fidelyss">
-        <activity android:name=".CreationReclamationActivity"></activity>
+        <activity android:name=".CreationReclamationActivity"  android:windowSoftInputMode="adjustPan" android:theme="@style/AppTheme.CustomTheme"/>
         <activity
             android:name=".TransacationPopup"
             android:theme="@style/AppTheme.CustomTheme" />

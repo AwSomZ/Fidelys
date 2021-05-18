@@ -45,9 +45,12 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
 
       View v= inflater.inflate(R.layout.fragment_espace_reclamations, container, false);
       error = (TextView) v.findViewById(R.id.error);
+      TextView bare = (TextView) v.findViewById(R.id.bare);
       ajouter =(ImageView) v.findViewById(R.id.ajouter);
-        Animation aniFade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
-        ajouter.setAnimation(aniFade);
+        Animation left = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
+        Animation right = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_right);
+        ajouter.setAnimation(right);
+        bare.setAnimation(left);
       sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
       String id = sharedPreferences.getString("id", "");
       ajouter.setOnClickListener(this);
@@ -88,8 +91,8 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
                     layoutManager2 = new LinearLayoutManager(getActivity());
                     recyclerViewUser2.setLayoutManager(layoutManager2);
                     recyclerViewUser2.setHasFixedSize(true);
-                    ReclamationEncoursAdapter adapter = new ReclamationEncoursAdapter(getActivity(), listReclamationResolu);
-                    recyclerViewUser2.setAdapter(adapter);
+                    ReclamationResoluAdapter adapter2 = new ReclamationResoluAdapter(getActivity(), listReclamationResolu);
+                    recyclerViewUser2.setAdapter(adapter2);
                 }
             }
 
@@ -105,6 +108,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
         Intent intent = new Intent(this.getContext(), CreationReclamationActivity.class);
 
         startActivity(intent);
+
         getActivity().overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
     }
 }

@@ -8,13 +8,15 @@ public class transaction {
     private int credit;
     private Date date;
     private String client;
+    private String description;
 
-    public transaction(int id, int debit, int credit, Date date, String client) {
+    public transaction(int id, int debit, int credit, Date date, String client, String description) {
         this.id = id;
         this.debit = debit;
         this.credit = credit;
         this.date = date;
         this.client = client;
+        this.description = description;
     }
 
     public transaction() {
@@ -59,5 +61,13 @@ public class transaction {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

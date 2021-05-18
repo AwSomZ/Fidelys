@@ -24,6 +24,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     Activity activity = (Activity) context;
     String value;
     String depends;
+    String desc;
     String color;
     String datee;
     String id;
@@ -55,11 +56,12 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
         SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat sdfd = new SimpleDateFormat("dd");
         String month =sdfm.format(date);
-
+        desc = Transaction.getDescription();
         System.out.println("month"+date.toString());
         String day =sdfd.format(date);
         holder.month.setText(month);
         holder.day.setText(day);
+        holder.description.setText(desc);
 
         if (Transaction.getDebit()==0)
             {
@@ -140,6 +142,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
         TextView depends;
         TextView month;
         TextView value;
+        TextView description;
         CardView cd;
         ConstraintLayout background;
         TextView day;
@@ -154,6 +157,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             value = (TextView)itemView.findViewById(R.id.valeur);
             day = (TextView)itemView.findViewById(R.id.day);
             month = (TextView)itemView.findViewById(R.id.month);
+            description= (TextView)itemView.findViewById(R.id.description);
 
 
 

@@ -69,22 +69,23 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         {
             description.setError("Ajouter une description");
         }
+        else {
+            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
+            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
-        ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+            Call<reclamation> buy = api.submitComplaint(client, titreadd, descriptionadd);
+            buy.enqueue(new retrofit.Callback<reclamation>() {
+                @Override
+                public void onResponse(Response<reclamation> response, Retrofit retrofit) {
+                    Toast.makeText(CreationReclamationActivity.this, "Reclamation Envoyé ", Toast.LENGTH_LONG).show();
+                }
 
-        Call<reclamation> buy = api.submitComplaint(client,titreadd,descriptionadd);
-        buy.enqueue(new retrofit.Callback<reclamation>() {
-            @Override
-            public void onResponse(Response<reclamation> response, Retrofit retrofit) {
-                Toast.makeText(CreationReclamationActivity.this, "Reclamation Envoyé ", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Toast.makeText(CreationReclamationActivity.this, "Echec d'envoie "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+                @Override
+                public void onFailure(Throwable t) {
+                    Toast.makeText(CreationReclamationActivity.this, "Echec d'envoie " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+        }
 
 
     }
