@@ -23,7 +23,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     private Context context;
     Activity activity = (Activity) context;
     String value;
-    String depends;
+    String dependss;
     String desc;
     String color;
     String datee;
@@ -67,7 +67,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             {
             holder.value.setText("+"+String.valueOf(Transaction.getCredit()));
             holder.depends.setText("Crédit");
-            depends="crédit";
+
             value="+"+String.valueOf(Transaction.getCredit());
             holder.value.setTextColor(this.context.getResources().getColor(R.color.green));
             holder.background.setBackground(ContextCompat.getDrawable(context, R.drawable.cardgreen));
@@ -80,7 +80,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
                 holder.depends.setText("Débit");
                 holder.value.setTextColor(this.context.getResources().getColor(R.color.red));
                 holder.background.setBackground(ContextCompat.getDrawable(context, R.drawable.cardred));
-                depends="débit";
+
                 value="-"+String.valueOf(Transaction.getDebit());
                 color= "red";
 
@@ -98,7 +98,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             if (Transaction.getDebit()==0)
             {
 
-                depends="crédit";
+                dependss="crédit";
                 value="+"+String.valueOf(Transaction.getCredit());
                 color = "green";
 
@@ -106,7 +106,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             else
             {
 
-                depends="débit";
+                dependss="débit";
                 value="-"+String.valueOf(Transaction.getDebit());
                 color= "red";
 
@@ -114,10 +114,10 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             }
 
             Intent intent = new Intent(context, TransacationPopup.class);
-            intent.putExtra("depends",depends);
+            intent.putExtra("depends",dependss);
             editor.putString("ref",id);
             editor.putString("value",value);
-            editor.putString("depends",depends);
+            editor.putString("depends",dependss);
             editor.putString("datee",datee);
             editor.putString("color",color);
             editor.commit();

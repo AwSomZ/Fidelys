@@ -9,7 +9,7 @@ android:padding="10dp"
     <androidx.cardview.widget.CardView
         android:id="@+id/cd"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         app:cardElevation="14dp"
 
         >
@@ -22,12 +22,13 @@ android:padding="10dp"
             android:background="@drawable/cardred">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/card"
+                android:layout_marginLeft="15dp"
+
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/description"
-                app:layout_constraintHorizontal_bias="0.615"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -39,9 +40,9 @@ android:padding="10dp"
                         android:id="@+id/day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/soda"
                         android:text="18"
                         android:textSize="26dp"
-                        android:fontFamily="@font/soda"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.428"
@@ -102,17 +103,15 @@ android:padding="10dp"
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="68dp"
                 android:fontFamily="@font/hardy"
                 android:maxEms="8"
                 android:singleLine="false"
-                android:text="Achat Des Miles Prime Comme Cadeau"
+                android:text="Achat Des Miles Prime "
                 android:textSize="18dp"
-
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/depends"
                 app:layout_constraintHorizontal_bias="0.532"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.506" />
 

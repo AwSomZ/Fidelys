@@ -46,8 +46,10 @@ TextView dat;
             {
                 depends=intent.getStringExtra("depends");
             }
-        if ("crédit" == depends)
+        System.out.println("Hello waa"+depends);
+        if (depends.equals("crédit"))
         {
+            System.out.println("Credit Green");
             ref.setText(sharedPreferences.getString("ref", ""));
             dep.setText(sharedPreferences.getString("depends", ""));
             val.setText(sharedPreferences.getString("value", ""));
