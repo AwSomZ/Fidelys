@@ -296,6 +296,82 @@
         <item>Autre</item>
 
     </string-array>
+
+    <string-array name="airports">
+        <item>Abidjan</item>
+        <item>Alger</item>
+        <item>Amsterdam</item>
+        <item>Bâle</item>
+        <item>Bamako</item>
+        <item>Barcelone</item>
+        <item>Belgrade</item>
+        <item>Benghazi</item>
+        <item>Berlin</item>
+        <item>Beyrouth</item>
+        <item>Bologne</item>
+        <item>Bordeaux</item>
+        <item>Bruxelles</item>
+        <item>Casablanca</item>
+        <item>Conakry</item>
+        <item>Constantine</item>
+        <item>Cotonou</item>
+        <item>Dakar</item>
+        <item>Djerba</item>
+        <item>Duesseldorf</item>
+        <item>Enfidha</item>
+        <item>Frankfurt</item>
+        <item>Gabes</item>
+        <item>Gafsa</item>
+        <item>Genève</item>
+        <item>Hamburg</item>
+        <item>Istanbul</item>
+        <item>Jeddah</item>
+        <item>Le Caire</item>
+        <item>Lille</item>
+        <item>Lisbonne</item>
+        <item>Londres</item>
+        <item>Lyon</item>
+        <item>Madrid</item>
+        <item>Malte</item>
+        <item>Marseille</item>
+        <item>Médine</item>
+        <item>Milan</item>
+        <item>Monastir</item>
+        <item>Montréal</item>
+        <item>Moscou</item>
+        <item>Munich</item>
+        <item>Nantes</item>
+        <item>Naples</item>
+        <item>Niamey</item>
+        <item>Nice</item>
+        <item>Nouakchott</item>
+        <item>Oran</item>
+        <item>Ouagadougou</item>
+        <item>Palerme</item>
+        <item>Paris</item>
+        <item>Prague</item>
+        <item>Rome</item>
+        <item>Sfax</item>
+        <item>Strasbourg</item>
+        <item>Tabarka</item>
+        <item>Toulouse</item>
+        <item>Tozeur</item>
+        <item>Tripoli</item>
+        <item>Tunis</item>
+        <item>Venise</item>
+        <item>Vérone</item>
+        <item>Vienne</item>
+        <item>Zurich</item>
+    </string-array>
+    <string-array name="passagers">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
