@@ -50,6 +50,9 @@ public class MouvementActivity extends AppCompatActivity {
                 case R.id.profile:
                     unFrgment = new ProfilePageFragment();
                     break;
+                    case R.id.billet:
+                    unFrgment = new AchatBilletFragment();
+                    break;
 
 
 

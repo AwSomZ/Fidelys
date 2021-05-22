@@ -136,4 +136,20 @@ public interface ApiHandler {
             @Field("client") String var1
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/achatbillet.php")
+    Call<billet> buyTicket(
+            @Field("client") String var1,
+            @Field("de") String var2,
+            @Field("vers") String var3,
+            @Field("type") String var4,
+            @Field("datealler") String var5,
+            @Field("dateretour") String var6,
+            @Field("classe") String var7,
+            @Field("adulte") String var8,
+            @Field("jeune") String var9,
+            @Field("enfant") String var10,
+            @Field("bebe") String var11
+    );
+
 }

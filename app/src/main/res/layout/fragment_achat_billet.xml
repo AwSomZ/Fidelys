@@ -4,11 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="10dp"
+
     android:layout_marginTop="170dp"
     tools:context=".AchatBilletFragment">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="373dp"
+        android:layout_width="match_parent"
         android:layout_height="594dp"
         android:background="@drawable/ticketshape"
         android:orientation="vertical"
@@ -48,19 +52,15 @@
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.709"
-                    app:layout_constraintStart_toEndOf="@+id/textView10"
-                    app:layout_constraintTop_toTopOf="parent" />
+                     />
             </TableRow>
 
-            <TableRow android:padding="5dp">
+            <TableRow >
 
                 <Spinner
                     android:id="@+id/de"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
-                    android:layout_marginTop="12dp"
                     android:layout_marginRight="10dp"
                     android:entries="@array/airports"
                     android:background="@drawable/ticketinput"
@@ -71,7 +71,6 @@
                     android:id="@+id/vers"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
-                    android:layout_marginTop="12dp"
                     android:background="@drawable/ticketinput"
                     android:drawableStart="@drawable/cart"
                     android:fontFamily="@font/soda"
@@ -133,7 +132,7 @@
                 android:id="@+id/datealler"
                 android:layout_width="150dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/ticketinput"
                 android:fontFamily="@font/soda"
@@ -144,7 +143,7 @@
                 android:id="@+id/dateretour"
                 android:layout_width="150dp"
                 android:layout_height="37dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/ticketinput"
                 android:fontFamily="@font/soda"
@@ -231,7 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/soda"
-                    android:text="Bébés <2"
+                    android:text="Bébés"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -251,7 +250,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="10"
+            android:layout_marginTop="10dp"
             android:layout_gravity="center">
                 <TextView
                     android:layout_width="wrap_content"
@@ -268,7 +267,7 @@
                     android:layout_width="155dp"
                     android:layout_height="37dp"
                     android:layout_gravity="center"
-                    android:entries="@array/airports"
+                    android:entries="@array/classes"
                     android:background="@drawable/ticketinput"
                     android:fontFamily="@font/soda" />
     </LinearLayout>
@@ -288,12 +287,13 @@
                 android:textColor="@color/black"
                 android:textSize="30sp" />
             <TextView
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/soda"
                 android:layout_marginLeft="10dp"
-                android:text="2000 Miles Prime"
+                android:text="0 Miles Prime"
                 android:textAlignment="center"
                 android:textColor="@color/lred"
                 android:textSize="30sp" />
@@ -312,6 +312,6 @@
             android:textColor="@color/white"
             app:backgroundTint="@color/bottom_nav" />
     </LinearLayout>
-
+</ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
