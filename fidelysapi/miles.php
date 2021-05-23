@@ -1,5 +1,6 @@
 <?php
 	include "bd.php";
+	$buyer=$_POST['id'];
 	$id=$_POST['client'];
 	$type=$_POST['type'];
 	$quantite=(int)$_POST['quantite'];
@@ -18,14 +19,14 @@
 	$delai = strtotime('+ 1 year', $dateniv);
 	$del=date("Y-m-d",$delai);		
 	if ($type=='prime')
-		{
+		{$description="Achat des Miles Prime";
 			$update = "UPDATE mouvement set milesprime=milesprime+'$quantite' where client='$id' "; 
 			$res=$bd->exec($update);  
 		}
 	else if ($type=='statut')
 		{	
 			if (($cummul+$quantite>=$plafond) and ($today<$del) and (($statut=='silver')or($statut=='classic')))
-				{
+				{$description="Achat des Miles Statut";
 					$cummul=($cummul+$quantite)-$plafond;
 					if($statut=='silver') 
 						{	
@@ -67,11 +68,13 @@
 			
 			else
 			{
+				$description="Achat des Miles Prime";
 				$cummul=$cummul+$quantite;
 				$update = "UPDATE mouvement set milesstatut=milesstatut+'$quantite' , soldecummule='$cummul' where client='$id' "; 
 			}
 			$res=$bd->exec($update);  
 		}
-	$transition = "insert into transaction (`credit`,`client`,`date`) values ('$quantite','$id','$today');";
+		if ($buyer != $id){$description= $description." comme cadeau";}
+	$transition = "insert into transaction (`credit`,`client`,`date`,`description`) values ('$quantite','$id','$today','$description');";
 	$re=$bd->exec($transition); 
 ?>
