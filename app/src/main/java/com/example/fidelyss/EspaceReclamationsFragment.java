@@ -55,7 +55,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
       String id = sharedPreferences.getString("id", "");
       ajouter.setOnClickListener(this);
       Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-      Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create(gson)).build();
+      Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
       ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
       Call<List<reclamation>> getreclamationencours = api.getReclamationEncours(id);
       getreclamationencours.enqueue(new Callback<List<reclamation>>(){

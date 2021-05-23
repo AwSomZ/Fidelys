@@ -149,7 +149,15 @@ public interface ApiHandler {
             @Field("adulte") String var8,
             @Field("jeune") String var9,
             @Field("enfant") String var10,
-            @Field("bebe") String var11
+            @Field("bebe") String var11,
+            @Field("prix") int var12
     );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/billet.php")
+    Call<List<billet>> getBillet(
+            @Field("client") String var1
+    );
+
 
 }

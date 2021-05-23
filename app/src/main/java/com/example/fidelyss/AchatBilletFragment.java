@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.sql.Date;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -29,7 +30,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 
-public class AchatBilletFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class AchatBilletFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
 
 Spinner de;
 String deString;
@@ -37,7 +38,7 @@ String versString;
 String priceString="Miles Prime";
 String dateallerString;
 int solde;
-int p=0;
+int p;
 String dateretourString="";
 String classeString;
 String enfantString;
@@ -69,9 +70,13 @@ String client;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_achat_billet, container, false);
+        p=0;
+        versString="Abidjan";
+        deString="Abidjan";
         prices=((Global) this.getActivity().getApplication()).getMileprice();
         price = (TextView) v.findViewById(R.id.price) ;
         de = (Spinner) v.findViewById(R.id.de);
+        classe = (Spinner) v.findViewById(R.id.classe);
         datealler = (TextView) v.findViewById(R.id.datealler);
         dateretour = (TextView) v.findViewById(R.id.dateretour);
         aller = (RadioButton) v.findViewById(R.id.aller);
@@ -86,13 +91,113 @@ String client;
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
         solde = Integer.valueOf(sharedPreferences.getString("prime", ""));
-        de.setOnItemSelectedListener(this);
-        vers.setOnItemSelectedListener(this);
-        enfant.setOnItemSelectedListener(this);
-        adulte.setOnItemSelectedListener(this);
-        jeune.setOnItemSelectedListener(this);
-        bebe.setOnItemSelectedListener(this);
-        classe.setOnItemSelectedListener(this);
+        de.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                deString= parent.getItemAtPosition(position).toString().trim();
+                if (versString.equals("Tunis")||versString.equals("Sfax")||versString.equals("Enfidha")) {
+                    priceString=String.valueOf(prices.get(deString))+" "+priceString;
+                    p=prices.get(deString);
+                    price.setText(priceString);
+                    priceString="Miles Prime";
+                }
+                else if ((deString.equals("Tunis")) || (deString.equals("Sfax")) || (deString.equals("Enfidha")) )
+                {
+                    priceString=String.valueOf(prices.get(versString))+" "+priceString;
+                    p=prices.get(deString);
+                    price.setText(priceString);
+                    priceString="Miles Prime";
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        vers.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                versString= parent.getItemAtPosition(position).toString().trim();
+                if ((deString.equals("Tunis")) || (deString.equals("Sfax")) || (deString.equals("Enfidha")) ) {
+                    priceString=String.valueOf(prices.get(versString))+" "+priceString;
+                    p=prices.get(deString);
+                    price.setText(priceString);
+                    priceString="Miles Prime";
+                }
+                else if (versString.equals("Tunis")||versString.equals("Sfax")||versString.equals("Enfidha"))
+                {
+                    priceString=String.valueOf(prices.get(deString))+" "+priceString;
+                    p=prices.get(deString);
+                    price.setText(priceString);
+                    priceString="Miles Prime";
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        enfant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                enfantString= parent.getItemAtPosition(position).toString().trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        adulte.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                adulteString= parent.getItemAtPosition(position).toString().trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        jeune.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                jeuneString= parent.getItemAtPosition(position).toString().trim();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        bebe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                bebeString= parent.getItemAtPosition(position).toString().trim();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        classe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                classeString= parent.getItemAtPosition(position).toString().trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         type.setOnCheckedChangeListener(this);
         acheter.setOnClickListener(this);
         datealler.setOnClickListener(new View.OnClickListener() {
@@ -104,9 +209,9 @@ String client;
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog;
-                dialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateAllerSetListener, year, month, day);
+                dialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateAllerSetListener, year, month+1, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
                 dialog.show();
             }
@@ -130,9 +235,9 @@ String client;
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog;
-                dialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateRetourSetListener, year, month, day);
+                dialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateRetourSetListener, year, month+1, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dialog.show();
             }
         });
@@ -142,6 +247,7 @@ String client;
                 String date = year + "-" + month + "-" + day;
                 dateretour.setText(date);
                 dateretourString=date;
+
 
 
 
@@ -165,70 +271,16 @@ String client;
 
 
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long l) {
-        switch (v.getId())
-        {
 
-            case R.id.de:
-                deString= parent.getItemAtPosition(position).toString().trim();
-                if (versString.equals("Tunis")||versString.equals("Sfax")||versString.equals("Enfidha")) {
-                    priceString=String.valueOf(prices.get(deString))+" "+priceString;
-                    p=prices.get(deString);
-                    price.setText(priceString);
-                }
-                else if (deString.equals("Tunis")||deString.equals("Sfax")||deString.equals("Enfidha"))
-                {
-                    priceString=String.valueOf(prices.get(versString))+" "+priceString;
-                    p=prices.get(deString);
-                    price.setText(priceString);
-                }
-                break;
-            case R.id.vers:
-                versString= parent.getItemAtPosition(position).toString().trim();
-                if (deString.equals("Tunis")||deString.equals("Sfax")||deString.equals("Enfidha")) {
-                    priceString=String.valueOf(prices.get(versString))+" "+priceString;
-                    p=prices.get(deString);
-                    price.setText(priceString);
-                }
-                else if (versString.equals("Tunis")||versString.equals("Sfax")||versString.equals("Enfidha"))
-                {
-                    priceString=String.valueOf(prices.get(deString))+" "+priceString;
-                    p=prices.get(deString);
-                    price.setText(priceString);
-
-                }
-                break;
-            case R.id.jeune:
-                jeuneString= parent.getItemAtPosition(position).toString().trim();
-                break;
-            case R.id.bebe:
-                bebeString= parent.getItemAtPosition(position).toString().trim();
-                break;
-            case R.id.enfant:
-                enfantString= parent.getItemAtPosition(position).toString().trim();
-                break;
-            case R.id.adulte:
-                adulteString= parent.getItemAtPosition(position).toString().trim();
-                break;
-            case R.id.classe:
-                classeString= parent.getItemAtPosition(position).toString().trim();
-                break;
-        }
-
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-
-    }
 
     @Override
     public void onClick(View view) {
         int selectedId = type.getCheckedRadioButtonId();
+
+
         radiobutton = (RadioButton) getActivity().findViewById(selectedId);
         typeString=radiobutton.getText().toString().trim();
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         if (deString.equals(versString))
             {
@@ -239,8 +291,12 @@ String client;
                 {
                     Toast.makeText(AchatBilletFragment.this.getActivity(), "Solde Insuffisant", Toast.LENGTH_LONG).show();
                 }
+            else if (retour.isChecked()&&java.sql.Date.valueOf(dateallerString).compareTo(Date.valueOf(dateretourString))>0)
+                {
+                    Toast.makeText(AchatBilletFragment.this.getActivity(), "La date de retour doit etre apres la date d aller", Toast.LENGTH_LONG).show();
+                }
                 else{
-                Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString, classeString, adulteString, jeuneString, enfantString, bebeString);
+                Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString, classeString, adulteString, jeuneString, enfantString, bebeString,p);
                 buytikcet.enqueue(new retrofit.Callback<billet>() {
                                       @Override
                                       public void onResponse(Response<billet> response, Retrofit retrofit) {
