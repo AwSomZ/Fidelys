@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -46,7 +47,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
     String tp=null;
     String fa=null;
     String s=null;
-
+    private ImageView goback;
 
 
     @Override
@@ -70,6 +71,8 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
 
 
         Spinner pays = (Spinner) findViewById(R.id.pays);
+        goback= (ImageView) findViewById(R.id.goback);
+        goback.setOnClickListener(this);
         pays.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.country_arrays, android.R.layout.simple_spinner_item);
@@ -115,8 +118,13 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        etape2();
-
+        switch (v.getId()) {
+            case R.id.goback:finish();
+            break;
+            case R.id.envoyer:
+            etape2();
+            break;
+        }
     }
 
     private void etape2() {

@@ -8,7 +8,7 @@
     tools:context=".EspaceReclamationsFragment">
 
     <TextView
-        android:id="@+id/textView37"
+        android:id="@+id/enc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -26,15 +26,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:elevation="5dp"
         android:fontFamily="@font/soda"
-        android:visibility="gone"
         android:text="Aucune reclamation"
         android:textColor="@color/orange"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView3"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/scrollView3" />
+
+
 
     <ScrollView
         android:id="@+id/scrollView3"
@@ -44,8 +47,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView37"
+        app:layout_constraintTop_toBottomOf="@+id/enc"
         app:layout_constraintVertical_bias="0.0">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/encours"
@@ -56,7 +60,7 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/textView40"
+        android:id="@+id/enr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -78,7 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        app:layout_constraintTop_toBottomOf="@+id/enr"
         app:layout_constraintVertical_bias="0.076">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -88,6 +92,22 @@
 
 
     </ScrollView>
+
+    <TextView
+        android:id="@+id/error1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="5dp"
+        android:fontFamily="@font/soda"
+        android:text="Aucune reclamation"
+        android:textColor="@color/green"
+        android:textSize="20dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView4" />
 
     <ImageView
         android:id="@+id/ajouter"

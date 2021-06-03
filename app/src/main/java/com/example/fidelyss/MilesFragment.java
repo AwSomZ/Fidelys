@@ -27,16 +27,20 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
 
-public class MilesFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener {
+public class MilesFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
 SharedPreferences sharedPreferences;
-String quantite;
+String quantite="1000";
 CheckBox gift;
+double coef=0.07;
 EditText to;
 String id;
 String client;
 RadioGroup radioGroup;
 TextView price;
 RadioButton radioButton;
+    private String milestype="prime";
+    private TextView unit;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
@@ -46,14 +50,18 @@ RadioButton radioButton;
         radioGroup = (RadioGroup) v.findViewById(R.id.milestype);
         to = (EditText)  v.findViewById(R.id.to);
         price = (TextView) v.findViewById(R.id.price);
+        unit= (TextView) v.findViewById(R.id.unit);
         gift = (CheckBox)  v.findViewById(R.id.show);
-        Spinner quantite = (Spinner) v.findViewById(R.id.quantite);
-        quantite.setOnItemSelectedListener(this);
+        Spinner quantitee = (Spinner) v.findViewById(R.id.quantite);
+        quantitee.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
         R.array.quantite, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        quantite.setAdapter(adapter);
-        quantite.setOnItemSelectedListener(this);
+        quantitee.setAdapter(adapter);
+        quantitee.setOnItemSelectedListener(this);
+        radioGroup.setOnCheckedChangeListener(this);
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        System.out.println(selectedId);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
 
         id = sharedPreferences.getString("id", "");
@@ -71,6 +79,10 @@ RadioButton radioButton;
 
 
         ((Button) v.findViewById(R.id.acheter)).setOnClickListener(this);
+        Double prix = Integer.valueOf(quantite)*coef;
+        DecimalFormat df = new DecimalFormat("###.###");
+
+        price.setText(df.format(prix)+"DT");
 
 
         return v;
@@ -84,10 +96,11 @@ RadioButton radioButton;
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
         quantite = parent.getItemAtPosition(position).toString().trim();
-        Double prix = Integer.valueOf(quantite)*0.07;
+        Double prix = Integer.valueOf(quantite)*coef;
         DecimalFormat df = new DecimalFormat("###.###");
 
         price.setText(df.format(prix)+"DT");
+
 
 
 
@@ -98,10 +111,7 @@ RadioButton radioButton;
        @Override
     public void onClick(View v)
        {
-           int selectedId = radioGroup.getCheckedRadioButtonId();
-           System.out.println(selectedId);
-           radioButton = (RadioButton) this.getActivity().findViewById(selectedId);
-          String milestype = radioButton.getText().toString().trim();
+
            if (gift.isChecked())
            {
               if (to.getText().toString().trim().isEmpty())
@@ -144,5 +154,24 @@ RadioButton radioButton;
             to.setVisibility(View.GONE);
         }
 
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        switch (i)
+        {
+            case R.id.prime:coef=0.07;
+            milestype="prime";
+            unit.setText("Prix Unitaire 0.07DT");
+            break;
+            case R.id.statut:coef=0.14;
+            milestype="statut";
+            unit.setText("Prix Unitaire 0.14DT");
+            break;
+        }
+        Double prix = Integer.valueOf(quantite)*coef;
+        DecimalFormat df = new DecimalFormat("###.###");
+
+        price.setText(df.format(prix)+"DT");
     }
 }

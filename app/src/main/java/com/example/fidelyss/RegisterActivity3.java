@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -56,6 +57,8 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
     String sexe = "";
     GoogleApiClient googleApiClient;
     String Key ="6Ld2YnQaAAAAAKjcJIcpKYDBofusqkXq1CYmdu1O";
+    private ImageView goback;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -69,6 +72,8 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
         r5= (RadioGroup) findViewById(R.id.pref);
         r6= (RadioGroup) findViewById(R.id.assistance);
         checkBox =(CheckBox) findViewById(R.id.tos);
+        goback= (ImageView) findViewById(R.id.goback);
+        goback.setOnClickListener(this);
         ((Button)findViewById(R.id.add)).setOnClickListener(this);
 
         Intent intent = getIntent();
@@ -155,23 +160,29 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
     }
     @Override
     public void onClick(View v) {
-        if (checkBox.isChecked() == false) {
-            checkBox.setError("You have To agree");
-            Toast.makeText(RegisterActivity3.this, "You have To agree ", Toast.LENGTH_LONG).show();
-        } else {
-            SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
-                    .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {
-                        @Override
-                        public void onResult(@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult) {
-                            Status status = recaptchaTokenResult.getStatus();
-                            if ((status != null) && status.isSuccess()) {
-                                ajouter();
+        switch (v.getId()) {
+            case R.id.goback:finish();
+            break;
+            case R.id.add:
+            if (checkBox.isChecked() == false) {
+                checkBox.setError("You have To agree");
+                Toast.makeText(RegisterActivity3.this, "You have To agree ", Toast.LENGTH_LONG).show();
+            } else {
+                SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
+                        .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {
+                            @Override
+                            public void onResult(@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult) {
+                                Status status = recaptchaTokenResult.getStatus();
+                                if ((status != null) && status.isSuccess()) {
+                                    ajouter();
+                                }
                             }
-                        }
 
-                    });
+                        });
+            }
+            break;
+
         }
-
     }
 
     private void ajouter() {
@@ -206,19 +217,20 @@ public class RegisterActivity3 extends AppCompatActivity implements View.OnClick
             radioButton = (RadioButton) findViewById(selectedId);
             String habadd = radioButton.getText().toString().trim();
 
-            Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.16:80/").addConverterFactory(GsonConverterFactory.create()).build();
+            Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
             Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd, societeadd, fonctionadd, telpadd, faxadd, langueadd, prefadd, paiementadd, habadd, classehadd, assistanceadd, typeadd);
             addUser.enqueue(new Callback<user>() {
                 public void onResponse(Response<user> response, Retrofit retrofit) {
                     Toast.makeText(RegisterActivity3.this, "user successfully registred ", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(RegisterActivity3.this, Redirection.class);
+                    intent.putExtra("user", cinadd);
                     startActivity(intent);
-                    overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
+                    overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
                 }
 
                 public void onFailure(Throwable t) {
-                    Toast.makeText(RegisterActivity3.this, "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity3.this, "error" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             });
 

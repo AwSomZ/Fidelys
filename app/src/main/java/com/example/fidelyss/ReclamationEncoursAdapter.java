@@ -60,7 +60,6 @@ public class ReclamationEncoursAdapter  extends RecyclerView.Adapter<Reclamation
 
         public ReclamationEncoursViewHolder(View itemView) {
             super(itemView);
-
             date = (TextView) itemView.findViewById(R.id.datecreation);
             titre = (TextView) itemView.findViewById(R.id.titre);
 

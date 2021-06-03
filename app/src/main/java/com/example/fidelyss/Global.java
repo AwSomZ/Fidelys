@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Global extends Application {
-    private String BaseUrl ="http://192.168.1.23:80/";
+    private String BaseUrl ="http://192.168.1.18:80/";
     private static final Map<String, Integer> mileprice = new HashMap<String, Integer>() {{
         put("Abidjan",24000);
         put("Alger",5000);
@@ -73,6 +73,72 @@ public class Global extends Application {
         put("Zurich",7000);
 
     }};
+    private static final Map<String, String> aka = new HashMap<String, String>() {{
+        put("Abidjan","ABJ");
+        put("Alger","ALG");
+        put("Amsterdam","AMS");
+        put("Bâle","BSL");
+        put("Bamako","BKO");
+        put("Barcelone","BCN");
+        put("Belgrade","BEG");
+        put("Benghazi","BEN");
+        put("Berlin","SXF");
+        put("Beyrouth","BEY");
+        put("Bologne","BLQ");
+        put("Bordeaux","BOD");
+        put("Bruxelles","BRU");
+        put("Casablanca","CMN");
+        put("Conakry","CKY");
+        put("Constantine","CZL");
+        put("Cotonou","COO");
+        put("Dakar","DSS");
+        put("Djerba","DJE");
+        put("Duesseldorf","DUS");
+        put("Enfidha","NBE");
+        put("Frankfurt","FRA");
+        put("Gabes","GAB");
+        put("Gafsa","GAF");
+        put("Genève","GVA");
+        put("Hamburg","HAM");
+        put("Istanbul","IST");
+        put("Jeddah","JED");
+        put("Le Caire","CAI");
+        put("Lille","LIL");
+        put("Lisbonne","LIS");
+        put("Londres","LON");
+        put("Lyon","LYS");
+        put("Madrid","MAD");
+        put("Malte","MLA");
+        put("Marseille","MRS");
+        put("Médine","MED");
+        put("Milan","MXP");
+        put("Monastir","MIR");
+        put("Montréal","YUL");
+        put("Munich","MUC");
+        put("Nantes","NTE");
+        put("Naples","NAP");
+        put("Niamey","NIM");
+        put("Nice","NCE");
+        put("Nouakchott","NKC");
+        put("Oran","ORN");
+        put("Ouagadougou","OUA");
+        put("Palerme","PMO");
+        put("Paris","PAR");
+        put("Prague","PRG");
+        put("Rome","FCO");
+        put("Sfax","SFA");
+        put("Strasbourg","SXB");
+        put("Tabarka","TBJ");
+        put("Toulouse","TLS");
+        put("Tozeur","TOE");
+        put("Tripoli","MJI");
+        put("Tunis","TUN");
+        put("Venise","VCE");
+        put("Vérone","VRN");
+        put("Vienne","VIE");
+        put("Zurich","ZRH");
+    }};
+
 
     public String getBaseUrl() {
         return BaseUrl;
@@ -80,5 +146,9 @@ public class Global extends Application {
 
     public static Map<String, Integer> getMileprice() {
         return mileprice;
+    }
+
+    public static Map<String, String> getAka() {
+        return aka;
     }
 }

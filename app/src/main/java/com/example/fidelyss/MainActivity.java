@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
 
                 break;
+            case R.id.verifier:
+                intent = new Intent(this, VerifierCompte.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
+
+                break;
             case R.id.login:
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);

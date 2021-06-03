@@ -1,6 +1,7 @@
 package com.example.fidelyss;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ TextView np;
 TextView datenaiss;
 TextView sexe;
 TextView cin;
+TextView logout;
 TextView pays;
 TextView adresse;
 TextView ville;
@@ -42,6 +44,7 @@ private SharedPreferences sharedPreferences;
         adresseid= (ConstraintLayout) v.findViewById(R.id.adresseid);
         contactemail = (ConstraintLayout) v.findViewById(R.id.contactemail);
         np= (TextView) v.findViewById(R.id.np);
+        logout= (TextView) v.findViewById(R.id.logout);
         cp= (TextView) v.findViewById(R.id.cp);
         datenaiss= (TextView) v.findViewById(R.id.datenaiss);
         sexe= (TextView) v.findViewById(R.id.sexe);
@@ -54,6 +57,7 @@ private SharedPreferences sharedPreferences;
         Animation aniFade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
         Animation Fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
         sc.startAnimation(Fade);
+        logout.startAnimation(aniFade);
         infogen.startAnimation(aniFade);
         adresseid.startAnimation(aniFade);
         contactemail.startAnimation(aniFade);
@@ -68,6 +72,7 @@ private SharedPreferences sharedPreferences;
         String nationaliteadd = sharedPreferences.getString("nationalite", "");
         String emailadd = sharedPreferences.getString("email", "");
         String npadd = sharedPreferences.getString("nom", "")+" "+sharedPreferences.getString("prenom", "");
+        logout.setOnClickListener(this);
         np.setText(npadd);
         datenaiss.setText(dateadd);
         sexe.setText(sexeadd);
@@ -98,11 +103,13 @@ private SharedPreferences sharedPreferences;
             case R.id.adresseid:
                 unFrgment = new Profile2Fragment();
                 break;
-        }
-        String URL = "http://192.168.1.20:80/";
-        Bundle bundle = new Bundle();
-        bundle.putString("url", URL);
-        unFrgment.setArguments(bundle);
+            case R.id.logout:
+                unFrgment = new MouvementFragment();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+                getActivity().finish();
+        break;}
+
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
     }
 }

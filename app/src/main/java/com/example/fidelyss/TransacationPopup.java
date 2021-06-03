@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.DisplayMetrics;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ String id;
 TextView ref;
     SharedPreferences sharedPreferences;
 TextView dep;
+TextView description;
 TextView val;
 TextView dat;
     @Override
@@ -38,6 +40,8 @@ TextView dat;
         dep = (TextView) findViewById(R.id.depends);
         val = (TextView) findViewById(R.id.valeur);
         dat = (TextView) findViewById(R.id.date);
+        description = (TextView) findViewById(R.id.description);
+        description.setMovementMethod(new ScrollingMovementMethod());
 
 
 
@@ -54,6 +58,7 @@ TextView dat;
             dep.setText(sharedPreferences.getString("depends", ""));
             val.setText(sharedPreferences.getString("value", ""));
             dat.setText(sharedPreferences.getString("datee", ""));
+            description.setText(sharedPreferences.getString("description", ""));
             val.setTextColor(getResources().getColor(R.color.green));
         }
         else
@@ -62,6 +67,7 @@ TextView dat;
                 dep.setText(sharedPreferences.getString("depends", ""));
                 val.setText(sharedPreferences.getString("value", ""));
                 dat.setText(sharedPreferences.getString("datee", ""));
+                description.setText(sharedPreferences.getString("description", ""));
                 val.setTextColor(getResources().getColor(R.color.red));
 
             }

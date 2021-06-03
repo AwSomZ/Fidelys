@@ -16,5 +16,6 @@
     <color name="orange">#FF5A00</color>
     <color name="grey">#D3CFCF</color>
     <color name="green">#33FF00</color>
+    <color name="transparent">#51000000</color>
 
 </resources>

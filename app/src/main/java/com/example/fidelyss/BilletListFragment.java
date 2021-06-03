@@ -1,11 +1,13 @@
 package com.example.fidelyss;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,18 +26,21 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 
-public class BilletListFragment extends Fragment {
+public class BilletListFragment extends Fragment implements View.OnClickListener {
 
 
     private SharedPreferences sharedPreferences;
     private RecyclerView recyclerViewUser3;
     private RecyclerView.LayoutManager layoutManager3;
+    Button acheter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v= inflater.inflate(R.layout.fragment_billet_list, container, false);
+        acheter = (Button) v.findViewById(R.id.acheter);
+        acheter.setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
@@ -62,5 +67,14 @@ public class BilletListFragment extends Fragment {
 
             }});
             return v;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(this.getContext(), AchatBilletActivity.class);
+
+        startActivity(intent);
+
+        getActivity().overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
     }
 }

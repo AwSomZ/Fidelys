@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     int i;
     private TextView mDisplayDate;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private ImageView goback;
 
 
     @Override
@@ -43,6 +45,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         prenom = (EditText)findViewById(R.id.Prenom);
         radioGroup = (RadioGroup) findViewById(R.id.sexe);
         mDisplayDate = (TextView) findViewById(R.id.tvDate) ;
+        goback= (ImageView) findViewById(R.id.goback);
+        goback.setOnClickListener(this);
 
         ((Button)findViewById(R.id.button)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signin)).setOnClickListener(this);
@@ -91,6 +95,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         Intent intent;
 
         switch (v.getId()) {
+            case R.id.goback:finish();
+            break;
             case R.id.button: sendInfo();
                 break;
             case R.id.signin:intent = new Intent(this, LoginActivity.class);

@@ -120,6 +120,7 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
             editor.putString("depends",dependss);
             editor.putString("datee",datee);
             editor.putString("color",color);
+            editor.putString("description",Transaction.getDescription());
             editor.commit();
 
             context.startActivity(intent);

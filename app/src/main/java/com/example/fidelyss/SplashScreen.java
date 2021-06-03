@@ -11,7 +11,6 @@ Handler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
         handler=new Handler();
         handler.postDelayed(new Runnable() {
             @Override

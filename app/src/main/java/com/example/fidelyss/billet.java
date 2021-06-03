@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class billet {
     private int id;
-    private String de;
-    private String vers;
+    private String depart;
+    private String destination;
     private String type;
     private String classe;
     private Date datealler;
@@ -16,14 +16,15 @@ public class billet {
     private int bebe;
     private Date dateachat;
     private String client;
+    private int prix;
 
     public billet() {
     }
 
-    public billet(int id, String de, String vers, String type, String classe, Date datealler, Date dateretour, int adulte, int jeune, int enfant, int bebe, Date dateachat, String client) {
+    public billet(int id, String depart, String destination, String type, String classe, Date datealler, Date dateretour, int adulte, int jeune, int enfant, int bebe, Date dateachat, String client, int prix) {
         this.id = id;
-        this.de = de;
-        this.vers = vers;
+        this.depart = depart;
+        this.destination = destination;
         this.type = type;
         this.classe = classe;
         this.datealler = datealler;
@@ -34,6 +35,7 @@ public class billet {
         this.bebe = bebe;
         this.dateachat = dateachat;
         this.client = client;
+        this.prix = prix;
     }
 
     public int getId() {
@@ -44,20 +46,20 @@ public class billet {
         this.id = id;
     }
 
-    public String getDe() {
-        return de;
+    public String getDepart() {
+        return depart;
     }
 
-    public void setDe(String de) {
-        this.de = de;
+    public void setDepart(String depart) {
+        this.depart = depart;
     }
 
-    public String getVers() {
-        return vers;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setVers(String vers) {
-        this.vers = vers;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
     public String getType() {
@@ -138,5 +140,13 @@ public class billet {
 
     public void setClient(String client) {
         this.client = client;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
     }
 }

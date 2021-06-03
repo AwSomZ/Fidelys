@@ -32,6 +32,9 @@ import retrofit.Retrofit;
 public class EspaceReclamationsFragment extends Fragment implements View.OnClickListener {
 
     TextView error;
+    TextView error1;
+    TextView enc;
+    TextView enr;
     ImageView ajouter;
     private RecyclerView recyclerViewUser;
     private RecyclerView.LayoutManager layoutManager;
@@ -45,11 +48,20 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
 
       View v= inflater.inflate(R.layout.fragment_espace_reclamations, container, false);
       error = (TextView) v.findViewById(R.id.error);
+      error1 = (TextView) v.findViewById(R.id.error1);
+      enc = (TextView) v.findViewById(R.id.enc);
+      enr = (TextView) v.findViewById(R.id.enr);
       TextView bare = (TextView) v.findViewById(R.id.bare);
       ajouter =(ImageView) v.findViewById(R.id.ajouter);
         Animation left = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
         Animation right = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_right);
+        Animation zoom = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.zoom_in);
+        Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
+        error.setAnimation(fade);
         ajouter.setAnimation(right);
+        enc.setAnimation(left);
+        enr.setAnimation(left);
+        error1.setAnimation(fade);
         bare.setAnimation(left);
       sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
       String id = sharedPreferences.getString("id", "");
@@ -72,7 +84,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
                     ReclamationEncoursAdapter adapter = new ReclamationEncoursAdapter(getActivity(), listReclamationEncours);
                     recyclerViewUser.setAdapter(adapter);
                 }
-                else {error.setVisibility(View.VISIBLE);}
+                else {error.setVisibility(View.VISIBLE);error.setAnimation(fade);}
             }
 
             @Override
@@ -94,6 +106,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
                     ReclamationResoluAdapter adapter2 = new ReclamationResoluAdapter(getActivity(), listReclamationResolu);
                     recyclerViewUser2.setAdapter(adapter2);
                 }
+                else {error1.setVisibility(View.VISIBLE);error1.setAnimation(fade);}
             }
 
             @Override

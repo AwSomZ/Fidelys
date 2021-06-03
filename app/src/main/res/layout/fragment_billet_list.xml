@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
+    android:orientation="vertical"
     android:layout_marginTop="170dp"
     tools:context=".BilletListFragment">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hardy"
+        android:text="Mes Billets Prime "
+        android:textColor="@color/lred"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center"
+        android:textSize="40sp"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="330dp">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/billet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"/>
+    android:layout_height="match_parent"/>
 
     </ScrollView>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/soda"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        android:text="Voulez-Vous Acheter Une Billet Prime ? "
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <Button
+        android:id="@+id/acheter"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button"
+        android:drawableStart="@drawable/cart"
+        android:fontFamily="@font/hardy"
+        android:text="CLickez Ici"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/lred" />
+
+</LinearLayout>

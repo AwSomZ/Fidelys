@@ -20,21 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/textView13"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/hardy"
-        android:text="Titre: "
+        android:text="Description: "
         android:textColor="@color/lred"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.063"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-
 
     <TextView
         android:id="@+id/id"
@@ -43,7 +42,7 @@
         android:layout_marginTop="24dp"
         android:fontFamily="@font/soda"
         android:text="000135 "
-        android:textColor="@color/grey"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView8"
@@ -61,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.624"
         app:layout_constraintStart_toEndOf="@+id/depends"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <TextView
         android:id="@+id/date"
@@ -70,24 +69,27 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/soda"
         android:text="2011-03-06"
-        android:textColor="@color/grey"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintHorizontal_bias="0.74"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toBottomOf="@+id/id" />
 
     <TextView
-        android:id="@+id/textView17"
+        android:id="@+id/description"
         android:layout_width="180dp"
         android:layout_height="40dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/soda"
-        android:text="Achat des miles"
-        android:textColor="@color/grey"
+        android:scrollbars="horizontal"
+        android:singleLine="false"
+        android:maxEms="2"
+        android:text="Achat Billet Prime"
+        android:textColor="@color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintHorizontal_bias="0.767"
         app:layout_constraintStart_toEndOf="@+id/textView13"
         app:layout_constraintTop_toBottomOf="@+id/date" />
 
@@ -124,7 +126,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="27dp"
         android:fontFamily="@font/hardy"
         android:text="Date: "
         android:textColor="@color/lred"

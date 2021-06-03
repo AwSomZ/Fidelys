@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import retrofit.Retrofit;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     public EditText cin;
     public EditText pin;
+    ImageView goback;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         cin= (EditText) findViewById(R.id.logincin);
         pin= (EditText) findViewById(R.id.loginpin);
-
+        goback= (ImageView) findViewById(R.id.goback);
+        goback.setOnClickListener(this);
         ((Button) findViewById(R.id.login)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signup)).setOnClickListener(this);
 
@@ -49,6 +52,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.login: login();
                 break;
+
+            case R.id.goback:finish();
+            break;
+
             case R.id.signup:intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
@@ -115,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(cinadd.equals("")){
                         cin.setError("Please enter you email");
                     }else {
-                        Toast.makeText(LoginActivity.this, " cin is incorrect ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, " Incorrecte ", Toast.LENGTH_LONG).show();
                     }
                 }
             }

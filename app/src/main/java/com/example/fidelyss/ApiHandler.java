@@ -40,6 +40,19 @@ public interface ApiHandler {
     );
 
         @FormUrlEncoded
+        @POST("fidelysapi/verify.php")
+        Call<String> verify(
+                @Field("user") String var1,
+                @Field("token") String var2
+        );
+
+    @FormUrlEncoded
+    @POST("fidelysapi/checkuser.php")
+    Call<user> check(
+            @Field("cin") String var1
+    );
+
+        @FormUrlEncoded
         @POST("fidelysapi/login.php")
         Call<client> selectUser(
             @Field("id") String var1,

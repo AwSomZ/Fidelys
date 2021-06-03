@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".Redirection">
+    tools:context=".VerifierCompte">
 
 
     <TextView
@@ -13,29 +13,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/soda"
-        android:text="Saisir Le Code Envoyé à votre Email Pour Valider Votre Compte"
+        android:text="Saisir Votre CIN"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.038" />
+        app:layout_constraintVertical_bias="0.04" />
 
     <EditText
-        android:id="@+id/token"
+        android:id="@+id/cin"
         android:layout_width="321dp"
         android:layout_height="49dp"
         android:layout_marginTop="28dp"
         android:width="250dp"
         android:paddingLeft="10dp"
         android:maxLength="5"
-        android:hint="_  _  _  _  _"
+        android:hint="C.I.N"
         android:background="@drawable/input"
-        android:drawableStart="@drawable/mdp"
+        android:drawableStart="@drawable/profiler"
         android:drawablePadding="5dp"
         android:fontFamily="@font/soda"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,18 +43,19 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
-        android:id="@+id/gotologin"
+        android:id="@+id/verifier"
         android:layout_width="307dp"
         android:layout_height="49dp"
         android:background="@drawable/button"
         android:backgroundTint="@color/red"
         android:fontFamily="@font/soda"
+        app:backgroundTint="@color/lred"
         android:shadowColor="#2196F3"
         android:text="Vérifier"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/token"
+        app:layout_constraintTop_toBottomOf="@+id/cin"
         app:layout_constraintVertical_bias="0.069" />
 </androidx.constraintlayout.widget.ConstraintLayout>

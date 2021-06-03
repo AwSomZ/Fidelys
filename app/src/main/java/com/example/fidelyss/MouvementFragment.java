@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -55,6 +56,8 @@ public class MouvementFragment extends Fragment {
 
         List<Fragment> list= new ArrayList<>();
         list.add(new SoldeFragment());
+        list.add(new SoldeStatutFragment());
+        list.add(new RestToUpgradeFragment());
         list.add(new InformationFragment());
         list.add(new CarteFragment());
         pager = v.findViewById(R.id.view_pager);
@@ -62,6 +65,8 @@ public class MouvementFragment extends Fragment {
         pager.setAnimation(aniFade);
         pagerAdapter= new SliderPageAdapter(getFragmentManager(),list);
         pager.setAdapter(pagerAdapter);
+        TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(pager, true);
 
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();

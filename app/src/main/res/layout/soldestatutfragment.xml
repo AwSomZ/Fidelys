@@ -46,7 +46,7 @@
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Miles Prime"
+        android:text="Miles Statut"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:fontFamily="@font/hardy"

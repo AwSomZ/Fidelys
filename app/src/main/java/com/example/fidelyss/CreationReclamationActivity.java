@@ -37,7 +37,7 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int)(width*0.97),(int)(height*0.60));
+        getWindow().setLayout((int)(width*0.97),(int)(height*0.465));
 
         titre= (Spinner) findViewById(R.id.titre);
         description= (EditText) findViewById(R.id.contenu);

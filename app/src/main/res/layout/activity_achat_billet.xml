@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    tools:context=".AchatBilletActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="594dp"
+            android:background="@drawable/ticketshape"
+            android:orientation="vertical"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.246">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/soda"
+                        android:text="De"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+
+                        android:id="@+id/textView33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/soda"
+                        android:text="Vers"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        />
+                </TableRow>
+
+                <TableRow >
+
+                    <Spinner
+                        android:id="@+id/de"
+                        android:layout_width="150dp"
+                        android:layout_height="37dp"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/airports"
+                        android:background="@drawable/ticketinput"
+                        android:fontFamily="@font/soda" />
+
+
+                    <Spinner
+                        android:id="@+id/vers"
+                        android:layout_width="150dp"
+                        android:layout_height="37dp"
+                        android:background="@drawable/ticketinput"
+                        android:drawableStart="@drawable/cart"
+                        android:fontFamily="@font/soda"
+                        android:entries="@array/airports"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.792"
+                        app:layout_constraintStart_toEndOf="@+id/de"
+                        app:layout_constraintTop_toBottomOf="@+id/textView33" />
+                </TableRow>
+
+
+            </TableLayout>
+
+            <RadioGroup
+                android:id="@+id/type"
+                android:layout_width="239dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.668"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vers">
+
+                <RadioButton
+                    android:id="@+id/aller"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginRight="30dp"
+                    android:buttonTint="@color/lred"
+                    android:checked="true"
+                    android:fontFamily="@font/soda"
+                    android:text="Aller simple"
+                    android:textColor="@color/black" />
+
+                <RadioButton
+                    android:id="@+id/retour"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:buttonTint="@color/lred"
+                    android:fontFamily="@font/soda"
+                    android:text="Aller retour"
+                    android:textColor="@color/black" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/datealler"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ticketinput"
+                    android:fontFamily="@font/soda"
+                    android:hint="Vol aller"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:id="@+id/dateretour"
+                    android:layout_width="150dp"
+                    android:layout_height="37dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ticketinput"
+                    android:fontFamily="@font/soda"
+                    android:hint="Vol retour"
+                    android:visibility="gone"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp">
+
+                <TableRow>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/soda"
+                        android:text="Adultes(25+)"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/adulte"
+                        android:layout_width="80dp"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/passagers"
+                        android:background="@drawable/ticketinput"
+                        android:fontFamily="@font/soda" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/soda"
+                        android:text="Jeunes (12-24)"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/jeune"
+                        android:layout_width="80dp"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/passagers"
+                        android:background="@drawable/ticketinput"
+                        android:fontFamily="@font/soda" />
+                </TableRow>
+
+                <TableRow android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/soda"
+                        android:text="Enfants (2-11)"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/enfant"
+                        android:layout_width="80dp"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/passagers"
+                        android:background="@drawable/ticketinput"
+                        android:fontFamily="@font/soda" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/soda"
+                        android:text="Bébés"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/bebe"
+                        android:layout_width="80dp"
+                        android:layout_height="37dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"
+                        android:entries="@array/passagers"
+                        android:background="@drawable/ticketinput"
+                        android:fontFamily="@font/soda" />
+                </TableRow>
+            </TableLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/soda"
+                    android:text="Classe"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+
+                <Spinner
+                    android:id="@+id/classe"
+                    android:layout_width="155dp"
+                    android:layout_height="37dp"
+                    android:layout_gravity="center"
+                    android:entries="@array/classes"
+                    android:background="@drawable/ticketinput"
+                    android:fontFamily="@font/soda" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/soda"
+                    android:text="Prix:"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/soda"
+                    android:layout_marginLeft="10dp"
+                    android:text="0 Miles Prime"
+                    android:textAlignment="center"
+                    android:textColor="@color/lred"
+                    android:textSize="30sp" />
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/acheter"
+                android:layout_width="321dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                android:background="@drawable/button"
+                android:fontFamily="@font/soda"
+                android:shadowColor="#2196F3"
+                android:text="Acheter"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/bottom_nav" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
