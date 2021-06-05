@@ -24,6 +24,7 @@ import java.text.DecimalFormat;
 
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
+import retrofit.Response;
 import retrofit.Retrofit;
 
 
@@ -121,24 +122,50 @@ RadioButton radioButton;
               else
                   {
                       id= to.getText().toString().trim();
+                      Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
+                      ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+
+                      Call<String> buy = api.buyMiles(id,quantite,milestype,client);
+                      buy.enqueue(new retrofit.Callback<String>() {
+
+                          public void onResponse(Response<String> response, Retrofit retrofit) {
+                              if ((response.body()!=null)&&(response.body().trim().equals("error")))
+                              {
+                                  to.setError("Verifiez l id du recepteur");
+                                  Toast.makeText(MilesFragment.this.getActivity(), "Client non trouvé ", Toast.LENGTH_LONG).show();
+                              }
+                              else
+                                  {
+
+                              Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
+                                  }
+
+                          }
+
+                          public void onFailure(Throwable t) {
+                              Toast.makeText(MilesFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                          }
+                      });
                   }
 
            }
-           Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
-           ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+           else {
+               Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
+               ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
-           Call<String> buy = api.buyMiles(id,quantite,milestype,client);
-           buy.enqueue(new retrofit.Callback<String>() {
+               Call<String> buy = api.buyMiles(id, quantite, milestype, client);
+               buy.enqueue(new retrofit.Callback<String>() {
 
-               public void onResponse(retrofit.Response<String> response, Retrofit retrofit) {
-                   Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
+                   public void onResponse(Response<String> response, Retrofit retrofit) {
+                       Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
 
-               }
+                   }
 
-               public void onFailure(Throwable t) {
-                   Toast.makeText(MilesFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-               }
-           });
+                   public void onFailure(Throwable t) {
+                       Toast.makeText(MilesFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                   }
+               });
+           }
 
 
 

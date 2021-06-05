@@ -135,9 +135,12 @@
             android:background="@drawable/input"
             android:fontFamily="@font/soda"
             android:hint="Identifiant"
+            android:inputType="number"
+            android:maxLength="9"
             android:padding="5dp"
+            android:drawableStart="@drawable/cinimg"
             android:paddingLeft="10dp"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
     </LinearLayout>
 

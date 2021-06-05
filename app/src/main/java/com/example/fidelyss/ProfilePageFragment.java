@@ -104,12 +104,12 @@ private SharedPreferences sharedPreferences;
                 unFrgment = new Profile2Fragment();
                 break;
             case R.id.logout:
-                unFrgment = new MouvementFragment();
+                unFrgment = new ProfilePageFragment();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("LOGIN");
                 editor.apply();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-            startActivity(intent);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
                 getActivity().finish();
         break;}
 

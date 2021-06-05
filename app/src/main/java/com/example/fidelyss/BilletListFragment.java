@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -32,6 +35,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
     private SharedPreferences sharedPreferences;
     private RecyclerView recyclerViewUser3;
     private RecyclerView.LayoutManager layoutManager3;
+    TextView error;
     Button acheter;
 
     @Override
@@ -39,7 +43,10 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
 
         View v= inflater.inflate(R.layout.fragment_billet_list, container, false);
+        Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
         acheter = (Button) v.findViewById(R.id.acheter);
+        error = (TextView) v.findViewById(R.id.error1);
+        error.setAnimation(fade);
         acheter.setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
@@ -59,6 +66,9 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
                     recyclerViewUser3.setHasFixedSize(true);
                     BilletAdapter adapter = new BilletAdapter(getActivity(), listBillet);
                     recyclerViewUser3.setAdapter(adapter);
+                }
+                else {
+                    error.setVisibility(View.VISIBLE);
                 }
             }
 
