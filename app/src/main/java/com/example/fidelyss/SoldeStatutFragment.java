@@ -3,6 +3,7 @@ package com.example.fidelyss;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +21,22 @@ public class SoldeStatutFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootView= (ViewGroup)inflater.inflate(R.layout.soldestatutfragment,container,false);
         solde= (TextView) rootView.findViewById(R.id.solde);
-        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String sold = sharedPreferences.getString("milesstatut", "") ;
-        System.out.println("Votre solde est"+sold);
         solde.setText(sold);
+        final Handler refreshHandler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                String sold = sharedPreferences.getString("milesstatut", "") ;
+                System.out.println("Votre solde est"+sold);
+                solde.setText(sold);
+                refreshHandler.postDelayed(this, 10);
+            }
+        };
+        refreshHandler.postDelayed(runnable, 10);
+
         return rootView;
     }
 

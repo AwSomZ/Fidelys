@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import retrofit.Call;
 import retrofit.GsonConverterFactory;
 import retrofit.Response;
@@ -28,9 +31,9 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.50));
+        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.3));
         cin=(EditText) findViewById(R.id.cin);
-        ((Button) findViewById(R.id.gotologin)).setOnClickListener(this);
+        ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
 
     }
 
@@ -41,7 +44,8 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
             cin.setError("Vous Devez Saisir Votre CIN");
         }
         else {
-            Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
             Call<user> buy = api.check(cinadd);

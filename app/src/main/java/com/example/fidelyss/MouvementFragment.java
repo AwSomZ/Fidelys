@@ -40,7 +40,7 @@ public class MouvementFragment extends Fragment {
     TextView identifiant;
     TextView np;
     TextView solde;
-
+    TextView error;
     ImageView img;
     private ViewPager pager;
     private PagerAdapter pagerAdapter;
@@ -52,7 +52,10 @@ public class MouvementFragment extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mouvement, container, false);
 
-
+        Animation left = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
+        Animation right = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_right);
+        Animation zoom = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.zoom_in);
+        Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
 
         List<Fragment> list= new ArrayList<>();
         list.add(new SoldeFragment());
@@ -61,6 +64,8 @@ public class MouvementFragment extends Fragment {
         list.add(new InformationFragment());
         list.add(new CarteFragment());
         pager = v.findViewById(R.id.view_pager);
+        error = v.findViewById(R.id.error1);
+        error.setAnimation(fade);
         Animation aniFade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
         pager.setAnimation(aniFade);
         pagerAdapter= new SliderPageAdapter(getFragmentManager(),list);
@@ -73,7 +78,7 @@ public class MouvementFragment extends Fragment {
 
         Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+        sharedPreferences = this.getContext().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
         String sexe = sharedPreferences.getString("sexe", "");
         String npp = sharedPreferences.getString("nom", "") + " " + sharedPreferences.getString("prenom", "");
@@ -106,7 +111,7 @@ public class MouvementFragment extends Fragment {
                     editor.putString("plafond",plafond);
                     editor.putString("soldecummule",soldecum);
                     editor.putString("milesprime",sp);
-                    editor.commit();
+                    editor.apply();
 
 
 
@@ -130,6 +135,7 @@ public class MouvementFragment extends Fragment {
                                 TransactionAdapter adapter=new TransactionAdapter(getActivity(),listtransaction);
                                 recyclerViewUser.setAdapter(adapter);
                             }
+                            else {error.setVisibility(View.VISIBLE);}
 
 
                         }
@@ -145,7 +151,7 @@ public class MouvementFragment extends Fragment {
             }
 
             public void onFailure(Throwable t) {
-                Toast.makeText(MouvementFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MouvementFragment.this.getActivity(), "Error " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
         return v;

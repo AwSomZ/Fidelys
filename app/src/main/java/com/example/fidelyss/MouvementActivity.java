@@ -61,7 +61,7 @@ public class MouvementActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putString("url", url);
             unFrgment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commitNow();
             return true;
         }};
 

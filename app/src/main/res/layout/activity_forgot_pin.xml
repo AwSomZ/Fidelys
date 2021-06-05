@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Redirection">
+    tools:context=".ForgotPinActivity">
 
 
     <TextView
@@ -13,37 +13,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/soda"
-        android:text="Saisir Le Code Envoyé à votre Email Pour Valider Votre Compte"
+        android:text="Saisir Votre Identifiant"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        />
 
     <EditText
-        android:id="@+id/token"
+        android:id="@+id/identifiant"
         android:layout_width="321dp"
         android:layout_height="49dp"
         android:layout_marginTop="28dp"
         android:width="250dp"
-        android:paddingLeft="10dp"
-        android:maxLength="5"
-        android:hint="_  _  _  _  _"
         android:background="@drawable/input"
-        android:drawableStart="@drawable/mdp"
+        android:drawableStart="@drawable/cinimg"
         android:drawablePadding="5dp"
         android:fontFamily="@font/soda"
+        android:hint="Identifiant"
+        android:inputType="number"
+        android:maxLength="9"
+        android:paddingLeft="10dp"
         android:layout_gravity="center" />
 
     <Button
-        android:id="@+id/gotologin"
+        android:id="@+id/verifier"
         android:layout_width="307dp"
         android:layout_height="49dp"
+        android:layout_marginBottom="592dp"
         android:background="@drawable/button"
         android:backgroundTint="@color/red"
         android:fontFamily="@font/soda"
         android:shadowColor="#2196F3"
         android:text="Vérifier"
         android:textColor="@color/white"
+        app:backgroundTint="@color/lred"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"/>
 </LinearLayout>

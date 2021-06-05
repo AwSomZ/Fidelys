@@ -127,7 +127,7 @@ int s;
        }
 
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl("http://192.168.1.20:80/").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
         Call<client> editUser = api.updateInf(sharedPreferences.getString("id",""),nomadd,prenomadd,sexeadd,dateadd);
         editUser.enqueue(new Callback<client>() {

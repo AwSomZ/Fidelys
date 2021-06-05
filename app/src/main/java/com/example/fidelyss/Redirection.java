@@ -29,7 +29,7 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.50));
+        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.33));
         token = (EditText) findViewById(R.id.token);
         user = getIntent().getStringExtra("user");
         ((Button) findViewById(R.id.gotologin)).setOnClickListener(this);

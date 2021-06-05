@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         goback.setOnClickListener(this);
         ((Button) findViewById(R.id.login)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signup)).setOnClickListener(this);
+        ((TextView) findViewById(R.id.forgot)).setOnClickListener(this);
 
 
 
@@ -55,6 +56,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             case R.id.goback:finish();
             break;
+
+            case R.id.forgot:intent = new Intent(this, ForgotPinActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
+                break;
 
             case R.id.signup:intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
@@ -106,10 +112,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     editor.putString("paiement", response.body().getPaiement());
                     editor.putString("type", response.body().getType());
                     editor.putString("assistance", response.body().getAssistance());
+                    editor.putString("LOGIN", response.body().getId());
 
 
-
-                    editor.commit();
+                    editor.apply();
                     Intent intent= new Intent(LoginActivity.this, MouvementActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);

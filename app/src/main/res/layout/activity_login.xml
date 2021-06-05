@@ -75,7 +75,7 @@
         android:background="@drawable/button"
         android:text="Se Connecter"
         android:textColor="@color/white"
-android:fontFamily="@font/soda"
+        android:fontFamily="@font/soda"
         app:backgroundTint="@color/bottom_nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,6 +85,21 @@ android:fontFamily="@font/soda"
         app:layout_constraintVertical_bias="0.719" />
 
     <TextView
+        android:id="@+id/forgot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hardy"
+        android:text="Code Pin Oublié?"
+        android:textSize="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,10 +107,10 @@ android:fontFamily="@font/soda"
         android:text="Vous n'avez pas de compte?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.327"
+        app:layout_constraintHorizontal_bias="0.396"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintVertical_bias="0.98" />
 
     <TextView
         android:id="@+id/signup"
@@ -107,10 +122,10 @@ android:fontFamily="@font/soda"
         android:textColor="@color/lred"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintHorizontal_bias="0.065"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.827" />
+        app:layout_constraintVertical_bias="0.979" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

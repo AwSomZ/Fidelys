@@ -52,6 +52,12 @@ public interface ApiHandler {
             @Field("cin") String var1
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/forgotpin.php")
+    Call<String> forgotpin(
+            @Field("id") String var1
+    );
+
         @FormUrlEncoded
         @POST("fidelysapi/login.php")
         Call<client> selectUser(
