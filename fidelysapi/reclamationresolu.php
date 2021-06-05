@@ -3,7 +3,7 @@
 	include "bd.php";
  	$id=$_POST['client'];
 
-$query=$bd->prepare("select * from  reclamation  where client='$id' and etat='resolu' ");
+$query=$bd->prepare("select * from  reclamation  where client='$id' and etat='resolu' order by datecreation desc ");
 $query->execute();
 if ($query->rowCount()>0)
 {
