@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 
-public class EmailUpdateFragment extends Fragment implements View.OnClickListener {
+public class EmailUpdateFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
     EditText email;
     String emailadd;
     private SharedPreferences sharedPreferences;
@@ -31,6 +32,7 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
        View v= inflater.inflate(R.layout.fragment_email_update, container, false);
        email= (EditText) v.findViewById(R.id.Email);
+       email.setOnFocusChangeListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
          emailadd = sharedPreferences.getString("email", "");
         email.setText(emailadd);
@@ -57,4 +59,12 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
             }
         });
 }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
 }

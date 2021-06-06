@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class Profile2Fragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class Profile2Fragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, View.OnFocusChangeListener {
 
 
     private EditText adr;
@@ -54,6 +55,18 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         fax = (EditText) v.findViewById(R.id.fax);
         cin = (EditText) v.findViewById(R.id.cin);
         Spinner pays = (Spinner) v.findViewById(R.id.pays);
+        adr.setOnFocusChangeListener(this);
+        teld.setOnFocusChangeListener(this);
+        telm.setOnFocusChangeListener(this);
+        telp.setOnFocusChangeListener(this);
+        ville.setOnFocusChangeListener(this);
+        cp.setOnFocusChangeListener(this);
+        nationalite.setOnFocusChangeListener(this);
+        fonction.setOnFocusChangeListener(this);
+        societe.setOnFocusChangeListener(this);
+        fax.setOnFocusChangeListener(this);
+        cin.setOnFocusChangeListener(this);
+
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String cinadd = sharedPreferences.getString("cin", "");
         String adradd= sharedPreferences.getString("adr", "");
@@ -89,7 +102,8 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
       return v;
     }
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    public void
+    onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         paysadd = parent.getItemAtPosition(position).toString().trim();
     }
 
@@ -157,4 +171,11 @@ public void update(){
 }
 
 
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
 }

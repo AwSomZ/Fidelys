@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,7 +25,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
     public EditText cin;
     public EditText pin;
     ImageView goback;
@@ -41,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ((Button) findViewById(R.id.login)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signup)).setOnClickListener(this);
         ((TextView) findViewById(R.id.forgot)).setOnClickListener(this);
+        cin.setOnFocusChangeListener(this);
+        pin.setOnFocusChangeListener(this);
 
 
 
@@ -126,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("/"+cinadd);
 
                     if(cinadd.equals("")){
-                        cin.setError("Please enter you email");
+                        cin.setError("Saisir votre email");
                     }else {
                         Toast.makeText(LoginActivity.this, " Incorrecte ", Toast.LENGTH_LONG).show();
                     }
@@ -141,4 +144,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+
+                if(!b){
+                    InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+                }
+
+
+
+}
 }

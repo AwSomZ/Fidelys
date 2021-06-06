@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class CreationReclamationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
+public class CreationReclamationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener, View.OnFocusChangeListener {
     Spinner titre;
     String titreadd;
     EditText description;
@@ -41,6 +42,7 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
 
         titre= (Spinner) findViewById(R.id.titre);
         description= (EditText) findViewById(R.id.contenu);
+        description.setOnFocusChangeListener(this);
         creer= (Button) findViewById(R.id.creer);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.reclamation, android.R.layout.simple_spinner_item);
@@ -88,5 +90,13 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         }
 
 
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }

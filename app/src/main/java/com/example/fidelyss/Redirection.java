@@ -1,9 +1,11 @@
 package com.example.fidelyss;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,7 +17,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class Redirection extends AppCompatActivity implements View.OnClickListener {
+public class Redirection extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     private String user;
     String tokenadd;
@@ -31,6 +33,7 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.33));
         token = (EditText) findViewById(R.id.token);
+        token.setOnFocusChangeListener(this);
         user = getIntent().getStringExtra("user");
         ((Button) findViewById(R.id.gotologin)).setOnClickListener(this);
 
@@ -70,6 +73,14 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
                     Toast.makeText(Redirection.this, " Erreur "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                 }
             });
+        }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
     }
 }

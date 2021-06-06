@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -29,7 +30,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 
-public class ProfileFragment extends Fragment implements View.OnClickListener {
+public class ProfileFragment extends Fragment implements View.OnClickListener, View.OnFocusChangeListener {
 EditText nom;
 EditText prenom;
 TextView mDisplayDate;
@@ -49,7 +50,8 @@ int s;
         prenom = (EditText) v.findViewById(R.id.Prenom);
         radioGroup = (RadioGroup) v.findViewById(R.id.sexe);
         mDisplayDate = (TextView) v.findViewById(R.id.tvDate) ;
-
+        nom.setOnFocusChangeListener(this);
+        prenom.setOnFocusChangeListener(this);
         ((Button)v.findViewById(R.id.maj)).setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String no = sharedPreferences.getString("nom", "");
@@ -154,5 +156,13 @@ int s;
     @Override
     public void onClick(View v){
 update();
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }

@@ -1,9 +1,11 @@
 package com.example.fidelyss;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,7 +17,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ForgotPinActivity extends AppCompatActivity implements View.OnClickListener {
+public class ForgotPinActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     String idadd;
     private EditText id;
@@ -30,6 +32,7 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.3));
         id=(EditText) findViewById(R.id.identifiant);
+        id.setOnFocusChangeListener(this);
         ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
     }
 
@@ -66,5 +69,13 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
                 }
             });
             }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }

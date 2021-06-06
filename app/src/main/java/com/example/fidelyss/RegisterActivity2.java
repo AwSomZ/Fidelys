@@ -1,8 +1,10 @@
 package com.example.fidelyss;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,7 +16,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegisterActivity2 extends AppCompatActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener {
+public class RegisterActivity2 extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, View.OnFocusChangeListener {
     public EditText cin;
     public EditText adr;
     public EditText teld;
@@ -68,6 +70,17 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         fax = (EditText) findViewById(R.id.fax);
         cin = (EditText) findViewById(R.id.cin);
         radioGroup = (RadioGroup) findViewById(R.id.langue);
+        adr.setOnFocusChangeListener(this);
+        teld.setOnFocusChangeListener(this);
+        telm.setOnFocusChangeListener(this);
+        telp.setOnFocusChangeListener(this);
+        ville.setOnFocusChangeListener(this);
+        cp.setOnFocusChangeListener(this);
+        nationalite.setOnFocusChangeListener(this);
+        fonction.setOnFocusChangeListener(this);
+        societe.setOnFocusChangeListener(this);
+        fax.setOnFocusChangeListener(this);
+        cin.setOnFocusChangeListener(this);
 
 
         Spinner pays = (Spinner) findViewById(R.id.pays);
@@ -186,6 +199,14 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
             intent.putExtra("cinadd", cinadd);
             startActivity(intent);
               overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
+        }
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
     }
 }

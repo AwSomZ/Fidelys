@@ -1,12 +1,14 @@
 package com.example.fidelyss;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,7 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.sql.Date;
 import java.util.Calendar;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
     public static final String TAG="RegisterActivity";
     public EditText email;
     public EditText nom;
@@ -47,6 +49,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mDisplayDate = (TextView) findViewById(R.id.tvDate) ;
         goback= (ImageView) findViewById(R.id.goback);
         goback.setOnClickListener(this);
+        email.setOnFocusChangeListener(this);
+        nom.setOnFocusChangeListener(this);
+        prenom.setOnFocusChangeListener(this);
+
 
         ((Button)findViewById(R.id.button)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signin)).setOnClickListener(this);
@@ -153,4 +159,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
 }

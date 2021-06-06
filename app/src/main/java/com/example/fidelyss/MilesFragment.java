@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,7 +29,7 @@ import retrofit.Response;
 import retrofit.Retrofit;
 
 
-public class MilesFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener {
+public class MilesFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener, View.OnFocusChangeListener {
 SharedPreferences sharedPreferences;
 String quantite="1000";
 CheckBox gift;
@@ -53,6 +54,7 @@ RadioButton radioButton;
         price = (TextView) v.findViewById(R.id.price);
         unit= (TextView) v.findViewById(R.id.unit);
         gift = (CheckBox)  v.findViewById(R.id.show);
+        to.setOnFocusChangeListener(this);
         Spinner quantitee = (Spinner) v.findViewById(R.id.quantite);
         quantitee.setOnItemSelectedListener(this);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
@@ -202,5 +204,13 @@ RadioButton radioButton;
         DecimalFormat df = new DecimalFormat("###.###");
 
         price.setText(df.format(prix)+"DT");
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 }
