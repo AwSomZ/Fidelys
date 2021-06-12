@@ -25,25 +25,14 @@ public interface ApiHandler {
             @Field("codepostal") String var10,
             @Field("pays") String var11,
             @Field("teldomicile") String var12,
-            @Field("telmobile") String var13,
-            @Field("societe") String var14,
-            @Field("fonction") String var15,
-            @Field("telprofessionnel") String var16,
-            @Field("fax") String var17,
-            @Field("langue") String var18,
-            @Field("preference") String var19,
-            @Field("paiement") String var20,
-            @Field("habitude") String var21,
-            @Field("classeh") String var22,
-            @Field("assistance") String var23,
-            @Field("type") String var24
+            @Field("telmobile") String var13
     );
 
-        @FormUrlEncoded
-        @POST("fidelysapi/verify.php")
-        Call<String> verify(
-                @Field("user") String var1,
-                @Field("token") String var2
+    @FormUrlEncoded
+    @POST("fidelysapi/verify.php")
+    Call<String> verify(
+            @Field("user") String var1,
+            @Field("token") String var2
         );
 
     @FormUrlEncoded
@@ -58,9 +47,9 @@ public interface ApiHandler {
             @Field("id") String var1
     );
 
-        @FormUrlEncoded
-        @POST("fidelysapi/login.php")
-        Call<client> selectUser(
+    @FormUrlEncoded
+    @POST("fidelysapi/login.php")
+    Call<client> selectUser(
             @Field("id") String var1,
             @Field("pin") String var2
         );
@@ -105,14 +94,11 @@ public interface ApiHandler {
             @Field("adr") String var3,
             @Field("teld") String var4,
             @Field("telm") String var5,
-            @Field("telp") String var6,
-            @Field("ville") String var7,
-            @Field("cp") String var8,
-            @Field("nationalite") String var9,
-            @Field("fonction") String var10,
-            @Field("pays") String var11,
-            @Field("societe") String var12,
-            @Field("fax") String var13
+            @Field("ville") String var6,
+            @Field("cp") String var7,
+            @Field("nationalite") String var8,
+            @Field("pays") String var9
+
     );
 
     @FormUrlEncoded

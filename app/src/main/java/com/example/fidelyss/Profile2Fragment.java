@@ -28,13 +28,9 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
     private EditText adr;
     private EditText teld;
     private EditText telm;
-    private EditText telp;
     private EditText ville;
     private EditText cp;
     private EditText nationalite;
-    private EditText fonction;
-    private EditText societe;
-    private EditText fax;
     private EditText cin;
     private String paysadd;
     private SharedPreferences sharedPreferences;
@@ -42,54 +38,38 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      View v= inflater.inflate(R.layout.fragment_profile2, container, false);
+        View v= inflater.inflate(R.layout.fragment_profile2, container, false);
         adr = (EditText) v.findViewById(R.id.adresse);
         teld = (EditText) v.findViewById(R.id.teldomicile);
         telm = (EditText) v.findViewById(R.id.telmobile);
-        telp = (EditText) v.findViewById(R.id.telpro);
         ville = (EditText) v.findViewById(R.id.ville);
         cp = (EditText) v.findViewById(R.id.codepostal);
         nationalite = (EditText) v.findViewById(R.id.nationality);
-        fonction = (EditText) v.findViewById(R.id.fonction);
-        societe = (EditText) v.findViewById(R.id.societe);
-        fax = (EditText) v.findViewById(R.id.fax);
         cin = (EditText) v.findViewById(R.id.cin);
         Spinner pays = (Spinner) v.findViewById(R.id.pays);
         adr.setOnFocusChangeListener(this);
         teld.setOnFocusChangeListener(this);
         telm.setOnFocusChangeListener(this);
-        telp.setOnFocusChangeListener(this);
         ville.setOnFocusChangeListener(this);
         cp.setOnFocusChangeListener(this);
         nationalite.setOnFocusChangeListener(this);
-        fonction.setOnFocusChangeListener(this);
-        societe.setOnFocusChangeListener(this);
-        fax.setOnFocusChangeListener(this);
         cin.setOnFocusChangeListener(this);
 
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String cinadd = sharedPreferences.getString("cin", "");
         String adradd= sharedPreferences.getString("adr", "");
-        String fonctionadd = sharedPreferences.getString("fonction", "");
-        String societeadd = sharedPreferences.getString("societe", "");
-        String faxadd = sharedPreferences.getString("fax", "");
         String paysadd = sharedPreferences.getString("pays", "");
         String nationaliteadd = sharedPreferences.getString("nationalite", "");
         String teldadd = sharedPreferences.getString("teld", "");
         String telmadd = sharedPreferences.getString("telm", "");
-        String telpadd = sharedPreferences.getString("telp", "");
         String villeadd = sharedPreferences.getString("ville", "");
         String cpadd = sharedPreferences.getString("cp", "");
         System.out.println("adresse "+adradd);
         cin.setText(cinadd);
         adr.setText(adradd);
-        fonction.setText(fonctionadd);
-        societe.setText(societeadd);
-        fax.setText(faxadd);
         nationalite.setText(nationaliteadd);
         teld.setText(teldadd);
         telm.setText(telmadd);
-        telp.setText(telpadd);
         ville.setText(villeadd);
         cp.setText(cpadd);
         pays.setOnItemSelectedListener(this);
@@ -122,45 +102,39 @@ public void update(){
     String adradd = adr.getText().toString().trim();
     String teldadd = teld.getText().toString().trim();
     String telmadd = telm.getText().toString().trim();
-    String telpadd = telp.getText().toString().trim();
     String villeadd = ville.getText().toString().trim();
     String cpadd = cp.getText().toString().trim();
     String nationaliteadd = nationalite.getText().toString().trim();
-    String fonctionadd = fonction.getText().toString().trim();
-    String societeadd = societe.getText().toString().trim();
-    String faxadd = fax.getText().toString().trim();
 
     if (cinadd.isEmpty()) {
-        cin.setError("Please enter your cin");
+        cin.setError("Saisir votre cin");
     } else if (nationaliteadd.isEmpty()) {
-        nationalite.setError("Please enter your nationality");
+        nationalite.setError("Saisir votre nationalite");
     } else if (adradd.isEmpty()) {
-        adr.setError("Please enter your adress");
+        adr.setError("Saisir votre adresse");
     }  else if (villeadd.isEmpty()) {
-        ville.setError("Please enter your ville");
+        ville.setError("Saisir votre ville");
     } else if (cpadd.isEmpty()) {
-        cp.setError("Please enter your zip code");
+        cp.setError("Saisir votre code postal");
+    }else if (telmadd.isEmpty()) {
+        cp.setError("Saisir votre telephone mobile");
     }
 
     Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
     ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
-    Call<client> editUser = api.updateInf2(sharedPreferences.getString("id",""),cinadd,adradd,teldadd,telmadd,telpadd,villeadd,cpadd,nationaliteadd,fonctionadd,paysadd,societeadd,faxadd);
+    Call<client> editUser = api.updateInf2(sharedPreferences.getString("id",""),cinadd,adradd,teldadd,telmadd,villeadd,cpadd,nationaliteadd,paysadd);
     editUser.enqueue(new Callback<client>() {
         public void onResponse(Response<client> response, Retrofit retrofit) {
-            Toast.makeText(getActivity(), "Client updated", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(), "Client mise à jour", Toast.LENGTH_LONG).show();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putString("cin",cinadd);
             editor.putString("adr",adradd);
             editor.putString("teld",teldadd);
             editor.putString("telm",telmadd);
-            editor.putString("telp",telpadd);
             editor.putString("ville",villeadd);
             editor.putString("cp",cpadd);
             editor.putString("nationalite",nationaliteadd);
-            editor.putString("fonction",fonctionadd);
             editor.putString("pays",paysadd);
-            editor.putString("societe",societeadd);
-            editor.putString("fax",faxadd);
             editor.commit();
         }
 

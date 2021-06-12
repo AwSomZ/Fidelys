@@ -8,41 +8,46 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RegisterActivity2 extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, View.OnFocusChangeListener {
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.safetynet.SafetyNet;
+import com.google.android.gms.safetynet.SafetyNetApi;
+
+import java.sql.Date;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.GsonConverterFactory;
+import retrofit.Response;
+import retrofit.Retrofit;
+
+public class RegisterActivity2 extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, View.OnFocusChangeListener, GoogleApiClient.ConnectionCallbacks {
     public EditText cin;
     public EditText adr;
     public EditText teld;
-    public EditText telp;
     public EditText telm;
     public EditText ville;
     public EditText pays;
     public EditText cp;
     public EditText nationalite;
-    public EditText fonction;
-    public EditText societe;
-    public EditText fax;
-    public EditText langue;
-    public RadioButton radioButton;
-    private RadioGroup r1;
-    private RadioGroup radioGroup;
-    private RadioGroup r2;
-    private RadioGroup r3;
-    private RadioGroup r4;
-    private RadioGroup r5;
-    private RadioGroup r6;
+    GoogleApiClient googleApiClient;
+    String Key ="6Ld2YnQaAAAAAKjcJIcpKYDBofusqkXq1CYmdu1O";
     String email = "";
     String nom = "";
     String prenom = "";
     String sexe = "";
-    String date="";
+    Date date;
     String paysadd;
     String f=null;
     String td=null;
@@ -50,36 +55,27 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
     String fa=null;
     String s=null;
     private ImageView goback;
+    private CheckBox checkBox;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register2);
-
         adr = (EditText) findViewById(R.id.adresse);
         teld = (EditText) findViewById(R.id.teldomicile);
         telm = (EditText) findViewById(R.id.telmobile);
-        telp = (EditText) findViewById(R.id.telpro);
         ville = (EditText) findViewById(R.id.ville);
-        //pays = (EditText) findViewById(R.id.pays);
+        checkBox =(CheckBox) findViewById(R.id.tos);
         cp = (EditText) findViewById(R.id.codepostal);
         nationalite = (EditText) findViewById(R.id.nationality);
-        fonction = (EditText) findViewById(R.id.fonction);
-        societe = (EditText) findViewById(R.id.societe);
-        fax = (EditText) findViewById(R.id.fax);
         cin = (EditText) findViewById(R.id.cin);
-        radioGroup = (RadioGroup) findViewById(R.id.langue);
         adr.setOnFocusChangeListener(this);
         teld.setOnFocusChangeListener(this);
         telm.setOnFocusChangeListener(this);
-        telp.setOnFocusChangeListener(this);
         ville.setOnFocusChangeListener(this);
         cp.setOnFocusChangeListener(this);
         nationalite.setOnFocusChangeListener(this);
-        fonction.setOnFocusChangeListener(this);
-        societe.setOnFocusChangeListener(this);
-        fax.setOnFocusChangeListener(this);
         cin.setOnFocusChangeListener(this);
 
 
@@ -112,10 +108,15 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
                 sexe = intent.getStringExtra("sexe");
             }
             if (intent.hasExtra("date")) {
-                date = intent.getStringExtra("date");
+                date= Date.valueOf(intent.getStringExtra("date"));
 
             }
         }
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(SafetyNet.API)
+                .addConnectionCallbacks(RegisterActivity2.this)
+                .build();
+        googleApiClient.connect();
     }
 
     @Override
@@ -135,7 +136,23 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
             case R.id.goback:finish();
             break;
             case R.id.envoyer:
-            etape2();
+                if (checkBox.isChecked() == false) {
+                    checkBox.setError("Vous devez accepter pour continuer");
+                    Toast.makeText(RegisterActivity2.this, "Vous devez accepter pour continuer", Toast.LENGTH_LONG).show();
+                } else {
+                SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
+                        .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {
+                            @Override
+                            public void onResult(@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult) {
+                                Status status = recaptchaTokenResult.getStatus();
+                                if ((status != null) && status.isSuccess()) {
+                                    etape2();
+                                }
+                            }
+
+                        });
+                }
+
             break;
         }
     }
@@ -147,58 +164,43 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         String adradd = adr.getText().toString().trim();
         String teldadd = teld.getText().toString().trim();
         String telmadd = telm.getText().toString().trim();
-        String telpadd = telp.getText().toString().trim();
         String villeadd = ville.getText().toString().trim();
         String cpadd = cp.getText().toString().trim();
         String nationaliteadd = nationalite.getText().toString().trim();
-        String fonctionadd = fonction.getText().toString().trim();
-        String societeadd = societe.getText().toString().trim();
-        String faxadd = fax.getText().toString().trim();
-
-        //langue
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        radioButton = (RadioButton) findViewById(selectedId);
-        String langueadd = radioButton.getText().toString().trim();
 
 
 
           if (cinadd.isEmpty()) {
-            cin.setError("Please enter your cin");
+            cin.setError("Saisir votre cin");
           } else if (nationaliteadd.isEmpty()) {
-              nationalite.setError("Please enter your nationality");
+              nationalite.setError("Saisir votre nationalite");
           } else if (adradd.isEmpty()) {
-            adr.setError("Please enter your adress");
+            adr.setError("Saisir votre adresse");
           } else if (paysadd.isEmpty()) {
-              pays.setError("Please enter your pays");
+              pays.setError("Saisir votre pays");
           } else if (villeadd.isEmpty()) {
-              ville.setError("Please enter your ville");
+              ville.setError("Saisir votre ville");
           } else if (cpadd.isEmpty()) {
-              cp.setError("Please enter your zip code");
-          } else if (langueadd.isEmpty()) {
-              langue.setError("Please enter your langue");
+              cp.setError("Saisir votre code postal");
           } else {
+              Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
+              ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+              Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd);
+              addUser.enqueue(new Callback<user>() {
+                  public void onResponse(Response<user> response, Retrofit retrofit) {
+                      Toast.makeText(RegisterActivity2.this, "user successfully registred ", Toast.LENGTH_LONG).show();
+                      Intent intent = new Intent(RegisterActivity2.this, Redirection.class);
+                      intent.putExtra("user", cinadd);
+                      startActivity(intent);
+                      overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
+                  }
 
-            Intent intent = new Intent(this, RegisterActivity3.class);
-            intent.putExtra("email", email);
-            intent.putExtra("nom", nom);
-            intent.putExtra("prenom", prenom);
-            intent.putExtra("sexe", sexe);
-            intent.putExtra("date", date);
-            intent.putExtra("nationaliteadd", nationaliteadd);
-            intent.putExtra("adradd", adradd);
-            intent.putExtra("villeadd", villeadd);
-            intent.putExtra("cpadd", cpadd);
-            intent.putExtra("paysadd", paysadd);
-            intent.putExtra("teldadd", teldadd);
-            intent.putExtra("telmadd", telmadd);
-            intent.putExtra("societeadd", societeadd);
-            intent.putExtra("fonctionadd", fonctionadd);
-            intent.putExtra("telpadd", telpadd);
-            intent.putExtra("faxadd", faxadd);
-            intent.putExtra("langueadd", langueadd);
-            intent.putExtra("cinadd", cinadd);
-            startActivity(intent);
-              overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
+                  public void onFailure(Throwable t) {
+                      Toast.makeText(RegisterActivity2.this, "error" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                  }
+              });
+
+
         }
     }
 
@@ -208,5 +210,15 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
             InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }
