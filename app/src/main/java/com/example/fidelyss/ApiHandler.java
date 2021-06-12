@@ -116,7 +116,7 @@ public interface ApiHandler {
     @FormUrlEncoded
     @POST("fidelysapi/changeemail.php")
     Call<client> updateEmail(
-            @Field("id") String var1,
+            @Field("client") String var1,
             @Field("email") String var2,
             @Field("newemail") String var3
     );

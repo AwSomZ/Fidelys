@@ -23,7 +23,7 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
     private Context context;
     Activity activity = (Activity) context;
     List<billet> listeBillet;
-    private static final Map<String, String> aka = new HashMap<String, String>() {{
+    private static final Map<String, String> aka = new HashMap<String, String>() {
         put("Abidjan","ABJ");
         put("Alger","ALG");
         put("Amsterdam","AMS");
@@ -87,7 +87,7 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
         put("Vérone","VRN");
         put("Vienne","VIE");
         put("Zurich","ZRH");
-    }};
+    };
 
     public BilletAdapter(Context context, List<billet> listeBillet) {
         this.context = context;
