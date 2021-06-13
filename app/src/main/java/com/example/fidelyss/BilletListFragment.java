@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,8 +40,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
     Button acheter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v= inflater.inflate(R.layout.fragment_billet_list, container, false);
         Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
@@ -74,7 +74,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onFailure(Throwable t) {
-
+                Toast.makeText( getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }});
             return v;
     }
@@ -82,9 +82,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this.getContext(), AchatBilletActivity.class);
-
         startActivity(intent);
-
         getActivity().overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
     }
 }

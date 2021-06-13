@@ -21,7 +21,6 @@ public class SoldeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         ViewGroup rootView= (ViewGroup)inflater.inflate(R.layout.soldefragment,container,false);
-
         solde= (TextView) rootView.findViewById(R.id.solde);
         sharedPreferences = getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String sold = sharedPreferences.getString("milesprime", "") ;

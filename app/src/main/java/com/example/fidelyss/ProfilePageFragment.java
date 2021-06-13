@@ -21,23 +21,22 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     ConstraintLayout adresseid;
     ConstraintLayout contactemail;
     ScrollView sc;
-TextView np;
-TextView datenaiss;
-TextView sexe;
-TextView cin;
-TextView logout;
-TextView pays;
-TextView adresse;
-TextView ville;
-TextView nationalite;
-TextView cp;
-TextView email;
-private SharedPreferences sharedPreferences;
+    TextView np;
+    TextView datenaiss;
+    TextView sexe;
+    TextView cin;
+    TextView logout;
+    TextView pays;
+    TextView adresse;
+    TextView ville;
+    TextView nationalite;
+    TextView cp;
+    TextView email;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v= inflater.inflate(R.layout.fragment_profile_page, container, false);
         sc = (ScrollView) v.findViewById(R.id.scrollView2);
         infogen = (ConstraintLayout) v.findViewById(R.id.infogen);
@@ -111,7 +110,8 @@ private SharedPreferences sharedPreferences;
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
-        break;}
+                break;
+        }
 
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
     }

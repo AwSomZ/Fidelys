@@ -12,7 +12,6 @@ public class SliderPageAdapter extends FragmentStatePagerAdapter {
     public SliderPageAdapter(FragmentManager fm, List<Fragment> fragmentList){super(fm);
     this.fragmentList = fragmentList;
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {

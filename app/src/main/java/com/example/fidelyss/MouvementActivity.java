@@ -18,8 +18,6 @@ public class MouvementActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mouvement);
-
-
         bottomNavigationView=(BottomNavigationView) findViewById(R.id.botton_navigation);
         bottomNavigationView.getMenu().getItem(0).setChecked(true);
         unFrgment = new MouvementFragment();
@@ -36,26 +34,18 @@ public class MouvementActivity extends AppCompatActivity {
                 case R.id.mouvement:
                     unFrgment = new MouvementFragment();
                     break;
-
-
-
                 case R.id.achat:
                     unFrgment = new MilesFragment();
                     break;
-
                 case R.id.conversion:
                     unFrgment = new EspaceReclamationsFragment();
                     break;
-
                 case R.id.profile:
                     unFrgment = new ProfilePageFragment();
                     break;
                     case R.id.billet:
                     unFrgment = new BilletListFragment();
                     break;
-
-
-
             }
             String url = "http://192.168.157.16:80/";
             Bundle bundle = new Bundle();

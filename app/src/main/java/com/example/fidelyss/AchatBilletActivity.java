@@ -57,7 +57,6 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     RadioGroup type;
     RadioButton radiobutton;
     RadioButton aller;
-
     RadioButton retour;
     String client;
     private DatePickerDialog.OnDateSetListener DateAllerSetListener;
@@ -257,9 +256,6 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 dateretour.setText(date);
                 dateretourString=date;
 
-
-
-
             }
         };
     }
@@ -311,21 +307,20 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
             else{
                 Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString, classeString, adulteString, jeuneString, enfantString, bebeString,p);
                 buytikcet.enqueue(new retrofit.Callback<billet>() {
-                                      @Override
-                                      public void onResponse(Response<billet> response, Retrofit retrofit) {
-                                          solde=solde-p;
-                                          SharedPreferences.Editor editor = sharedPreferences.edit();
-                                          editor.putString("solde",String.valueOf(solde));
-                                          editor.commit();
-                                          Toast.makeText(AchatBilletActivity.this, "Achat validé "+p, Toast.LENGTH_LONG).show();
-                                      }
+                    @Override
+                    public void onResponse(Response<billet> response, Retrofit retrofit) {
+                        solde=solde-p;
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("solde",String.valueOf(solde));
+                        editor.commit();
+                        Toast.makeText(AchatBilletActivity.this, "Achat validé "+p, Toast.LENGTH_LONG).show();
+                    }
 
-                                      @Override
-                                      public void onFailure(Throwable t) {
-                                          Toast.makeText(AchatBilletActivity.this, "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                                      }
-                                  }
-                );
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast.makeText(AchatBilletActivity.this, "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         }
     }

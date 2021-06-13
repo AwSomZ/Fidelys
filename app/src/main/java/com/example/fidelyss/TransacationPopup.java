@@ -11,23 +11,22 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class TransacationPopup extends AppCompatActivity {
-String value;
-String depends;
-String date;
-String color;
-String id;
-TextView ref;
+    String value;
+    String depends;
+    String date;
+    String color;
+    String id;
+    TextView ref;
     SharedPreferences sharedPreferences;
-TextView dep;
-TextView description;
-TextView val;
-TextView dat;
+    TextView dep;
+    TextView description;
+    TextView val;
+    TextView dat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transacation_popup);
         sharedPreferences = getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
@@ -46,13 +45,10 @@ TextView dat;
 
 
         Intent intent = getIntent();
-        if(intent.hasExtra("depends"))
-            {
+        if(intent.hasExtra("depends")) {
                 depends=intent.getStringExtra("depends");
-            }
-        System.out.println("Hello waa"+depends);
-        if (depends.equals("crédit"))
-        {
+        }
+        if (depends.equals("crédit")) {
             System.out.println("Credit Green");
             ref.setText(sharedPreferences.getString("ref", ""));
             dep.setText(sharedPreferences.getString("depends", ""));
@@ -61,8 +57,7 @@ TextView dat;
             description.setText(sharedPreferences.getString("description", ""));
             val.setTextColor(getResources().getColor(R.color.green));
         }
-        else
-            {
+        else {
                 ref.setText(sharedPreferences.getString("ref", ""));
                 dep.setText(sharedPreferences.getString("depends", ""));
                 val.setText(sharedPreferences.getString("value", ""));
@@ -70,6 +65,6 @@ TextView dat;
                 description.setText(sharedPreferences.getString("description", ""));
                 val.setTextColor(getResources().getColor(R.color.red));
 
-            }
+        }
     }
 }

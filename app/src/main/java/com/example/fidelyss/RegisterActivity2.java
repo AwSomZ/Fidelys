@@ -49,11 +49,6 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
     String sexe = "";
     Date date;
     String paysadd;
-    String f=null;
-    String td=null;
-    String tp=null;
-    String fa=null;
-    String s=null;
     private ImageView goback;
     private CheckBox checkBox;
 
@@ -109,7 +104,6 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
             }
             if (intent.hasExtra("date")) {
                 date= Date.valueOf(intent.getStringExtra("date"));
-
             }
         }
         googleApiClient = new GoogleApiClient.Builder(this)
@@ -134,13 +128,14 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.goback:finish();
-            break;
+                break;
             case R.id.envoyer:
                 if (checkBox.isChecked() == false) {
                     checkBox.setError("Vous devez accepter pour continuer");
                     Toast.makeText(RegisterActivity2.this, "Vous devez accepter pour continuer", Toast.LENGTH_LONG).show();
-                } else {
-                SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
+                }
+                else {
+                        SafetyNet.SafetyNetApi.verifyWithRecaptcha(googleApiClient, Key)
                         .setResultCallback(new ResultCallback<SafetyNetApi.RecaptchaTokenResult>() {
                             @Override
                             public void onResult(@NonNull SafetyNetApi.RecaptchaTokenResult recaptchaTokenResult) {
@@ -152,8 +147,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
 
                         });
                 }
-
-            break;
+                break;
         }
     }
 
@@ -167,28 +161,31 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         String villeadd = ville.getText().toString().trim();
         String cpadd = cp.getText().toString().trim();
         String nationaliteadd = nationalite.getText().toString().trim();
-
-
-
-          if (cinadd.isEmpty()) {
+        if (cinadd.isEmpty()) {
             cin.setError("Saisir votre cin");
-          } else if (nationaliteadd.isEmpty()) {
+        }
+        else if (nationaliteadd.isEmpty()) {
               nationalite.setError("Saisir votre nationalite");
-          } else if (adradd.isEmpty()) {
+        }
+        else if (adradd.isEmpty()) {
             adr.setError("Saisir votre adresse");
-          } else if (paysadd.isEmpty()) {
+        }
+        else if (paysadd.isEmpty()) {
               pays.setError("Saisir votre pays");
-          } else if (villeadd.isEmpty()) {
+        }
+        else if (villeadd.isEmpty()) {
               ville.setError("Saisir votre ville");
-          } else if (cpadd.isEmpty()) {
+        }
+        else if (cpadd.isEmpty()) {
               cp.setError("Saisir votre code postal");
-          } else {
+        }
+        else {
               Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
               ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
               Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd);
               addUser.enqueue(new Callback<user>() {
                   public void onResponse(Response<user> response, Retrofit retrofit) {
-                      Toast.makeText(RegisterActivity2.this, "user successfully registred ", Toast.LENGTH_LONG).show();
+                      Toast.makeText(RegisterActivity2.this, "utilisateur inscrit avec succes", Toast.LENGTH_LONG).show();
                       Intent intent = new Intent(RegisterActivity2.this, Redirection.class);
                       intent.putExtra("user", cinadd);
                       startActivity(intent);
@@ -196,7 +193,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
                   }
 
                   public void onFailure(Throwable t) {
-                      Toast.makeText(RegisterActivity2.this, "error" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                      Toast.makeText(RegisterActivity2.this, "erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                   }
               });
 

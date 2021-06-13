@@ -42,8 +42,7 @@ RadioButton radioButton;
 int s;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_profile, container, false);
         nom = (EditText) v.findViewById(R.id.Nom);
@@ -79,7 +78,6 @@ int s;
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-
                 DatePickerDialog dialog;
                 dialog = new DatePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -101,9 +99,6 @@ int s;
 
                 String date = year + "-" + month + "-" + day;
                 mDisplayDate.setText(date);
-
-
-
             }
         };
         return  v;

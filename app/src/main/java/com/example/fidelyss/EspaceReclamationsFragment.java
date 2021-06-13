@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -53,16 +54,16 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
       enr = (TextView) v.findViewById(R.id.enr);
       TextView bare = (TextView) v.findViewById(R.id.bare);
       ajouter =(ImageView) v.findViewById(R.id.ajouter);
-        Animation left = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
-        Animation right = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_right);
-        Animation zoom = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.zoom_in);
-        Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
-        error.setAnimation(fade);
-        ajouter.setAnimation(right);
-        enc.setAnimation(left);
-        enr.setAnimation(left);
-        error1.setAnimation(fade);
-        bare.setAnimation(left);
+      Animation left = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
+      Animation right = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_right);
+      Animation zoom = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.zoom_in);
+      Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
+      error.setAnimation(fade);
+      ajouter.setAnimation(right);
+      enc.setAnimation(left);
+      enr.setAnimation(left);
+      error1.setAnimation(fade);
+      bare.setAnimation(left);
       sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
       String id = sharedPreferences.getString("id", "");
       ajouter.setOnClickListener(this);
@@ -89,7 +90,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
 
             @Override
             public void onFailure(Throwable t) {
-
+                Toast.makeText(getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }});
         Call<List<reclamation>> getreclamationresolu = api.getReclamationResolu(id);
         getreclamationresolu.enqueue(new Callback<List<reclamation>>(){
@@ -111,7 +112,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
 
             @Override
             public void onFailure(Throwable t) {
-
+                Toast.makeText(getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }});
             return v;
     }

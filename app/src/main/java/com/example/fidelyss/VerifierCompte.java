@@ -50,7 +50,6 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-
             Call<user> buy = api.check(cinadd);
             buy.enqueue(new retrofit.Callback<user>() {
                 @Override
@@ -69,13 +68,13 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Toast.makeText(VerifierCompte.this, "error" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(VerifierCompte.this, "erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
                 }
 
-    });
+            });
         }
-        }
+    }
 
     @Override
     public void onFocusChange(View view, boolean b) {

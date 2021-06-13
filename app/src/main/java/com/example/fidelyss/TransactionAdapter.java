@@ -38,11 +38,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
     @NonNull
     @Override
-public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
-    {
-        View view = LayoutInflater.from(parent.getContext()).inflate((R.layout.recyclerviewtransaction),parent, false);
-        TransactionViewHolder UViewHolder = new TransactionViewHolder(view);
-        return UViewHolder;
+    public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate((R.layout.recyclerviewtransaction),parent, false);
+            TransactionViewHolder UViewHolder = new TransactionViewHolder(view);
+            return UViewHolder;
     }
     @Override
     public void onBindViewHolder(@NonNull final TransactionAdapter.TransactionViewHolder holder, final int position) {
@@ -63,74 +62,66 @@ public TransactionAdapter.TransactionViewHolder onCreateViewHolder(@NonNull View
         holder.day.setText(day);
         holder.description.setText(desc);
 
-        if (Transaction.getDebit()==0)
-            {
+        if (Transaction.getDebit()==0) {
             holder.value.setText("+"+String.valueOf(Transaction.getCredit()));
             holder.depends.setText("Crédit");
-
             value="+"+String.valueOf(Transaction.getCredit());
             holder.value.setTextColor(this.context.getResources().getColor(R.color.green));
             holder.background.setBackground(ContextCompat.getDrawable(context, R.drawable.cardgreen));
             color = "green";
-
-            }
-        else
-            {
+        }
+        else {
                 holder.value.setText("-"+String.valueOf(Transaction.getDebit()));
                 holder.depends.setText("Débit");
                 holder.value.setTextColor(this.context.getResources().getColor(R.color.red));
                 holder.background.setBackground(ContextCompat.getDrawable(context, R.drawable.cardred));
-
                 value="-"+String.valueOf(Transaction.getDebit());
                 color= "red";
-
-
-            }
+        }
 
         holder.cd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Date date = Transaction.getDate();
+                id= String.valueOf(Transaction.getId());
+                datee= sdft.format(date);
+                if (Transaction.getDebit()==0)
+                {
 
-        @Override
-        public void onClick(View v)
-        {
-            Date date = Transaction.getDate();
-            id= String.valueOf(Transaction.getId());
-            datee= sdft.format(date);
-            if (Transaction.getDebit()==0)
-            {
+                    dependss="crédit";
+                    value="+"+String.valueOf(Transaction.getCredit());
+                    color = "green";
 
-                dependss="crédit";
-                value="+"+String.valueOf(Transaction.getCredit());
-                color = "green";
+                }
+                else
+                {
+
+                    dependss="débit";
+                    value="-"+String.valueOf(Transaction.getDebit());
+                    color= "red";
+
+
+                }
+
+                Intent intent = new Intent(context, TransacationPopup.class);
+                intent.putExtra("depends",dependss);
+                editor.putString("ref",id);
+                editor.putString("value",value);
+                editor.putString("depends",dependss);
+                editor.putString("datee",datee);
+                editor.putString("color",color);
+                editor.putString("description",Transaction.getDescription());
+                editor.commit();
+
+                context.startActivity(intent);
+                activity.overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
 
             }
-            else
-            {
-
-                dependss="débit";
-                value="-"+String.valueOf(Transaction.getDebit());
-                color= "red";
-
-
-            }
-
-            Intent intent = new Intent(context, TransacationPopup.class);
-            intent.putExtra("depends",dependss);
-            editor.putString("ref",id);
-            editor.putString("value",value);
-            editor.putString("depends",dependss);
-            editor.putString("datee",datee);
-            editor.putString("color",color);
-            editor.putString("description",Transaction.getDescription());
-            editor.commit();
-
-            context.startActivity(intent);
-            activity.overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
-
-        }});
+        });
 
 
 
-        };
+    };
 
 
 

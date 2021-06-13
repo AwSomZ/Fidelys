@@ -34,10 +34,8 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         setContentView(R.layout.activity_creation_reclamation);
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
-
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-
         getWindow().setLayout((int)(width*0.97),(int)(height*0.465));
 
         titre= (Spinner) findViewById(R.id.titre);
@@ -94,7 +92,8 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
 
     @Override
     public void onFocusChange(View view, boolean b) {
-        if(!b){
+        if(!b)
+        {
             InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
         }

@@ -26,18 +26,15 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
     private SharedPreferences sharedPreferences;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
        View v= inflater.inflate(R.layout.fragment_email_update, container, false);
        email= (EditText) v.findViewById(R.id.Email);
        email.setOnFocusChangeListener(this);
-        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-         emailadd = sharedPreferences.getString("email", "");
-        email.setText(emailadd);
-        ((Button) v.findViewById(R.id.maj)).setOnClickListener(this);
-
+       sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+       emailadd = sharedPreferences.getString("email", "");
+       email.setText(emailadd);
+       ((Button) v.findViewById(R.id.maj)).setOnClickListener(this);
        return v;
     }
 

@@ -45,7 +45,6 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
         else {
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-
             Call<String> buy = api.forgotpin(idadd);
             buy.enqueue(new retrofit.Callback<String>() {
 
@@ -65,7 +64,7 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
 
                 @Override
                 public void onFailure(Throwable t) {
-                    Toast.makeText(ForgotPinActivity.this, "Error "+t.getLocalizedMessage() , Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPinActivity.this, "Erreur "+t.getLocalizedMessage() , Toast.LENGTH_LONG).show();
                 }
             });
             }

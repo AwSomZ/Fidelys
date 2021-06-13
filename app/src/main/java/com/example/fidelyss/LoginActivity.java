@@ -33,8 +33,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-       
-
         cin= (EditText) findViewById(R.id.logincin);
         pin= (EditText) findViewById(R.id.loginpin);
         goback= (ImageView) findViewById(R.id.goback);
@@ -44,15 +42,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ((TextView) findViewById(R.id.forgot)).setOnClickListener(this);
         cin.setOnFocusChangeListener(this);
         pin.setOnFocusChangeListener(this);
-
-
-
     }
     @Override
     public void onClick(View v)
     {
         Intent intent;
-
         switch (v.getId()) {
             case R.id.login: login();
                 break;
@@ -68,70 +62,66 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.signup:intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
-
                 break;
         }
     }
 
     private void login()
     {
+
         String cinadd = cin.getText().toString().trim();
         String pinadd = pin.getText().toString().trim();
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
-        ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
-        Call<client> find = api.selectUser(cinadd,pinadd);
-        find.enqueue(new Callback<client>() {
-            @Override
-            public void onResponse(Response<client> response, Retrofit retrofit)
-            {
-                if(response.body() != null ){
+        if(cinadd.isEmpty()){
+            cin.setError("Champs obligatoire");
+        }
+        else if(pinadd.isEmpty()){
+            pin.setError("Champs obligatoire");
+        }
+        else {
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+            Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
+            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+            Call<client> find = api.selectUser(cinadd, pinadd);
+            find.enqueue(new Callback<client>() {
+                @Override
+                public void onResponse(Response<client> response, Retrofit retrofit) {
+                    if (response.body() != null) {
 
-                    SharedPreferences sharedPreferences =  LoginActivity.this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("nom",response.body().getNom());
-                    editor.putString("prenom",response.body().getPrenom());
-                    editor.putString("cin", response.body().getCin());
-                    SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd");
-                    editor.putString("date", sdft.format(response.body().getDatenaiss()));
-                    editor.putString("id", response.body().getId());
-                    editor.putString("sexe", response.body().getSexe());
-                    editor.putString("nationalite", response.body().getNationalite());
-                    editor.putString("pays", response.body().getPays());
-                    editor.putString("teld", response.body().getTeldomicile());
-                    editor.putString("email", response.body().getEmail());
-                    editor.putString("telm", response.body().getTelmobile());
-                    editor.putString("adr", response.body().getAdressedomicile());
-                    System.out.println("adresse"+response.body().getAdressedomicile());
-                    editor.putString("cp", response.body().getCodepostal());
-                    editor.putString("ville", response.body().getVille());
-                    editor.putString("LOGIN", response.body().getId());
-
-
-                    editor.apply();
-                    Intent intent= new Intent(LoginActivity.this, MouvementActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
-
-
-                }
-                else{
-                    System.out.println("/"+cinadd);
-
-                    if(cinadd.equals("")){
-                        cin.setError("Saisir votre email");
-                    }else {
-                        Toast.makeText(LoginActivity.this, " Incorrecte ", Toast.LENGTH_LONG).show();
+                        SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("nom", response.body().getNom());
+                        editor.putString("prenom", response.body().getPrenom());
+                        editor.putString("cin", response.body().getCin());
+                        SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd");
+                        editor.putString("date", sdft.format(response.body().getDatenaiss()));
+                        editor.putString("id", response.body().getId());
+                        editor.putString("sexe", response.body().getSexe());
+                        editor.putString("nationalite", response.body().getNationalite());
+                        editor.putString("pays", response.body().getPays());
+                        editor.putString("teld", response.body().getTeldomicile());
+                        editor.putString("email", response.body().getEmail());
+                        editor.putString("telm", response.body().getTelmobile());
+                        editor.putString("adr", response.body().getAdressedomicile());
+                        System.out.println("adresse" + response.body().getAdressedomicile());
+                        editor.putString("cp", response.body().getCodepostal());
+                        editor.putString("ville", response.body().getVille());
+                        editor.putString("LOGIN", response.body().getId());
+                        editor.apply();
+                        Intent intent = new Intent(LoginActivity.this, MouvementActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.translate_in_right, R.anim.translate_out_left);
+                    } else {
+                        Toast.makeText(LoginActivity.this, " Verifez votre Id/Pin ", Toast.LENGTH_LONG).show();
                     }
                 }
-            }
-            @Override
-            public void onFailure(Throwable t) {
-                Toast.makeText(LoginActivity.this, "wuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
-            }
-        });
+                @Override
+                public void onFailure(Throwable t) {
+                    Toast.makeText(LoginActivity.this, "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
+                }
+            });
+        }
     }
 
 

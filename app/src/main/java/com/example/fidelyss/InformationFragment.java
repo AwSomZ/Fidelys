@@ -32,7 +32,6 @@ public class InformationFragment extends Fragment {
         np.setText(npp);
         sexe.setText(sx);
         id.setText(idd);
-
         return rootView;
 
     }

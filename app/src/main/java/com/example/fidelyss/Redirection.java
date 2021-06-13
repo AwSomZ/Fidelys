@@ -61,10 +61,12 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_in_right, R.anim.translate_out_left);
                     }
-                    else if (response.body().equals("incorrect"))
-                    {
-                        Toast.makeText(Redirection.this, " Code Est Incorrecte Verifie Votre Email ", Toast.LENGTH_LONG).show();}
-                    else {Toast.makeText(Redirection.this, "Compte Non Trouvé", Toast.LENGTH_LONG).show();}
+                    else if (response.body().equals("incorrect")) {
+                        Toast.makeText(Redirection.this, " Code Est Incorrecte Verifie Votre Email ", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(Redirection.this, "Compte Non Trouvé", Toast.LENGTH_LONG).show();
+                    }
                 }
 
 

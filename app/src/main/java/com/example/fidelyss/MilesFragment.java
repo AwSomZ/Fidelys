@@ -30,23 +30,21 @@ import retrofit.Retrofit;
 
 
 public class MilesFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, CompoundButton.OnCheckedChangeListener, RadioGroup.OnCheckedChangeListener, View.OnFocusChangeListener {
-SharedPreferences sharedPreferences;
-String quantite="1000";
-CheckBox gift;
-double coef=0.07;
-EditText to;
-String id;
-String client;
-RadioGroup radioGroup;
-TextView price;
-RadioButton radioButton;
+    SharedPreferences sharedPreferences;
+    String quantite="1000";
+    CheckBox gift;
+    double coef=0.07;
+    EditText to;
+    String id;
+    String client;
+    RadioGroup radioGroup;
+    TextView price;
+    RadioButton radioButton;
     private String milestype="prime";
     private TextView unit;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
-    {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_miles, container, false);
         radioGroup = (RadioGroup) v.findViewById(R.id.milestype);
@@ -70,27 +68,18 @@ RadioButton radioButton;
         id = sharedPreferences.getString("id", "");
         client = sharedPreferences.getString("id", "");
         gift.setOnCheckedChangeListener(this);
-        if (gift.isChecked())
-        {
+        if (gift.isChecked()) {
             to.setVisibility(View.VISIBLE);
         }
-        else
-        {
+        else {
             to.setVisibility(View.GONE);
         }
-
-
 
         ((Button) v.findViewById(R.id.acheter)).setOnClickListener(this);
         Double prix = Integer.valueOf(quantite)*coef;
         DecimalFormat df = new DecimalFormat("###.###");
-
         price.setText(df.format(prix)+"DT");
-
-
         return v;
-
-
     }
 
 
@@ -101,19 +90,14 @@ RadioButton radioButton;
         quantite = parent.getItemAtPosition(position).toString().trim();
         Double prix = Integer.valueOf(quantite)*coef;
         DecimalFormat df = new DecimalFormat("###.###");
-
         price.setText(df.format(prix)+"DT");
-
-
-
 
     }
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
     }
        @Override
-    public void onClick(View v)
-       {
+    public void onClick(View v) {
 
            if (gift.isChecked())
            {
@@ -121,58 +105,47 @@ RadioButton radioButton;
                   {
                       to.setError("Vous devez saisir l'id du recepteur");
                   }
-              else
-                  {
+              else {
                       id= to.getText().toString().trim();
                       Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
                       ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-
                       Call<String> buy = api.buyMiles(id,quantite,milestype,client);
                       buy.enqueue(new retrofit.Callback<String>() {
 
                           public void onResponse(Response<String> response, Retrofit retrofit) {
-                              if ((response.body()!=null)&&(response.body().trim().equals("error")))
-                              {
+                              if ((response.body()!=null)&&(response.body().trim().equals("error"))) {
                                   to.setError("Verifiez l id du recepteur");
                                   Toast.makeText(MilesFragment.this.getActivity(), "Client non trouvé ", Toast.LENGTH_LONG).show();
                               }
-                              else
-                                  {
-
-                              Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
-                                  }
+                              else {
+                                  Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
+                              }
 
                           }
 
                           public void onFailure(Throwable t) {
-                              Toast.makeText(MilesFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                              Toast.makeText(MilesFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                           }
                       });
-                  }
+              }
 
            }
            else {
                Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
                ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-
                Call<String> buy = api.buyMiles(id, quantite, milestype, client);
                buy.enqueue(new retrofit.Callback<String>() {
-
                    public void onResponse(Response<String> response, Retrofit retrofit) {
                        Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
 
                    }
 
                    public void onFailure(Throwable t) {
-                       Toast.makeText(MilesFragment.this.getActivity(), "wuuj" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                       Toast.makeText(MilesFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                    }
                });
            }
-
-
-
-
-       }
+    }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -202,7 +175,6 @@ RadioButton radioButton;
         }
         Double prix = Integer.valueOf(quantite)*coef;
         DecimalFormat df = new DecimalFormat("###.###");
-
         price.setText(df.format(prix)+"DT");
     }
 

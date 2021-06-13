@@ -52,12 +52,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         email.setOnFocusChangeListener(this);
         nom.setOnFocusChangeListener(this);
         prenom.setOnFocusChangeListener(this);
-
-
         ((Button)findViewById(R.id.button)).setOnClickListener(this);
         ((TextView) findViewById(R.id.signin)).setOnClickListener(this);
-
-
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,12 +81,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     ((Button)findViewById(R.id.button)).setEnabled(false);
                 }
                 else {((Button)findViewById(R.id.button)).setEnabled(true);}
-
                     String date = year + "-" + month + "-" + day;
                     mDisplayDate.setText(date);
-
-
-
             }
         };
     }
@@ -102,7 +94,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         switch (v.getId()) {
             case R.id.goback:finish();
-            break;
+                break;
             case R.id.button: sendInfo();
                 break;
             case R.id.signin:intent = new Intent(this, LoginActivity.class);
@@ -119,8 +111,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void sendInfo() {
-
-
 
         String emailadd = email.getText().toString().trim();
         String nomadd = nom.getText().toString().trim();
@@ -140,8 +130,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }else if(prenomadd.isEmpty()){
             prenom.setError("Veuillez taper votre Prenom");
         }
-
-    else if(sexeadd.isEmpty()){
+        else if(sexeadd.isEmpty()){
             sexe.setError("Veuillez choisir votre sexe");
         }
         else{

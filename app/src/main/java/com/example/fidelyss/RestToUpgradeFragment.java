@@ -30,7 +30,6 @@ public class RestToUpgradeFragment extends Fragment {
         String cumule = sharedPreferences.getString("soldecummule", "") ;
         String date = sharedPreferences.getString("dateexpiration", "") ;
         String statut = sharedPreferences.getString("statut", "") ;
-
         int rest = Integer.valueOf(plafond)-Integer.valueOf(cumule);
         solde.setText(rest+" Miles Statut");
         if (statut.equals("classic")){
@@ -51,7 +50,6 @@ public class RestToUpgradeFragment extends Fragment {
                 String cumule = sharedPreferences.getString("soldecummule", "") ;
                 String date = sharedPreferences.getString("dateexpiration", "") ;
                 String statut = sharedPreferences.getString("statut", "") ;
-
                 int rest = Integer.valueOf(plafond)-Integer.valueOf(cumule);
                 solde.setText(rest+" Miles Statut");
                 if (statut.equals("classic")){

@@ -54,9 +54,7 @@ public class ReclamationResoluAdapter  extends RecyclerView.Adapter<ReclamationR
 
         TextView date;
         TextView titre;
-
         ConstraintLayout background;
-
 
         public ReclamationResoluViewHolder(View itemView) {
             super(itemView);

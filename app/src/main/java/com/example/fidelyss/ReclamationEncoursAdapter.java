@@ -54,9 +54,7 @@ public class ReclamationEncoursAdapter  extends RecyclerView.Adapter<Reclamation
 
         TextView date;
         TextView titre;
-
         ConstraintLayout background;
-
 
         public ReclamationEncoursViewHolder(View itemView) {
             super(itemView);

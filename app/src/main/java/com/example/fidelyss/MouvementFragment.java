@@ -48,15 +48,12 @@ public class MouvementFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mouvement, container, false);
-
         Animation left = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_left);
         Animation right = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.translate_in_right);
         Animation zoom = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.zoom_in);
         Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
-
         List<Fragment> list= new ArrayList<>();
         list.add(new SoldeFragment());
         list.add(new SoldeStatutFragment());
@@ -72,10 +69,7 @@ public class MouvementFragment extends Fragment {
         pager.setAdapter(pagerAdapter);
         TabLayout tabLayout = (TabLayout) v.findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(pager, true);
-
-
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-
         Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         sharedPreferences = this.getContext().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
@@ -83,16 +77,10 @@ public class MouvementFragment extends Fragment {
         String sexe = sharedPreferences.getString("sexe", "");
         String npp = sharedPreferences.getString("nom", "") + " " + sharedPreferences.getString("prenom", "");
 
-
-
-
-        Call<mouvement> addUser = api.getMvt(id);
-        addUser.enqueue(new Callback<mouvement>() {
-
+        Call<mouvement> find = api.getMvt(id);
+        find.enqueue(new Callback<mouvement>() {
             public void onResponse(Response<mouvement> response, Retrofit retrofit) {
-
                 if (response.body() != null) {
-
                     int s = response.body().getMilesstatut();
                     int p = response.body().getMilesprime();
                     int pl = response.body().getPlafond();
@@ -102,7 +90,6 @@ public class MouvementFragment extends Fragment {
                     String soldecum= Integer.toString(sc);
                     String sp= Integer.toString(p);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    System.out.println(se);
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                     editor.putString("dateniveau", df.format(response.body().getDate_niveau()));
                     editor.putString("dateexpiration", df.format(response.body().getDate_expiration()));
@@ -112,21 +99,15 @@ public class MouvementFragment extends Fragment {
                     editor.putString("soldecummule",soldecum);
                     editor.putString("milesprime",sp);
                     editor.apply();
-
-
-
-
                     // api call on response on failure
                     Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
                     Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
                     ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-                    Call<List<transaction>>addUser = api.getTransaction(id);
-                    addUser.enqueue(new Callback<List<transaction>>(){
-
+                    Call<List<transaction>>tr = api.getTransaction(id);
+                    tr.enqueue(new Callback<List<transaction>>(){
                         public void onResponse(Response<List<transaction>> response, Retrofit retrofit) {
                             List<transaction> listtransaction =new ArrayList<transaction>();
-                            if(response.body()!= null)
-                            {
+                            if(response.body()!= null) {
                                 listtransaction= (List<transaction>)response.body();
                                 recyclerViewUser = v.findViewById(R.id.rv1);
                                 layoutManager = new LinearLayoutManager(getActivity());
@@ -140,18 +121,13 @@ public class MouvementFragment extends Fragment {
 
                         }
                         public void onFailure(Throwable t) {
-                            Toast.makeText(MouvementFragment.this.getActivity(), "Pas de transaction" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                                        }
-                                    });
-
-
-
-
+                            Toast.makeText(MouvementFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
             }
-
             public void onFailure(Throwable t) {
-                Toast.makeText(MouvementFragment.this.getActivity(), "Error " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MouvementFragment.this.getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
         return v;

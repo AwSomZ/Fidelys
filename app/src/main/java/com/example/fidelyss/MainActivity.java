@@ -18,9 +18,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
         ((Button) findViewById(R.id.button)).setOnClickListener(this);
         ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
         ((TextView) findViewById(R.id.login)).setOnClickListener(this);
@@ -30,26 +27,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v)
     {
         Intent intent;
-
         switch (v.getId()) {
             case R.id.button:
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
-
                 break;
             case R.id.verifier:
                 intent = new Intent(this, VerifierCompte.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
-
                 break;
             case R.id.login:
                 intent = new Intent(this, RegisterActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.translate_in_right,R.anim.translate_out_left);
-
-                break;}
+                break;
+        }
 
     }
 

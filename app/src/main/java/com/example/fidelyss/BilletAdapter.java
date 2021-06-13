@@ -23,7 +23,7 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
     private Context context;
     Activity activity = (Activity) context;
     List<billet> listeBillet;
-    private static final Map<String, String> aka = new HashMap<String, String>() {
+    private static final Map<String, String> aka = new HashMap<String, String>() {{
         put("Abidjan","ABJ");
         put("Alger","ALG");
         put("Amsterdam","AMS");
@@ -87,7 +87,7 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
         put("Vérone","VRN");
         put("Vienne","VIE");
         put("Zurich","ZRH");
-    };
+    }};
 
     public BilletAdapter(Context context, List<billet> listeBillet) {
         this.context = context;
@@ -129,8 +129,7 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
         no.setMargins(0, 8, 0, 0);
 
         holder.datea.setText(dateallerString);
-        if (typeString.equals("Aller simple"))
-        {
+        if (typeString.equals("Aller simple")) {
             holder.dater.setVisibility(View.GONE);
             holder.arrow.setVisibility(View.GONE);
             holder.datea.setLayoutParams(params);
