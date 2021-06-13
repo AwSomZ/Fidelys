@@ -42,12 +42,12 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
     private SharedPreferences sharedPreferences;
     private RecyclerView recyclerViewUser2;
     private RecyclerView.LayoutManager layoutManager2;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
       View v= inflater.inflate(R.layout.fragment_espace_reclamations, container, false);
+
       error = (TextView) v.findViewById(R.id.error);
       error1 = (TextView) v.findViewById(R.id.error1);
       enc = (TextView) v.findViewById(R.id.enc);
@@ -70,6 +70,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
       Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
       Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
       ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+
       Call<List<reclamation>> getreclamationencours = api.getReclamationEncours(id);
       getreclamationencours.enqueue(new Callback<List<reclamation>>(){
 
@@ -92,8 +93,8 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
             public void onFailure(Throwable t) {
                 Toast.makeText(getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }});
-        Call<List<reclamation>> getreclamationresolu = api.getReclamationResolu(id);
-        getreclamationresolu.enqueue(new Callback<List<reclamation>>(){
+      Call<List<reclamation>> getreclamationresolu = api.getReclamationResolu(id);
+      getreclamationresolu.enqueue(new Callback<List<reclamation>>(){
 
             @Override
             public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
@@ -114,7 +115,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
             public void onFailure(Throwable t) {
                 Toast.makeText(getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }});
-            return v;
+      return v;
     }
 
     @Override

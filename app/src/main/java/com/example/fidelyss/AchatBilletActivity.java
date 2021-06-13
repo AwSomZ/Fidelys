@@ -97,7 +97,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         acheter = (Button) findViewById(R.id.acheter) ;
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
-        solde = Integer.valueOf(sharedPreferences.getString("prime", ""));
+        solde = Integer.valueOf(sharedPreferences.getString("milesprime", ""));
         de.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -291,7 +291,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
           datealler.setError("La date aller ne doit pas etre vide");
         }
         else {
-            if (p > solde)
+            if (solde-p<0)
             {
                 Toast.makeText(AchatBilletActivity.this, "Solde Insuffisant", Toast.LENGTH_LONG).show();
             }

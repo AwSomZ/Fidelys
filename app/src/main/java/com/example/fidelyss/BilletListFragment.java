@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,13 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
 
         View v= inflater.inflate(R.layout.fragment_billet_list, container, false);
         Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
+        final Handler refreshHandler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                refreshHandler.postDelayed(this, 1000);
+            }
+        };
         acheter = (Button) v.findViewById(R.id.acheter);
         error = (TextView) v.findViewById(R.id.error1);
         error.setAnimation(fade);

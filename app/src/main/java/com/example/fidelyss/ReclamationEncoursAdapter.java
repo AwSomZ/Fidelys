@@ -43,6 +43,7 @@ public class ReclamationEncoursAdapter  extends RecyclerView.Adapter<Reclamation
         String date = sdft.format(datecreation);
         holder.date.setText(date);
         holder.titre.setText(reclamation.getTitre());
+
     }
 
     @Override
