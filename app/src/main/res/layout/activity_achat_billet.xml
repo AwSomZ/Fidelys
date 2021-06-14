@@ -88,7 +88,7 @@
                 android:layout_width="239dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="110dp"
                 android:orientation="horizontal"
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -131,7 +131,7 @@
                     android:id="@+id/datealler"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/ticketinput"
                     android:fontFamily="@font/soda"
@@ -142,7 +142,7 @@
                     android:id="@+id/dateretour"
                     android:layout_width="150dp"
                     android:layout_height="37dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="20dp"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/ticketinput"
                     android:fontFamily="@font/soda"
@@ -151,100 +151,7 @@
                     android:padding="8dp" />
             </LinearLayout>
 
-            <TableLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="15dp">
 
-                <TableRow>
-
-                    <TextView
-
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/soda"
-                        android:text="Adultes(25+)"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <Spinner
-                        android:id="@+id/adulte"
-                        android:layout_width="80dp"
-                        android:layout_height="37dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/passagers"
-                        android:background="@drawable/ticketinput"
-                        android:fontFamily="@font/soda" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/soda"
-                        android:text="Jeunes (12-24)"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <Spinner
-                        android:id="@+id/jeune"
-                        android:layout_width="80dp"
-                        android:layout_height="37dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/passagers"
-                        android:background="@drawable/ticketinput"
-                        android:fontFamily="@font/soda" />
-                </TableRow>
-
-                <TableRow android:layout_marginTop="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/soda"
-                        android:text="Enfants (2-11)"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <Spinner
-                        android:id="@+id/enfant"
-                        android:layout_width="80dp"
-                        android:layout_height="37dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/passagers"
-                        android:background="@drawable/ticketinput"
-                        android:fontFamily="@font/soda" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/soda"
-                        android:text="Bébés"
-                        android:textAlignment="center"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <Spinner
-                        android:id="@+id/bebe"
-                        android:layout_width="80dp"
-                        android:layout_height="37dp"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="10dp"
-                        android:entries="@array/passagers"
-                        android:background="@drawable/ticketinput"
-                        android:fontFamily="@font/soda" />
-                </TableRow>
-            </TableLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -304,6 +211,7 @@
                 android:layout_width="321dp"
                 android:layout_height="49dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/button"
                 android:fontFamily="@font/soda"
                 android:shadowColor="#2196F3"

@@ -161,13 +161,11 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
         TextView type;
         ImageView arrow;
         TextView classe;
-
         ConstraintLayout background;
 
 
         public BilletViewHolder(View itemView) {
             super(itemView);
-
             datea = (TextView) itemView.findViewById(R.id.datealler);
             arrow = (ImageView) itemView.findViewById(R.id.arrow);
             dater = (TextView) itemView.findViewById(R.id.dateretour);
@@ -175,8 +173,6 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
             vers = (TextView) itemView.findViewById(R.id.vers);
             classe= (TextView) itemView.findViewById(R.id.classe);
             type = (TextView) itemView.findViewById(R.id.type);
-
-
 
         }
     }

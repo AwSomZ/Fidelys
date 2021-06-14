@@ -4,24 +4,23 @@ import java.util.Date;
 
 public class transaction {
     private int id;
-    private int debit;
-    private int credit;
+    private String type;
+    private int montant;
     private Date date;
     private String client;
     private String description;
 
-    public transaction(int id, int debit, int credit, Date date, String client, String description) {
+    public transaction() {
+    }
+
+    public transaction(int id, String type, int montant, Date date, String client, String description) {
         this.id = id;
-        this.debit = debit;
-        this.credit = credit;
+        this.type = type;
+        this.montant = montant;
         this.date = date;
         this.client = client;
         this.description = description;
     }
-
-    public transaction() {
-    }
-
 
     public int getId() {
         return id;
@@ -31,28 +30,20 @@ public class transaction {
         this.id = id;
     }
 
-    public int getDebit() {
-        return debit;
+    public String getType() {
+        return type;
     }
 
-    public void setDebit(int debit) {
-        this.debit = debit;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getCredit() {
-        return credit;
+    public int getMontant() {
+        return montant;
     }
 
-    public void setCredit(int credit) {
-        this.credit = credit;
-    }
-
-    public String getClient() {
-        return client;
-    }
-
-    public void setClient(String client) {
-        this.client = client;
+    public void setMontant(int montant) {
+        this.montant = montant;
     }
 
     public Date getDate() {
@@ -61,6 +52,14 @@ public class transaction {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
     }
 
     public String getDescription() {

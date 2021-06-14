@@ -39,17 +39,9 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     int p;
     String dateretourString="";
     String classeString;
-    String enfantString;
-    String bebeString;
-    String jeuneString;
-    String adulteString;
     String typeString;
     Spinner vers;
     Spinner classe;
-    Spinner adulte;
-    Spinner enfant;
-    Spinner jeune;
-    Spinner bebe;
     Button acheter;
     TextView datealler;
     TextView dateretour;
@@ -90,10 +82,6 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         type = (RadioGroup) findViewById(R.id.type);
         retour = (RadioButton) findViewById(R.id.retour);
         vers = (Spinner) findViewById(R.id.vers);
-        jeune = (Spinner) findViewById(R.id.jeune);
-        enfant = (Spinner) findViewById(R.id.enfant);
-        bebe = (Spinner) findViewById(R.id.bebe);
-        adulte = (Spinner) findViewById(R.id.adulte);
         acheter = (Button) findViewById(R.id.acheter) ;
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
@@ -149,52 +137,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
 
             }
         });
-        enfant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                enfantString= parent.getItemAtPosition(position).toString().trim();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        adulte.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                adulteString= parent.getItemAtPosition(position).toString().trim();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        jeune.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                jeuneString= parent.getItemAtPosition(position).toString().trim();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        bebe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bebeString= parent.getItemAtPosition(position).toString().trim();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         classe.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -305,7 +248,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
             }
 
             else{
-                Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString, classeString, adulteString, jeuneString, enfantString, bebeString,p);
+                Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString, classeString ,p);
                 buytikcet.enqueue(new retrofit.Callback<billet>() {
                     @Override
                     public void onResponse(Response<billet> response, Retrofit retrofit) {

@@ -121,9 +121,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(this.getContext(), CreationReclamationActivity.class);
-
         startActivity(intent);
-
         getActivity().overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
     }
 }

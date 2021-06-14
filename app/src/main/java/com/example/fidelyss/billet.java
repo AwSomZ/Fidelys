@@ -10,10 +10,6 @@ public class billet {
     private String classe;
     private Date datealler;
     private Date dateretour;
-    private int adulte;
-    private int jeune;
-    private int enfant;
-    private int bebe;
     private Date dateachat;
     private String client;
     private int prix;
@@ -21,7 +17,7 @@ public class billet {
     public billet() {
     }
 
-    public billet(int id, String depart, String destination, String type, String classe, Date datealler, Date dateretour, int adulte, int jeune, int enfant, int bebe, Date dateachat, String client, int prix) {
+    public billet(int id, String depart, String destination, String type, String classe, Date datealler, Date dateretour, Date dateachat, String client, int prix) {
         this.id = id;
         this.depart = depart;
         this.destination = destination;
@@ -29,10 +25,6 @@ public class billet {
         this.classe = classe;
         this.datealler = datealler;
         this.dateretour = dateretour;
-        this.adulte = adulte;
-        this.jeune = jeune;
-        this.enfant = enfant;
-        this.bebe = bebe;
         this.dateachat = dateachat;
         this.client = client;
         this.prix = prix;
@@ -92,38 +84,6 @@ public class billet {
 
     public void setDateretour(Date dateretour) {
         this.dateretour = dateretour;
-    }
-
-    public int getAdulte() {
-        return adulte;
-    }
-
-    public void setAdulte(int adulte) {
-        this.adulte = adulte;
-    }
-
-    public int getJeune() {
-        return jeune;
-    }
-
-    public void setJeune(int jeune) {
-        this.jeune = jeune;
-    }
-
-    public int getEnfant() {
-        return enfant;
-    }
-
-    public void setEnfant(int enfant) {
-        this.enfant = enfant;
-    }
-
-    public int getBebe() {
-        return bebe;
-    }
-
-    public void setBebe(int bebe) {
-        this.bebe = bebe;
     }
 
     public Date getDateachat() {

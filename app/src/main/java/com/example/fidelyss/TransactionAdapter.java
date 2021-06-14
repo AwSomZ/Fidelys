@@ -52,30 +52,29 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         transaction Transaction = listeTransaction.get(position);
         Date date = Transaction.getDate();
         SimpleDateFormat sdfm = new SimpleDateFormat("MMM");
-        SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd hh:mm aaa");
         SimpleDateFormat sdfd = new SimpleDateFormat("dd");
         String month =sdfm.format(date);
         desc = Transaction.getDescription();
-        System.out.println("month"+date.toString());
         String day =sdfd.format(date);
         holder.month.setText(month);
         holder.day.setText(day);
         holder.description.setText(desc);
 
-        if (Transaction.getDebit()==0) {
-            holder.value.setText("+"+String.valueOf(Transaction.getCredit()));
+        if (Transaction.getType().equals("credit")) {
+            holder.value.setText("+"+String.valueOf(Transaction.getMontant()));
             holder.depends.setText("Crédit");
-            value="+"+String.valueOf(Transaction.getCredit());
+            value="+"+String.valueOf(Transaction.getMontant());
             holder.value.setTextColor(this.context.getResources().getColor(R.color.green));
             holder.background.setBackground(ContextCompat.getDrawable(context, R.drawable.cardgreen));
             color = "green";
         }
         else {
-                holder.value.setText("-"+String.valueOf(Transaction.getDebit()));
+                holder.value.setText("-"+String.valueOf(Transaction.getMontant()));
                 holder.depends.setText("Débit");
                 holder.value.setTextColor(this.context.getResources().getColor(R.color.red));
                 holder.background.setBackground(ContextCompat.getDrawable(context, R.drawable.cardred));
-                value="-"+String.valueOf(Transaction.getDebit());
+                value="-"+String.valueOf(Transaction.getMontant());
                 color= "red";
         }
 
@@ -85,11 +84,11 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 Date date = Transaction.getDate();
                 id= String.valueOf(Transaction.getId());
                 datee= sdft.format(date);
-                if (Transaction.getDebit()==0)
+                if (Transaction.getType().equals("credit"))
                 {
 
                     dependss="crédit";
-                    value="+"+String.valueOf(Transaction.getCredit());
+                    value="+"+String.valueOf(Transaction.getMontant());
                     color = "green";
 
                 }
@@ -97,7 +96,7 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
                 {
 
                     dependss="débit";
-                    value="-"+String.valueOf(Transaction.getDebit());
+                    value="-"+String.valueOf(Transaction.getMontant());
                     color= "red";
 
 

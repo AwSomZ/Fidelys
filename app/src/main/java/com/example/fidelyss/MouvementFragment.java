@@ -100,7 +100,7 @@ public class MouvementFragment extends Fragment {
                     editor.putString("milesprime",sp);
                     editor.apply();
                     // api call on response on failure
-                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
                     Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
                     ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                     Call<List<transaction>>tr = api.getTransaction(id);

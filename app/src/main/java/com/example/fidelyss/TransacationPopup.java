@@ -66,5 +66,6 @@ public class TransacationPopup extends AppCompatActivity {
                 val.setTextColor(getResources().getColor(R.color.red));
 
         }
+
     }
 }

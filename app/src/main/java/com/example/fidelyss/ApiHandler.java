@@ -151,11 +151,7 @@ public interface ApiHandler {
             @Field("datealler") String var5,
             @Field("dateretour") String var6,
             @Field("classe") String var7,
-            @Field("adulte") String var8,
-            @Field("jeune") String var9,
-            @Field("enfant") String var10,
-            @Field("bebe") String var11,
-            @Field("prix") int var12
+            @Field("prix") int var8
     );
 
     @FormUrlEncoded
