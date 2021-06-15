@@ -19,7 +19,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
             android:orientation="vertical">
             <TextView
                 android:layout_width="wrap_content"
@@ -35,7 +34,10 @@
                 android:layout_height="match_parent"
                 android:padding="5dp">
 
-                <TableRow android:layout_marginBottom="5dp" android:background="@color/lred">
+                <TableRow
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/lred">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -97,13 +99,12 @@
 
                 </TableRow>
                 <TableRow android:layout_marginBottom="5dp"
-                    android:background="@color/lred">
+                    android:layout_marginTop="20dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/soda"
-                        android:background="@color/lred"
-                        android:textColor="@color/white"
+                        android:textColor="@color/lred"
                         android:textSize="20dp"
                         android:layout_gravity="center"
                         android:text="@string/Nationalité"/>
@@ -111,8 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/soda"
-                        android:background="@color/lred"
-                        android:textColor="@color/white"
+                        android:textColor="@color/lred"
                         android:textSize="20dp"
                         android:layout_gravity="center"
                         android:text="@string/Adresse"/>
@@ -147,12 +147,16 @@
                         android:inputType="textPostalAddress"
                         />
                 </TableRow>
-                <TableRow>
+                <TableRow
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/lred">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/soda"
-                        android:textColor="@color/lred"
+                        android:background="@color/lred"
+                        android:textColor="@color/white"
                         android:textSize="20dp"
                         android:layout_gravity="center"
                         android:text="@string/Ville"/>
@@ -161,7 +165,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/soda"
-                        android:textColor="@color/lred"
+                        android:textColor="@color/white"
                         android:textSize="20dp"
                         android:layout_gravity="center"
                         android:text="Code Postal "/>
@@ -196,13 +200,14 @@
                         android:padding="10dp"
                         />
                 </TableRow>
-                <TableRow android:layout_marginBottom="5dp" android:background="@color/lred">
+                <TableRow
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="20dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/soda"
-                        android:background="@color/lred"
-                        android:textColor="@color/white"
+                        android:textColor="@color/lred"
                         android:textSize="20dp"
                         android:layout_gravity="center"
                         android:text="Telephone Domicile"/>
@@ -211,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/soda"
-                        android:textColor="@color/white"
+                        android:textColor="@color/lred"
                         android:textSize="20dp"
                         android:layout_gravity="center"
                         android:text="Telephone Mobile"/>
@@ -255,6 +260,7 @@
                 android:layout_width="272dp"
                 android:layout_height="46dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/button"
                 android:fontFamily="@font/soda"
                 android:text="Mettre à Jour"

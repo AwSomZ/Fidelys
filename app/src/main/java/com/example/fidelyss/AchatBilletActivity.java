@@ -19,7 +19,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -41,9 +43,12 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     String classeString;
     String typeString;
     Spinner vers;
+    Spinner heuredep;
+    Spinner heureret;
     Spinner classe;
     Button acheter;
     TextView datealler;
+    TextView ret;
     TextView dateretour;
     TextView price;
     RadioGroup type;
@@ -51,10 +56,15 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     RadioButton aller;
     RadioButton retour;
     String client;
+    boolean ok=true;
     private DatePickerDialog.OnDateSetListener DateAllerSetListener;
     private DatePickerDialog.OnDateSetListener DateRetourSetListener;
     private SharedPreferences sharedPreferences;
     Map<String,Integer> prices;
+    String heuredepadd;
+    String heureretadd;
+    private Date date1;
+    private Date date2;
 
 
     @Override
@@ -75,8 +85,11 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         prices=((Global) this.getApplication()).getMileprice();
         price = (TextView) findViewById(R.id.price) ;
         de = (Spinner) findViewById(R.id.de);
+        heuredep = (Spinner) findViewById(R.id.timedep);
+        heureret = (Spinner) findViewById(R.id.timeret);
         classe = (Spinner) findViewById(R.id.classe);
         datealler = (TextView)findViewById(R.id.datealler);
+        ret = (TextView)findViewById(R.id.ret);
         dateretour = (TextView) findViewById(R.id.dateretour);
         aller = (RadioButton)findViewById(R.id.aller);
         type = (RadioGroup) findViewById(R.id.type);
@@ -86,6 +99,28 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
         solde = Integer.valueOf(sharedPreferences.getString("milesprime", ""));
+        heuredep.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                heuredepadd= parent.getItemAtPosition(position).toString().trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        heureret.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                heureretadd= parent.getItemAtPosition(position).toString().trim();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         de.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -158,7 +193,6 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-
                 DatePickerDialog dialog;
                 dialog = new DatePickerDialog(AchatBilletActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateAllerSetListener, year, month+1, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -206,8 +240,16 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     public void onCheckedChanged(RadioGroup radioGroup, int checkedid) {
         switch (checkedid)
         {
-            case  R.id.aller :dateretour.setVisibility(View.GONE);break;
-            case R.id.retour : dateretour.setVisibility(View.VISIBLE); break;
+            case  R.id.aller :
+                dateretour.setVisibility(View.GONE);
+                ret.setVisibility(View.GONE);
+                heureret.setVisibility(View.GONE);
+                break;
+            case R.id.retour :
+                dateretour.setVisibility(View.VISIBLE);
+                ret.setVisibility(View.VISIBLE);
+                heureret.setVisibility(View.VISIBLE);
+                break;
         }
 
     }
@@ -219,52 +261,64 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     @Override
     public void onClick(View view) {
         int selectedId = type.getCheckedRadioButtonId();
-
-
         radiobutton = (RadioButton) this.findViewById(selectedId);
         typeString=radiobutton.getText().toString().trim();
         Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-        if (deString.equals(versString))
-        {
+        if (deString.equals(versString)) {
+            ok=false;
             Toast.makeText(AchatBilletActivity.this, "la destination doit etre differente du depart", Toast.LENGTH_LONG).show();
         }
-        else if (dateallerString.isEmpty())
-        {
-          datealler.setError("La date aller ne doit pas etre vide");
+        else if (dateallerString.isEmpty()) {
+            ok=false;
+            datealler.setError("La date aller ne doit pas etre vide");
         }
-        else {
-            if (solde-p<0)
-            {
+        else if (solde-p<0) {
+                ok=false;
                 Toast.makeText(AchatBilletActivity.this, "Solde Insuffisant", Toast.LENGTH_LONG).show();
-            }
-            else if (retour.isChecked()&&dateretourString.isEmpty())
-            {
+        }
+        else if (retour.isChecked()) {
+            if (dateretourString.isEmpty()) {
+                ok = false;
                 dateretour.setError("La date retour ne doit pas etre vide");
+            } else {
+                dateallerString=dateallerString+" "+heuredepadd+":00";
+                dateretourString = dateretourString + " " + heureretadd + ":00";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                try {
+                    date1 = sdf.parse(dateallerString);
+                    date2 = sdf.parse(dateretourString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                if (date1.compareTo(date2) > 0) {
+                    ok = false;
+                    Toast.makeText(AchatBilletActivity.this, "La date de retour doit etre apres la date d aller", Toast.LENGTH_LONG).show();
+                }
             }
-            else if (retour.isChecked()&&java.sql.Date.valueOf(dateallerString).compareTo(Date.valueOf(dateretourString))>0)
-            {
-                Toast.makeText(AchatBilletActivity.this, "La date de retour doit etre apres la date d aller", Toast.LENGTH_LONG).show();
-            }
+        }
 
-            else{
-                Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString, classeString ,p);
-                buytikcet.enqueue(new retrofit.Callback<billet>() {
-                    @Override
-                    public void onResponse(Response<billet> response, Retrofit retrofit) {
-                        solde=solde-p;
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("solde",String.valueOf(solde));
-                        editor.commit();
-                        Toast.makeText(AchatBilletActivity.this, "Achat validé "+p, Toast.LENGTH_LONG).show();
-                    }
+        if(ok){
+            dateallerString=dateallerString+" "+heuredepadd+":00";
+            Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString,heuredepadd,heureretadd,classeString ,p);
+            buytikcet.enqueue(new retrofit.Callback<billet>() {
+                @Override
+                public void onResponse(Response<billet> response, Retrofit retrofit) {
+                    solde=solde-p;
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("milesprime",String.valueOf(solde));
+                    editor.putString("refresh","yes");
+                    editor.commit();
+                    Toast.makeText(AchatBilletActivity.this, "Achat validé ", Toast.LENGTH_LONG).show();
+                    finish();
+                }
 
-                    @Override
-                    public void onFailure(Throwable t) {
-                        Toast.makeText(AchatBilletActivity.this, "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+                @Override
+                public void onFailure(Throwable t) {
+                    Toast.makeText(AchatBilletActivity.this, "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
         }
     }
 }

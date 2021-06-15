@@ -9,12 +9,25 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginBottom="5sp"
         android:layout_marginTop="170dp"
         tools:context=".Profile2Fragment">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/hardy"
+            android:text="Changer Votre Email"
+            android:textColor="@color/lred"
+            android:textSize="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.096"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
             app:layout_constraintVertical_bias="0.928" />
 
         <EditText
@@ -61,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/soda"
                 android:background="@color/white"
-                android:text="Un email de confirmation va etre envoyer a votre adresse de base"
+                android:text="Un email de confirmation va etre envoyer a votre email de base"
                 android:textColor="@color/lred"
                 android:textSize="20dp"
                 android:textAlignment="center"

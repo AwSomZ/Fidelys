@@ -1,11 +1,11 @@
  package com.example.fidelyss;
 
-import android.content.Context;
+ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.view.LayoutInflater;
+ import android.os.Handler;
+ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -45,13 +45,6 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
 
         View v= inflater.inflate(R.layout.fragment_billet_list, container, false);
         Animation fade = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),R.anim.fade_in);
-        final Handler refreshHandler = new Handler();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                refreshHandler.postDelayed(this, 1000);
-            }
-        };
         acheter = (Button) v.findViewById(R.id.acheter);
         error = (TextView) v.findViewById(R.id.error1);
         error.setAnimation(fade);
@@ -59,33 +52,78 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
+        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         Call<List<billet>> getBillet = api.getBillet(id);
-        getBillet.enqueue(new Callback<List<billet>>(){
-            @Override
-            public void onResponse(Response<List<billet>> response, Retrofit retrofit) {
-                if(response.body()!= null) {
-                    List<billet> listBillet = new ArrayList<billet>();
-                    listBillet = (List<billet>) response.body();
-                    recyclerViewUser3 = v.findViewById(R.id.billet);
-                    layoutManager3 = new LinearLayoutManager(getActivity());
-                    recyclerViewUser3.setLayoutManager(layoutManager3);
-                    recyclerViewUser3.setHasFixedSize(true);
-                    BilletAdapter adapter = new BilletAdapter(getActivity(), listBillet);
-                    recyclerViewUser3.setAdapter(adapter);
-                }
-                else {
-                    error.setVisibility(View.VISIBLE);
-                }
-            }
 
+                getBillet.enqueue(new Callback<List<billet>>() {
+                    @Override
+                    public void onResponse(Response<List<billet>> response, Retrofit retrofit) {
+                        if (response.body() != null) {
+                            List<billet> listBillet = new ArrayList<billet>();
+                            listBillet = (List<billet>) response.body();
+                            recyclerViewUser3 = v.findViewById(R.id.billet);
+                            layoutManager3 = new LinearLayoutManager(getActivity());
+                            recyclerViewUser3.setLayoutManager(layoutManager3);
+                            recyclerViewUser3.setHasFixedSize(true);
+                            BilletAdapter adapter = new BilletAdapter(getActivity(), listBillet);
+                            recyclerViewUser3.setAdapter(adapter);
+                        } else {
+                            error.setVisibility(View.VISIBLE);
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast.makeText(getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        final Handler refreshHandler = new Handler();
+        Runnable runnable = new Runnable() {
             @Override
-            public void onFailure(Throwable t) {
-                Toast.makeText( getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }});
-            return v;
+            public void run() {
+                String ref = sharedPreferences.getString("refresh", "");
+                if (ref.equals("yes")){
+                    Call<List<billet>> getBillet = api.getBillet(id);
+
+                    getBillet.enqueue(new Callback<List<billet>>() {
+                        @Override
+                        public void onResponse(Response<List<billet>> response, Retrofit retrofit) {
+                            if (response.body() != null) {
+                                List<billet> listBillet = new ArrayList<billet>();
+                                listBillet = (List<billet>) response.body();
+                                recyclerViewUser3 = v.findViewById(R.id.billet);
+                                layoutManager3 = new LinearLayoutManager(getActivity());
+                                recyclerViewUser3.setLayoutManager(layoutManager3);
+                                recyclerViewUser3.setHasFixedSize(true);
+                                BilletAdapter adapter = new BilletAdapter(getActivity(), listBillet);
+                                recyclerViewUser3.setAdapter(adapter);
+                            } else {
+                                error.setVisibility(View.VISIBLE);
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+                            Toast.makeText(getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("refresh","no");
+                    editor.commit();
+                }
+
+            refreshHandler.postDelayed(this, 10);
+            }
+        };
+        refreshHandler.postDelayed(runnable, 10);
+        return v;
     }
+
+
+
 
     @Override
     public void onClick(View view) {

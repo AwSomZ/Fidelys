@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +116,37 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
             public void onFailure(Throwable t) {
                 Toast.makeText(getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }});
+        final Handler refreshHandler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                String ref = sharedPreferences.getString("refresh", "");
+                if (ref.equals("yes")){
+                    Call<List<reclamation>> getreclamationencours = api.getReclamationEncours(id);
+                    getreclamationencours.enqueue(new Callback<List<reclamation>>(){
+                    @Override
+                    public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
+                        if(response.body()!= null) {
+                            List<reclamation> listReclamationEncours = new ArrayList<reclamation>();
+                            listReclamationEncours = (List<reclamation>) response.body();
+                            recyclerViewUser = v.findViewById(R.id.encours);
+                            layoutManager = new LinearLayoutManager(getActivity());
+                            recyclerViewUser.setLayoutManager(layoutManager);
+                            recyclerViewUser.setHasFixedSize(true);
+                            ReclamationEncoursAdapter adapter = new ReclamationEncoursAdapter(getActivity(), listReclamationEncours);
+                            recyclerViewUser.setAdapter(adapter);
+                        }
+                        else {error.setVisibility(View.VISIBLE);error.setAnimation(fade);}
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        Toast.makeText(getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    }});}
+                refreshHandler.postDelayed(this, 10);
+            }
+        };
+        refreshHandler.postDelayed(runnable, 10);
       return v;
     }
 

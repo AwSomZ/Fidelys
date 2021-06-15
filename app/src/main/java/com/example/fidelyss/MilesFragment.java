@@ -36,6 +36,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
     double coef=0.07;
     EditText to;
     String id;
+    String solde;
     String client;
     RadioGroup radioGroup;
     TextView price;
@@ -64,8 +65,8 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
         int selectedId = radioGroup.getCheckedRadioButtonId();
         System.out.println(selectedId);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
-
         id = sharedPreferences.getString("id", "");
+        solde = sharedPreferences.getString("milesprime", "");
         client = sharedPreferences.getString("id", "");
         gift.setOnCheckedChangeListener(this);
         if (gift.isChecked()) {
@@ -137,6 +138,10 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
                buy.enqueue(new retrofit.Callback<String>() {
                    public void onResponse(Response<String> response, Retrofit retrofit) {
                        Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
+                       int nvsolde= Integer.valueOf(solde)+Integer.valueOf(quantite);
+                       SharedPreferences.Editor editor = sharedPreferences.edit();
+                       editor.putString("milesprime",String.valueOf(nvsolde));
+                       editor.commit();
 
                    }
 

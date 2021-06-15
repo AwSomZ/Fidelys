@@ -34,6 +34,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
     private EditText cin;
     private String paysadd;
     private SharedPreferences sharedPreferences;
+    private Spinner pays;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         cp = (EditText) v.findViewById(R.id.codepostal);
         nationalite = (EditText) v.findViewById(R.id.nationality);
         cin = (EditText) v.findViewById(R.id.cin);
-        Spinner pays = (Spinner) v.findViewById(R.id.pays);
+        pays = (Spinner) v.findViewById(R.id.pays);
         adr.setOnFocusChangeListener(this);
         teld.setOnFocusChangeListener(this);
         telm.setOnFocusChangeListener(this);
@@ -105,40 +106,43 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
 
         if (cinadd.isEmpty()) {
             cin.setError("Saisir votre cin");
-        } else if (nationaliteadd.isEmpty()) {
+        }else if (nationaliteadd.isEmpty()) {
             nationalite.setError("Saisir votre nationalite");
-        } else if (adradd.isEmpty()) {
+        }else if (adradd.isEmpty()) {
             adr.setError("Saisir votre adresse");
-        }  else if (villeadd.isEmpty()) {
+        }else if (villeadd.isEmpty()) {
             ville.setError("Saisir votre ville");
-        } else if (cpadd.isEmpty()) {
+        }else if (cpadd.isEmpty()) {
             cp.setError("Saisir votre code postal");
         }else if (telmadd.isEmpty()) {
-            cp.setError("Saisir votre telephone mobile");
+            telm.setError("Saisir votre telephone mobile");
+        }else if (paysadd.equals("Choisir votre pays")) {
+            Toast.makeText(getActivity(), "Vous devez choisir une pays", Toast.LENGTH_LONG).show();
+        }else {
+
+            Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
+            ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+            Call<client> editUser = api.updateInf2(sharedPreferences.getString("id", ""), cinadd, adradd, teldadd, telmadd, villeadd, cpadd, nationaliteadd, paysadd);
+            editUser.enqueue(new Callback<client>() {
+                public void onResponse(Response<client> response, Retrofit retrofit) {
+                    Toast.makeText(getActivity(), "Client mise à jour", Toast.LENGTH_LONG).show();
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("cin", cinadd);
+                    editor.putString("adr", adradd);
+                    editor.putString("teld", teldadd);
+                    editor.putString("telm", telmadd);
+                    editor.putString("ville", villeadd);
+                    editor.putString("cp", cpadd);
+                    editor.putString("nationalite", nationaliteadd);
+                    editor.putString("pays", paysadd);
+                    editor.commit();
+                }
+
+                public void onFailure(Throwable t) {
+                    Toast.makeText(getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         }
-
-        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
-        ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
-        Call<client> editUser = api.updateInf2(sharedPreferences.getString("id",""),cinadd,adradd,teldadd,telmadd,villeadd,cpadd,nationaliteadd,paysadd);
-        editUser.enqueue(new Callback<client>() {
-            public void onResponse(Response<client> response, Retrofit retrofit) {
-                Toast.makeText(getActivity(), "Client mise à jour", Toast.LENGTH_LONG).show();
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("cin",cinadd);
-                editor.putString("adr",adradd);
-                editor.putString("teld",teldadd);
-                editor.putString("telm",telmadd);
-                editor.putString("ville",villeadd);
-                editor.putString("cp",cpadd);
-                editor.putString("nationalite",nationaliteadd);
-                editor.putString("pays",paysadd);
-                editor.commit();
-            }
-
-            public void onFailure(Throwable t) {
-                Toast.makeText(getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
 

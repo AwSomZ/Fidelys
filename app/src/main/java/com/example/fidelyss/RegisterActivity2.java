@@ -179,6 +179,9 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         else if (cpadd.isEmpty()) {
               cp.setError("Saisir votre code postal");
         }
+        else if (paysadd.equals("Choisir votre pays")) {
+              Toast.makeText(RegisterActivity2.this, "Vous devez choisir une pays", Toast.LENGTH_LONG).show();
+        }
         else {
               Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
               ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);

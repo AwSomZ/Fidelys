@@ -37,7 +37,6 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int)(width*0.97),(int)(height*0.465));
-
         titre= (Spinner) findViewById(R.id.titre);
         description= (EditText) findViewById(R.id.contenu);
         description.setOnFocusChangeListener(this);
@@ -77,7 +76,11 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
             buy.enqueue(new retrofit.Callback<reclamation>() {
                 @Override
                 public void onResponse(Response<reclamation> response, Retrofit retrofit) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("refresh","yes");
+                    editor.commit();
                     Toast.makeText(CreationReclamationActivity.this, "Reclamation Envoyé ", Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
                 @Override
