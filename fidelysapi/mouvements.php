@@ -57,9 +57,6 @@
 					$res=$bd->exec($update); 
 				}
 		}
-
-
-
 	$query->execute();
 	if ($query->rowCount()>0)
 		{

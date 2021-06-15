@@ -1,5 +1,5 @@
 <?php
-	include'bd.php';
+	include "bd.php";
 	$id=$_POST['id'];
 	$pin=$_POST['pin'];
 	$query=$bd->prepare("select * from client where id='$id' and pin='$pin';");

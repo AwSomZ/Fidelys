@@ -10,14 +10,6 @@ if ($_SERVER['REQUEST_METHOD']=='POST')
 	$sql="UPDATE client SET nom='$nom', prenom='$prenom', sexe='$sexe', datenaiss='$datenaiss' where id='$id'";
 	$res=$bd->exec($sql);
 
-
-
-
-
-
-
-
-
 }
 
 ?>

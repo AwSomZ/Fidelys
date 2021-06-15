@@ -33,18 +33,7 @@
                                     $pays=$data[0]['pays'];
                                     $teld=$data[0]['teldomicile'];
                                     $telm=$data[0]['telmobile'];
-                                    $societe=$data[0]['societe'];
-                                    $fonction=$data[0]['fonction'];
-                                    $telp=$data[0]['telprofessionnel'];
-                                    $fax=$data[0]['fax'];
-                                    $langue=$data[0]['langue'];
-                                    $pref=$data[0]['preference'];
-                                    $paiement=$data[0]['paiement'];
-                                    $hab=$data[0]['habitude'];
-                                    $classh=$data[0]['classeh'];
-                                    $assistance=$data[0]['assistance'];
-                                    $type=$data[0]['type'];
-                                    //id 
+                                    //creation de l id 
                                     $nbr=$bd->prepare("select * from client;");
                                     $nbr->execute();
                                     $c = $nbr->rowCount();
@@ -65,10 +54,9 @@
                                             $ok->execute();
                                         }
                                     while($ok->rowCount()>0);
-                                    $update = "UPDATE user set verified= 1 where id='$user' ";    
-                                    $res=$bd->exec($update);
-                                    $sq="insert into client (`id`, `pin`, `cin`, `sexe`, `nom`, `prenom`, `datenaiss`, `email`, `nationalite`, `adressedomicile`, `ville`, `codepostal`, `pays`, `teldomicile`, `telmobile`, `societe`, `fonction`, `telprofessionnel`, `fax`, `langue`, `preference`, `paiement`, `habitude`, `classeh`, `assistance`, `type`) VALUES 
-                                    ('$code','$pin','$cin','$sexe','$nom','$prenom','$date','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm','$societe','$fonction','$telp','$fax','$langue','$pref','$paiement','$hab','$classh','$assistance','$type');";
+                                    //fin id
+                                    $sq="insert into client (`id`, `pin`, `cin`, `sexe`, `nom`, `prenom`, `datenaiss`, `email`, `nationalite`, `adressedomicile`, `ville`, `codepostal`, `pays`, `teldomicile`, `telmobile`) VALUES 
+                                    ('$code','$pin','$cin','$sexe','$nom','$prenom','$date','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm');";
                                     $re=$bd->exec($sq);
                                     if ($re) 
                                         {
@@ -107,7 +95,7 @@
                     }  
                     else
                     {
-                         $result='error';
+                        $result='error';
                     }      
                     echo $result;
         }

@@ -15,21 +15,9 @@
             $ville=$_POST['ville'];
             $teld=$_POST['teldomicile'];
             $telm=$_POST['telmobile'];
-            $societe=$_POST['societe'];
-            $fonction=$_POST['fonction'];
-            $telp=$_POST['telprofessionnel'];
-            $fax=$_POST['fax'];
-            $langue=$_POST['langue'];
-            $preference=$_POST['preference'];
-            $paiement=$_POST['paiement'];
-            $habitude=$_POST['habitude'];
-            $classeh=$_POST['classeh'];
-            $assistance=$_POST['assistance'];
-            $type=$_POST['type'];
             $datecreation = date("Y-m-d");
-            $vkey = md5(time().$nom);
-            $sql="insert into  user (id, sexe, nom, prenom, datenaiss, email, nationalite, adressedomicile, ville, codepostal, pays, teldomicile, telmobile, societe, fonction, telprofessionnel, fax, langue, preference, paiement, habitude, classeh, assistance, type, vkey) VALUES
-            ('$id','$sexe','$nom','$prenom','$datenaiss','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm','$societe','$fonction','$telp','$fax','$langue','$preference','$paiement','$habitude','$classeh','$assistance','$type','$vkey');";
+            $sql="insert into  user (id, sexe, nom, prenom, datenaiss, email, nationalite, adressedomicile, ville, codepostal, pays, teldomicile, telmobile) VALUES
+            ('$id','$sexe','$nom','$prenom','$datenaiss','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm');";
             $res=$bd->exec($sql);
             $token=substr(md5(uniqid($id ,true)), 0, 5);
             $verif="insert into  user_verification (token, datecreation, user) VALUES

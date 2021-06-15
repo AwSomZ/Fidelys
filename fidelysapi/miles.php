@@ -8,13 +8,13 @@
 	$query->execute();
 	if ($query->rowCount()>0)
 	{
-			$data=$query->fetchAll(PDO::FETCH_ASSOC);
-			$cummul=(int)$data[0]['soldecummule'];
-			$plafond=(int)$data[0]['plafond'];
-			$dateniv=$data[0]['date_niveau'];
-			$statut=$data[0]['statut'];
-		
+		$data=$query->fetchAll(PDO::FETCH_ASSOC);
+		$cummul=(int)$data[0]['soldecummule'];
+		$plafond=(int)$data[0]['plafond'];
+		$dateniv=$data[0]['date_niveau'];
+		$statut=$data[0]['statut'];
 		$today=date("Y-m-d");
+		$datecr=date("Y-m-d H:i:s");
 		$dateniv = strtotime($dateniv);
 		$delai = strtotime('+ 1 year', $dateniv);
 		$del=date("Y-m-d",$delai);		
@@ -93,7 +93,7 @@
 					}
 				
 			}
-		$transition = "insert into transaction (`credit`,`client`,`date`,`description`) values ('$quantite','$id','$today','$description');";
+		$transition = "insert into transaction (`montant`,`client`,`date`,`type`,`description`) values ('$quantite','$id','$datecr','credit','$description');";
 		$re=$bd->exec($transition); 
 		$result='success';
 	}
