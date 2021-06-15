@@ -29,7 +29,6 @@ public class SoldeStatutFragment extends Fragment {
             @Override
             public void run() {
                 String sold = sharedPreferences.getString("milesstatut", "") ;
-                System.out.println("Votre solde est"+sold);
                 solde.setText(sold);
                 refreshHandler.postDelayed(this, 10);
             }

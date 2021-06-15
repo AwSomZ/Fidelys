@@ -56,15 +56,15 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     RadioButton aller;
     RadioButton retour;
     String client;
-    boolean ok=true;
+    boolean ok;
     private DatePickerDialog.OnDateSetListener DateAllerSetListener;
     private DatePickerDialog.OnDateSetListener DateRetourSetListener;
     private SharedPreferences sharedPreferences;
     Map<String,Integer> prices;
     String heuredepadd;
     String heureretadd;
-    private Date date1;
-    private Date date2;
+    Date date1;
+     Date date2;
 
 
     @Override
@@ -241,6 +241,8 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         switch (checkedid)
         {
             case  R.id.aller :
+                dateretour.setText("");
+                dateretourString="";
                 dateretour.setVisibility(View.GONE);
                 ret.setVisibility(View.GONE);
                 heureret.setVisibility(View.GONE);
@@ -260,6 +262,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
 
     @Override
     public void onClick(View view) {
+        ok=true;
         int selectedId = type.getCheckedRadioButtonId();
         radiobutton = (RadioButton) this.findViewById(selectedId);
         typeString=radiobutton.getText().toString().trim();
@@ -269,20 +272,16 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
             ok=false;
             Toast.makeText(AchatBilletActivity.this, "la destination doit etre differente du depart", Toast.LENGTH_LONG).show();
         }
-        else if (dateallerString.isEmpty()) {
+        if (dateallerString.isEmpty()) {
             ok=false;
             datealler.setError("La date aller ne doit pas etre vide");
         }
-        else if (solde-p<0) {
-                ok=false;
-                Toast.makeText(AchatBilletActivity.this, "Solde Insuffisant", Toast.LENGTH_LONG).show();
-        }
-        else if (retour.isChecked()) {
+        if (retour.isChecked()) {
             if (dateretourString.isEmpty()) {
                 ok = false;
                 dateretour.setError("La date retour ne doit pas etre vide");
             } else {
-                dateallerString=dateallerString+" "+heuredepadd+":00";
+                dateallerString = dateallerString + " " + heuredepadd + ":00";
                 dateretourString = dateretourString + " " + heureretadd + ":00";
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
@@ -291,12 +290,21 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if (date1.compareTo(date2) > 0) {
+                if (date1.compareTo(date2) >= 0) {
                     ok = false;
-                    Toast.makeText(AchatBilletActivity.this, "La date de retour doit etre apres la date d aller", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AchatBilletActivity.this, "La date de retour doit etre apres la date d aller "+dateretourString+dateallerString, Toast.LENGTH_LONG).show();
+                    dateretourString="";
+                    dateallerString="";
+                    dateretour.setText("");
+                    datealler.setText("");
                 }
             }
         }
+        if (solde-p<0) {
+            ok=false;
+            Toast.makeText(AchatBilletActivity.this, "Solde Insuffisant", Toast.LENGTH_LONG).show();
+            }
+
 
         if(ok){
             dateallerString=dateallerString+" "+heuredepadd+":00";
