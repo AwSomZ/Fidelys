@@ -70,7 +70,7 @@
         android:layout_marginTop="210dp"
         android:elevation="5dp"
         android:fontFamily="@font/soda"
-        android:text="Aucune reclamation"
+        android:text="Aucune transaction"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:visibility="gone"
