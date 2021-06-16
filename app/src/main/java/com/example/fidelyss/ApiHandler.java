@@ -150,10 +150,8 @@ public interface ApiHandler {
             @Field("type") String var4,
             @Field("datealler") String var5,
             @Field("dateretour") String var6,
-            @Field("heuredepart") String var7,
-            @Field("heureretour") String var8,
-            @Field("classe") String var9,
-            @Field("prix") int var10
+            @Field("classe") String var7,
+            @Field("prix") int var8
     );
 
     @FormUrlEncoded

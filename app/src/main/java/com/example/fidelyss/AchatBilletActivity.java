@@ -317,7 +317,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         if(ok){
             progressDialog.show();
             dateallerString=dateallerString+" "+heuredepadd+":00";
-            Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString,heuredepadd,heureretadd,classeString ,p);
+            Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString,classeString ,p);
             buytikcet.enqueue(new retrofit.Callback<billet>() {
                 @Override
                 public void onResponse(Response<billet> response, Retrofit retrofit) {
