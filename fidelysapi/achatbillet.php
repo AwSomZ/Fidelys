@@ -8,15 +8,11 @@
             $type=$_POST['type'];
             $datealler=$_POST['datealler'];
             $dateretour=$_POST['dateretour'];
-            $heuredepart=$_POST['heuredepart'];
-            $heureretour=$_POST['heureretour'];
-            $dateallerc=$datealler." ".$heuredepart.":00";
-            $dateretourc=$dateretour." ".$heureretour.":00";
             $classe=$_POST['classe'];
             $prix=$_POST['prix'];
             $dateachat = date("Y-m-d H:i:s");
             $sql="insert into  billet (`depart`, `destination`, `type`, `datealler`, `dateretour`,`classe`, `dateachat`, `client`, `prix`) VALUES
-            ('$de','$vers','$type','$dateallerc','$dateretourc','$classe','$dateachat','$client','$prix');";  
+            ('$de','$vers','$type','$datealler','$dateretour','$classe','$dateachat','$client','$prix');";  
             $res=$bd->exec($sql);
             if($res)
                 {
