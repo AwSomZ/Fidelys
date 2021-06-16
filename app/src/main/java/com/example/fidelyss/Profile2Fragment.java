@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
     private String paysadd;
     private SharedPreferences sharedPreferences;
     private Spinner pays;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         cp.setOnFocusChangeListener(this);
         nationalite.setOnFocusChangeListener(this);
         cin.setOnFocusChangeListener(this);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Attendre s il vous plait ...");
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String cinadd = sharedPreferences.getString("cin", "");
         String adradd= sharedPreferences.getString("adr", "");
@@ -119,12 +123,13 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         }else if (paysadd.equals("Choisir votre pays")) {
             Toast.makeText(getActivity(), "Vous devez choisir une pays", Toast.LENGTH_LONG).show();
         }else {
-
+            progressDialog.show();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
             Call<client> editUser = api.updateInf2(sharedPreferences.getString("id", ""), cinadd, adradd, teldadd, telmadd, villeadd, cpadd, nationaliteadd, paysadd);
             editUser.enqueue(new Callback<client>() {
                 public void onResponse(Response<client> response, Retrofit retrofit) {
+                    progressDialog.dismiss();
                     Toast.makeText(getActivity(), "Client mise à jour", Toast.LENGTH_LONG).show();
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("cin", cinadd);
@@ -136,10 +141,12 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
                     editor.putString("nationalite", nationaliteadd);
                     editor.putString("pays", paysadd);
                     editor.commit();
+
                 }
 
                 public void onFailure(Throwable t) {
                     Toast.makeText(getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             });
         }

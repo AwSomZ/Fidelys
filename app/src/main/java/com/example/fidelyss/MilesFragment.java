@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
     RadioGroup radioGroup;
     TextView price;
     RadioButton radioButton;
+    ProgressDialog progressDialog;
     private String milestype="prime";
     private TextView unit;
 
@@ -62,6 +64,8 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
         quantitee.setAdapter(adapter);
         quantitee.setOnItemSelectedListener(this);
         radioGroup.setOnCheckedChangeListener(this);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Attendre s il vous plait ...");
         int selectedId = radioGroup.getCheckedRadioButtonId();
         System.out.println(selectedId);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
@@ -132,6 +136,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
 
            }
            else {
+               progressDialog.show();
                Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
                ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                Call<String> buy = api.buyMiles(id, quantite, milestype, client);
@@ -142,11 +147,13 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
                        SharedPreferences.Editor editor = sharedPreferences.edit();
                        editor.putString("milesprime",String.valueOf(nvsolde));
                        editor.commit();
+                       progressDialog.dismiss();
 
                    }
 
                    public void onFailure(Throwable t) {
                        Toast.makeText(MilesFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                       progressDialog.dismiss();
                    }
                });
            }

@@ -1,6 +1,7 @@
 package com.example.fidelyss;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -40,6 +41,7 @@ private DatePickerDialog.OnDateSetListener mDateSetListener;
 RadioGroup radioGroup;
 RadioButton radioButton;
 int s;
+    private ProgressDialog progressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,7 +72,8 @@ int s;
         nom.setText(no);
         prenom.setText(preno);
         mDisplayDate.setText(dated);
-
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Attendre s il vous plait ...");
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,34 +120,38 @@ int s;
 
        if(nomadd.isEmpty()){
             nom.setError("Veuillez taper votre Nom");
-        }else if(prenomadd.isEmpty()){
+       }
+       else if(prenomadd.isEmpty()){
             prenom.setError("Veuillez taper votre Prenom");
-        }else if(dateadd.isEmpty()){
+       }
+       else if(dateadd.isEmpty()){
            mDisplayDate.setError("Veuillez Saisir la date de naissance");
        }
+       else {
+           progressDialog.show();
+           Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
+           ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
+           Call<client> editUser = api.updateInf(sharedPreferences.getString("id", ""), nomadd, prenomadd, sexeadd, dateadd);
+           editUser.enqueue(new Callback<client>() {
+               public void onResponse(Response<client> response, Retrofit retrofit) {
+                   Toast.makeText(getActivity(), "Client updated", Toast.LENGTH_LONG).show();
+                   SharedPreferences.Editor editor = sharedPreferences.edit();
+                   editor.putString("nom", nomadd);
+                   editor.putString("prenom", prenomadd);
+                   editor.putString("sexe", sexeadd);
+                   editor.putString("date", dateadd);
+                   editor.commit();
+                   progressDialog.dismiss();
+               }
+
+               public void onFailure(Throwable t) {
+                   Toast.makeText(getActivity(), "failed " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                   progressDialog.dismiss();
+               }
+           });
 
 
-        Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
-        ApiHandler api = (ApiHandler)Rf.create(ApiHandler.class);
-        Call<client> editUser = api.updateInf(sharedPreferences.getString("id",""),nomadd,prenomadd,sexeadd,dateadd);
-        editUser.enqueue(new Callback<client>() {
-            public void onResponse(Response<client> response, Retrofit retrofit) {
-                Toast.makeText(getActivity(), "Client updated", Toast.LENGTH_LONG).show();
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("nom",nomadd);
-                editor.putString("prenom",prenomadd);
-                editor.putString("sexe",sexeadd);
-                editor.putString("date",dateadd);
-                editor.commit();
-            }
-
-            public void onFailure(Throwable t) {
-                Toast.makeText(getActivity(), "failed " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-
-
+       }
 
     }
 

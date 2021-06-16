@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -29,6 +30,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public EditText cin;
     public EditText pin;
     ImageView goback;
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ((TextView) findViewById(R.id.forgot)).setOnClickListener(this);
         cin.setOnFocusChangeListener(this);
         pin.setOnFocusChangeListener(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
     }
     @Override
     public void onClick(View v)
@@ -78,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             pin.setError("Champs obligatoire");
         }
         else {
+            progressDialog.show();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
@@ -110,14 +116,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Intent intent = new Intent(LoginActivity.this, MouvementActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.translate_in_right, R.anim.translate_out_left);
-                    } else {
+                    }
+                    else {
                         Toast.makeText(LoginActivity.this, " Verifez votre Id/Pin ", Toast.LENGTH_LONG).show();
                     }
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
                     Toast.makeText(LoginActivity.this, "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
 
                 }
             });

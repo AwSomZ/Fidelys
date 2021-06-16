@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
     Button creer;
     String client;
     String descriptionadd;
+    ProgressDialog progressDialog;
     private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
         creer.setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
     }
 
     @Override
@@ -69,6 +73,7 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
             description.setError("Ajouter une description");
         }
         else {
+            progressDialog.show();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
 
@@ -80,12 +85,14 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
                     editor.putString("refresh","yes");
                     editor.commit();
                     Toast.makeText(CreationReclamationActivity.this, "Reclamation Envoyé ", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                     finish();
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
                     Toast.makeText(CreationReclamationActivity.this, "Echec d'envoie " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             });
         }

@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,6 +42,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
     public EditText pays;
     public EditText cp;
     public EditText nationalite;
+    ProgressDialog progressDialog;
     GoogleApiClient googleApiClient;
     String Key ="6Ld2YnQaAAAAAKjcJIcpKYDBofusqkXq1CYmdu1O";
     String email = "";
@@ -83,6 +85,8 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         pays.setAdapter(adapter);
         pays.setOnItemSelectedListener(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
 
 
         ((Button) findViewById(R.id.envoyer)).setOnClickListener(this);
@@ -183,6 +187,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
               Toast.makeText(RegisterActivity2.this, "Vous devez choisir une pays", Toast.LENGTH_LONG).show();
         }
         else {
+              progressDialog.show();
               Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
               ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
               Call<user> addUser = api.insertUser(cinadd, sexe, nom, prenom, date, email, nationaliteadd, adradd, villeadd, cpadd, paysadd, teldadd, telmadd);
@@ -192,11 +197,13 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
                       Intent intent = new Intent(RegisterActivity2.this, Redirection.class);
                       intent.putExtra("user", cinadd);
                       startActivity(intent);
+                      progressDialog.dismiss();
                       overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
                   }
 
                   public void onFailure(Throwable t) {
                       Toast.makeText(RegisterActivity2.this, "erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                      progressDialog.dismiss();
                   }
               });
 

@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
     private String user;
     String tokenadd;
     EditText token;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
         token.setOnFocusChangeListener(this);
         user = getIntent().getStringExtra("user");
         ((Button) findViewById(R.id.gotologin)).setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
 
     }
 
@@ -46,12 +50,11 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
             token.setError("Vous Devez Saisir Le Code");
         }
         else {
+            progressDialog.show();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-
             Call<String> buy = api.verify(user, tokenadd);
             buy.enqueue(new retrofit.Callback<String>() {
-
 
                 @Override
                 public void onResponse(Response<String> response, Retrofit retrofit) {
@@ -67,12 +70,14 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
                     else {
                         Toast.makeText(Redirection.this, "Compte Non Trouvé", Toast.LENGTH_LONG).show();
                     }
+                    progressDialog.dismiss();
                 }
 
 
                 @Override
                 public void onFailure(Throwable t) {
                     Toast.makeText(Redirection.this, " Erreur "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             });
         }

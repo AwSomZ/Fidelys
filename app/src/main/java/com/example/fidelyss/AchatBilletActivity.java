@@ -1,6 +1,7 @@
 package com.example.fidelyss;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -65,6 +66,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
     String heureretadd;
     Date date1;
      Date date2;
+    private ProgressDialog progressDialog;
 
 
     @Override
@@ -96,6 +98,8 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         retour = (RadioButton) findViewById(R.id.retour);
         vers = (Spinner) findViewById(R.id.vers);
         acheter = (Button) findViewById(R.id.acheter) ;
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
         solde = Integer.valueOf(sharedPreferences.getString("milesprime", ""));
@@ -307,6 +311,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
 
 
         if(ok){
+            progressDialog.show();
             dateallerString=dateallerString+" "+heuredepadd+":00";
             Call<billet> buytikcet = api.buyTicket(client, deString, versString, typeString, dateallerString, dateretourString,heuredepadd,heureretadd,classeString ,p);
             buytikcet.enqueue(new retrofit.Callback<billet>() {
@@ -318,12 +323,14 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                     editor.putString("refresh","yes");
                     editor.commit();
                     Toast.makeText(AchatBilletActivity.this, "Achat validé ", Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                     finish();
                 }
 
                 @Override
                 public void onFailure(Throwable t) {
                     Toast.makeText(AchatBilletActivity.this, "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             });
 

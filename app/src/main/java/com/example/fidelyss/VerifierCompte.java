@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import retrofit.Retrofit;
 public class VerifierCompte extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
     EditText cin;
     String cinadd;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -37,6 +39,8 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
         cin=(EditText) findViewById(R.id.cin);
         cin.setOnFocusChangeListener(this);
         ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
 
     }
 
@@ -47,6 +51,7 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
             cin.setError("Vous Devez Saisir Votre CIN");
         }
         else {
+            progressDialog.show();
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
@@ -59,9 +64,11 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
                         intent.putExtra("user", cinadd);
                         startActivity(intent);
                         overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
+                        progressDialog.dismiss();
                 }
                     else {
                         Toast.makeText(VerifierCompte.this, "Compte Non Trouvé" , Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
                     }
 
                 }

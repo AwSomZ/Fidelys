@@ -1,5 +1,6 @@
 package com.example.fidelyss;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
 
     String idadd;
     private EditText id;
-
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,8 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
         id=(EditText) findViewById(R.id.identifiant);
         id.setOnFocusChangeListener(this);
         ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Attendre s il vous plait ...");
     }
 
     @Override
@@ -43,6 +46,7 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
             id.setError("Vous Devez Saisir Votre Identifiant");
         }
         else {
+            progressDialog.show();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
             Call<String> buy = api.forgotpin(idadd);
@@ -55,10 +59,12 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(ForgotPinActivity.this, "Votre Code Pin a été evoyer a votre email" , Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ForgotPinActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    progressDialog.dismiss();
                     finish();
                 }
                 else {
                     Toast.makeText(ForgotPinActivity.this, "Verifiez votre identifiant" , Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
                 }
 
