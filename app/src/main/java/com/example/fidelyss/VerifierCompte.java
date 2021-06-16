@@ -40,7 +40,7 @@ public class VerifierCompte extends AppCompatActivity implements View.OnClickLis
         cin.setOnFocusChangeListener(this);
         ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
 
     }
 

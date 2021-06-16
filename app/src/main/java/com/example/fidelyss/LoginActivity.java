@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         cin.setOnFocusChangeListener(this);
         pin.setOnFocusChangeListener(this);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
     }
     @Override
     public void onClick(View v)

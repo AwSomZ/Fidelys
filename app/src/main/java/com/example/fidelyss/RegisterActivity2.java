@@ -86,7 +86,7 @@ public class RegisterActivity2 extends AppCompatActivity implements View.OnClick
         pays.setAdapter(adapter);
         pays.setOnItemSelectedListener(this);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
 
 
         ((Button) findViewById(R.id.envoyer)).setOnClickListener(this);

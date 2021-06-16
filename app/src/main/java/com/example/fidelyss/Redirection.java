@@ -39,7 +39,7 @@ public class Redirection extends AppCompatActivity implements View.OnClickListen
         user = getIntent().getStringExtra("user");
         ((Button) findViewById(R.id.gotologin)).setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
 
     }
 

@@ -65,7 +65,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
         quantitee.setOnItemSelectedListener(this);
         radioGroup.setOnCheckedChangeListener(this);
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...\"");
         int selectedId = radioGroup.getCheckedRadioButtonId();
         System.out.println(selectedId);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
@@ -115,6 +115,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
                       Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
                       ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
                       Call<String> buy = api.buyMiles(id,quantite,milestype,client);
+                      progressDialog.show();
                       buy.enqueue(new retrofit.Callback<String>() {
 
                           public void onResponse(Response<String> response, Retrofit retrofit) {
@@ -125,10 +126,12 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
                               else {
                                   Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
                               }
+                              progressDialog.dismiss();
 
                           }
 
                           public void onFailure(Throwable t) {
+                              progressDialog.dismiss();
                               Toast.makeText(MilesFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                           }
                       });

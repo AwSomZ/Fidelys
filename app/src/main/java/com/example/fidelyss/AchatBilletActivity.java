@@ -99,7 +99,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         vers = (Spinner) findViewById(R.id.vers);
         acheter = (Button) findViewById(R.id.acheter) ;
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         client = sharedPreferences.getString("id", "");
         solde = Integer.valueOf(sharedPreferences.getString("milesprime", ""));
@@ -276,6 +276,10 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
             ok=false;
             Toast.makeText(AchatBilletActivity.this, "la destination doit etre differente du depart", Toast.LENGTH_LONG).show();
         }
+        if (!(versString.equals("Tunis"))&&!(deString.equals("Tunis"))) {
+            ok=false;
+            Toast.makeText(AchatBilletActivity.this, "la destination ou le depart doit etre de tunis", Toast.LENGTH_LONG).show();
+        }
         if (dateallerString.isEmpty()) {
             ok=false;
             datealler.setError("La date aller ne doit pas etre vide");
@@ -285,11 +289,11 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 ok = false;
                 dateretour.setError("La date retour ne doit pas etre vide");
             } else {
-                dateallerString = dateallerString + " " + heuredepadd + ":00";
+                String da = dateallerString + " " + heuredepadd + ":00";
                 dateretourString = dateretourString + " " + heureretadd + ":00";
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try {
-                    date1 = sdf.parse(dateallerString);
+                    date1 = sdf.parse(da);
                     date2 = sdf.parse(dateretourString);
                 } catch (ParseException e) {
                     e.printStackTrace();

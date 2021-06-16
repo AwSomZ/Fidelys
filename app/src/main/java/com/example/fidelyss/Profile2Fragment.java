@@ -57,7 +57,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         nationalite.setOnFocusChangeListener(this);
         cin.setOnFocusChangeListener(this);
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String cinadd = sharedPreferences.getString("cin", "");
         String adradd= sharedPreferences.getString("adr", "");

@@ -52,7 +52,7 @@ public class CreationReclamationActivity extends AppCompatActivity implements Ad
         client = sharedPreferences.getString("id", "");
         creer.setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
     }
 
     @Override

@@ -73,7 +73,7 @@ int s;
         prenom.setText(preno);
         mDisplayDate.setText(dated);
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Attendre s il vous plait ...");
+        progressDialog.setMessage("Veuillez patienter ...");
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
