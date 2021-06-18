@@ -62,6 +62,11 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
                     progressDialog.dismiss();
                     finish();
                 }
+                else if (response.body().equals("non")){
+                    Toast.makeText(ForgotPinActivity.this, "Vous avez utilisé cette fonctionalité veuillez verifier votre email" , Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                    finish();
+                }
                 else {
                     Toast.makeText(ForgotPinActivity.this, "Verifiez votre identifiant" , Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();
@@ -71,6 +76,7 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
                 @Override
                 public void onFailure(Throwable t) {
                     Toast.makeText(ForgotPinActivity.this, "Erreur "+t.getLocalizedMessage() , Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
                 }
             });
             }
