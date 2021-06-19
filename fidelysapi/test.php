@@ -1,25 +1,37 @@
 <?php
-include "bd.php";
-$nbr=$bd->prepare("select * from client;");
-$nbr->execute();
-$c = $nbr->rowCount();
- do {
-            
-                $c=$c+1;
-            $count= (string) $c;
-            $nb = strlen($count);
-            $err =9- $nb ; 
-            
-            $code="";
-            for ($x = 0; $x < $err; $x++)
-            {
-            $code="0".$code;
-            }
-            $code=$code.$count;
-	 $pin = rand(100000000,999999999);
-	$ok=$bd->prepare("select * from client where id='$code' or pin='$pin';");
-	$ok->execute();
-            }while($ok->rowCount()>0);
-echo $code;
-echo $pin;
+$d=password_hash("985764106", PASSWORD_BCRYPT);
+$new=password_hash("102348988", PASSWORD_BCRYPT);
+$password=$d.$new;
+$s='$2y$10$UkWETGSNWsC02JzkUVnABuZbuRgO8byNvX1TG5ilR7Ruk/Kc00o9K';
+echo strlen($s);
+echo '</br>';
+$rest = substr($password, 60);
+echo $d;
+echo '</br>';
+echo strlen($d);
+echo '</br>';
+echo $new;
+echo '</br>';
+echo strlen($password);
+echo '</br>';
+echo $password;
+echo '</br>';
+echo $rest;
+echo '</br>';
+$newpin=str_replace($rest, "",$password);
+echo $newpin;
+if (strlen($new)==60){
+    echo 'good';
+}
+else {
+    echo 'no';
+}
+
+if (password_verify("102348988", $rest)){
+    echo 'good';
+}
+else {
+    echo 'no';
+}
+
 ?>

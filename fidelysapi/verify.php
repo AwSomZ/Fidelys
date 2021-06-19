@@ -50,13 +50,14 @@
                                                 }
                                             $code=$code.$count;
                                             $pin = (string) rand(100000000,999999999);
-                                            $ok=$bd->prepare("select * from client where id='$code' or pin='$pin';");
+                                            $ok=$bd->prepare("select * from client where id='$code' ;");
                                             $ok->execute();
                                         }
                                     while($ok->rowCount()>0);
                                     //fin id
+                                    $hash=password_hash($pin, PASSWORD_BCRYPT);
                                     $sq="insert into client (`id`, `pin`, `cin`, `sexe`, `nom`, `prenom`, `datenaiss`, `email`, `nationalite`, `adressedomicile`, `ville`, `codepostal`, `pays`, `teldomicile`, `telmobile`) VALUES 
-                                    ('$code','$pin','$cin','$sexe','$nom','$prenom','$date','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm');";
+                                    ('$code','$hash','$cin','$sexe','$nom','$prenom','$date','$email','$nationalite','$adr','$ville','$cp','$pays','$teld','$telm');";
                                     $re=$bd->exec($sq);
                                     if ($re) 
                                         {
