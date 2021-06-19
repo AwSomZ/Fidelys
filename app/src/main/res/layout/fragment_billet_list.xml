@@ -27,7 +27,7 @@
 
         android:elevation="5dp"
         android:fontFamily="@font/soda"
-        android:text="Aucune Billet"
+        android:text="Aucun Billet"
         android:textColor="@color/black"
         android:textSize="20dp"
         android:visibility="gone"/>

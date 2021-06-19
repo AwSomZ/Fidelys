@@ -24,6 +24,7 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
     private String id;
     private ProgressDialog progressDialog;
     private String pinadd;
+    private String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.33));
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         id = sharedPreferences.getString("id", "");
+        email = sharedPreferences.getString("email", "");
         pin = (EditText) findViewById(R.id.npin);
         ((Button) findViewById(R.id.maj)).setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
@@ -56,12 +58,14 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
             progressDialog.show();
             Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
             ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-            Call<String> change = api.changePin(id, pinadd);
+            Call<String> change = api.changePin(id, pinadd, email);
             change.enqueue(new retrofit.Callback<String>() {
                 @Override
                 public void onResponse(Response<String> response, Retrofit retrofit) {
                     progressDialog.dismiss();
                     if (response.body().equals("sent")){
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("changed", "true");
                         Toast.makeText(ChangePinActivity.this, "Pin changé avec succés", Toast.LENGTH_LONG).show();
                         finish();
                     }

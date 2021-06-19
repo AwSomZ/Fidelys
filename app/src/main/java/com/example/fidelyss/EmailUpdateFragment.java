@@ -2,6 +2,7 @@ package com.example.fidelyss;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -35,6 +36,12 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
        email.setOnFocusChangeListener(this);
        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
        emailadd = sharedPreferences.getString("email", "");
+        String changed = sharedPreferences.getString("changed", "");
+        if (changed.equals("false")){
+            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
        email.setText(emailadd);
        ((Button) v.findViewById(R.id.maj)).setOnClickListener(this);
         progressDialog = new ProgressDialog(getContext());

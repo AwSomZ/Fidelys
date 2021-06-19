@@ -34,6 +34,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     TextView cp;
     TextView email;
     private SharedPreferences sharedPreferences;
+    private Intent intent;
 
 
     @Override
@@ -73,6 +74,12 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         String nationaliteadd = sharedPreferences.getString("nationalite", "");
         String emailadd = sharedPreferences.getString("email", "");
         String npadd = sharedPreferences.getString("nom", "")+" "+sharedPreferences.getString("prenom", "");
+        String changed = sharedPreferences.getString("changed", "");
+        if (changed.equals("false")){
+            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
         logout.setOnClickListener(this);
         np.setText(npadd);
         datenaiss.setText(dateadd);
@@ -84,9 +91,15 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         cp.setText(cpadd);
         nationalite.setText(nationaliteadd);
         email.setText(emailadd);
-        infogen.setOnClickListener(this);
         contactemail.setOnClickListener(this);
-        changepin.setOnClickListener(this);
+        changepin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getActivity(), ChangePinActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+            }
+        });
         adresseid.setOnClickListener(this);
         return v;
 
@@ -97,20 +110,11 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         Intent intent;
         Fragment unFrgment = null;
         switch (v.getId()) {
-            case R.id.infogen:
-                unFrgment = new ProfileFragment();
-                break;
             case R.id.contactemail:
                 unFrgment = new EmailUpdateFragment();
                 break;
             case R.id.adresseid:
                 unFrgment = new Profile2Fragment();
-                break;
-            case R.id.changepin:
-                unFrgment = new ProfilePageFragment();
-                intent = new Intent(getActivity(), ChangePinActivity.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
                 break;
             case R.id.logout:
                 unFrgment = new ProfilePageFragment();

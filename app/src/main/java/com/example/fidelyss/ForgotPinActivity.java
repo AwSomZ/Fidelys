@@ -3,6 +3,7 @@ package com.example.fidelyss;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -23,6 +24,8 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
     String idadd;
     private EditText id;
     ProgressDialog progressDialog;
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,7 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
         int width = dm.widthPixels;
         int height = dm.heightPixels;
         getWindow().setLayout((int) (width * 0.9), (int) (height * 0.3));
+        sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         id=(EditText) findViewById(R.id.identifiant);
         id.setOnFocusChangeListener(this);
         ((Button) findViewById(R.id.verifier)).setOnClickListener(this);
@@ -59,6 +63,8 @@ public class ForgotPinActivity extends AppCompatActivity implements View.OnClick
                     Toast.makeText(ForgotPinActivity.this, "Votre Code Pin a été evoyer a votre email" , Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(ForgotPinActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("changed", "false");
                     progressDialog.dismiss();
                     finish();
                 }

@@ -164,7 +164,8 @@ public interface ApiHandler {
     @POST("fidelysapi/changepin.php")
     Call<String> changePin(
             @Field("id") String var1,
-            @Field("pin") String var2
+            @Field("pin") String var2,
+            @Field("email") String var3
     );
 
 

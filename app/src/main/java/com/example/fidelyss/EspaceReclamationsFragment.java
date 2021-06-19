@@ -78,6 +78,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
             @Override
             public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
                 if(response.body()!= null) {
+                    error.setVisibility(View.GONE);
                     List<reclamation> listReclamationEncours = new ArrayList<reclamation>();
                     listReclamationEncours = (List<reclamation>) response.body();
                     recyclerViewUser = v.findViewById(R.id.encours);
@@ -100,6 +101,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
             @Override
             public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
                 if(response.body()!= null) {
+                    error1.setVisibility(View.GONE);
                     List<reclamation> listReclamationResolu = new ArrayList<reclamation>();
                     listReclamationResolu = (List<reclamation>) response.body();
                     recyclerViewUser2 = v.findViewById(R.id.resolu);
@@ -127,6 +129,7 @@ public class EspaceReclamationsFragment extends Fragment implements View.OnClick
                     @Override
                     public void onResponse(Response<List<reclamation>> response, Retrofit retrofit) {
                         if(response.body()!= null) {
+                            error.setVisibility(View.GONE);
                             List<reclamation> listReclamationEncours = new ArrayList<reclamation>();
                             listReclamationEncours = (List<reclamation>) response.body();
                             recyclerViewUser = v.findViewById(R.id.encours);

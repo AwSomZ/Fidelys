@@ -2,6 +2,7 @@ package com.example.fidelyss;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -65,10 +66,16 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
         quantitee.setOnItemSelectedListener(this);
         radioGroup.setOnCheckedChangeListener(this);
         progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Veuillez patienter ...\"");
+        progressDialog.setMessage("Veuillez patienter ...");
         int selectedId = radioGroup.getCheckedRadioButtonId();
         System.out.println(selectedId);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
+        String changed = sharedPreferences.getString("changed", "");
+        if (changed.equals("false")){
+            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
         id = sharedPreferences.getString("id", "");
         solde = sharedPreferences.getString("milesprime", "");
         client = sharedPreferences.getString("id", "");

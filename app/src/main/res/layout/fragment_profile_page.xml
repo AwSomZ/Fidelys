@@ -27,6 +27,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="100dp"
         android:paddingRight="10dp"
+        android:paddingBottom="10dp"
         android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -447,7 +448,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/changepin"
                         android:background="@drawable/profilefrag"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="25dp"
                         android:layout_width="350dp"
                         android:layout_height="90dp">
 

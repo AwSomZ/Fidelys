@@ -51,6 +51,12 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
         acheter.setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
+        String changed = sharedPreferences.getString("changed", "");
+        if (changed.equals("false")){
+            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+        }
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
@@ -60,6 +66,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onResponse(Response<List<billet>> response, Retrofit retrofit) {
                         if (response.body() != null) {
+                            error.setVisibility(View.GONE);
                             List<billet> listBillet = new ArrayList<billet>();
                             listBillet = (List<billet>) response.body();
                             recyclerViewUser3 = v.findViewById(R.id.billet);
@@ -91,6 +98,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
                         @Override
                         public void onResponse(Response<List<billet>> response, Retrofit retrofit) {
                             if (response.body() != null) {
+                                error.setVisibility(View.GONE);
                                 List<billet> listBillet = new ArrayList<billet>();
                                 listBillet = (List<billet>) response.body();
                                 recyclerViewUser3 = v.findViewById(R.id.billet);
