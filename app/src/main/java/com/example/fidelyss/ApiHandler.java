@@ -160,5 +160,12 @@ public interface ApiHandler {
             @Field("client") String var1
     );
 
+    @FormUrlEncoded
+    @POST("fidelysapi/changepin.php")
+    Call<String> changePin(
+            @Field("id") String var1,
+            @Field("pin") String var2
+    );
+
 
 }

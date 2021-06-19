@@ -20,6 +20,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
     ConstraintLayout infogen;
     ConstraintLayout adresseid;
     ConstraintLayout contactemail;
+    ConstraintLayout changepin;
     ScrollView sc;
     TextView np;
     TextView datenaiss;
@@ -42,6 +43,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         infogen = (ConstraintLayout) v.findViewById(R.id.infogen);
         adresseid= (ConstraintLayout) v.findViewById(R.id.adresseid);
         contactemail = (ConstraintLayout) v.findViewById(R.id.contactemail);
+        changepin = (ConstraintLayout) v.findViewById(R.id.changepin);
         np= (TextView) v.findViewById(R.id.np);
         logout= (TextView) v.findViewById(R.id.logout);
         cp= (TextView) v.findViewById(R.id.cp);
@@ -84,6 +86,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         email.setText(emailadd);
         infogen.setOnClickListener(this);
         contactemail.setOnClickListener(this);
+        changepin.setOnClickListener(this);
         adresseid.setOnClickListener(this);
         return v;
 
@@ -91,6 +94,7 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         Fragment unFrgment = null;
         switch (v.getId()) {
             case R.id.infogen:
@@ -102,12 +106,18 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
             case R.id.adresseid:
                 unFrgment = new Profile2Fragment();
                 break;
+            case R.id.changepin:
+                unFrgment = new ProfilePageFragment();
+                intent = new Intent(getActivity(), ChangePinActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
+                break;
             case R.id.logout:
                 unFrgment = new ProfilePageFragment();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("LOGIN");
                 editor.apply();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
                 getActivity().finish();
                 break;
