@@ -28,6 +28,13 @@
                 android:layout_gravity="center"
                 android:textColor="@color/lred"
                 android:text="Informations Générales"/>
+            <ImageView
+                android:id="@+id/goback"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:src="@drawable/backred"/>
+
             <TableLayout
 
                 android:layout_width="match_parent"
@@ -36,7 +43,7 @@
 
                 <TableRow
                     android:layout_marginBottom="5dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="5dp"
                     android:background="@color/lred">
                     <TextView
                         android:layout_width="wrap_content"

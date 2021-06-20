@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -27,12 +28,21 @@ public class EmailUpdateFragment extends Fragment implements View.OnClickListene
     String emailadd;
     private SharedPreferences sharedPreferences;
     private ProgressDialog progressDialog;
+    private ImageView goback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
        View v= inflater.inflate(R.layout.fragment_email_update, container, false);
        email= (EditText) v.findViewById(R.id.Email);
+        goback= (ImageView) v.findViewById(R.id.goback);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment unFrgment = new ProfilePageFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
+            }
+        });
        email.setOnFocusChangeListener(this);
        sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
        emailadd = sharedPreferences.getString("email", "");

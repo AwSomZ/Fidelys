@@ -20,10 +20,12 @@ import retrofit.Retrofit;
 public class ChangePinActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText pin;
+    private EditText cpin;
     private SharedPreferences sharedPreferences;
     private String id;
     private ProgressDialog progressDialog;
     private String pinadd;
+    private String cpinadd;
     private String email;
 
     @Override
@@ -39,6 +41,7 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
         id = sharedPreferences.getString("id", "");
         email = sharedPreferences.getString("email", "");
         pin = (EditText) findViewById(R.id.npin);
+        cpin = (EditText) findViewById(R.id.cpin);
         ((Button) findViewById(R.id.maj)).setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Veuillez patienter ...");
@@ -47,8 +50,15 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         pinadd = pin.getText().toString().trim();
+        cpinadd= cpin.getText().toString().trim();
         if (pinadd.isEmpty()) {
             pin.setError("Vous Devez Saisir Un PIN");
+        }
+        else if (cpinadd.isEmpty()){
+            cpin.setError("Vous Devez Confirmer Votre PIN");
+        }
+        else if (!(pinadd.equals(cpinadd))){
+            Toast.makeText(ChangePinActivity.this, "Le PIN doit etre identique dans les deux champs", Toast.LENGTH_LONG).show();
         }
         else if (pinadd.length()<6){
             pin.setError("Le PIN doit etre de 9 chiffre");

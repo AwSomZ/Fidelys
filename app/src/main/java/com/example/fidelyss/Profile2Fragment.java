@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
     private SharedPreferences sharedPreferences;
     private Spinner pays;
     private ProgressDialog progressDialog;
+    private ImageView goback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +52,14 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         nationalite = (EditText) v.findViewById(R.id.nationality);
         cin = (EditText) v.findViewById(R.id.cin);
         pays = (Spinner) v.findViewById(R.id.pays);
+        goback= (ImageView) v.findViewById(R.id.goback);
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment unFrgment = new ProfilePageFragment();
+                getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentplaceholder, unFrgment).commit();
+            }
+        });
         adr.setOnFocusChangeListener(this);
         teld.setOnFocusChangeListener(this);
         telm.setOnFocusChangeListener(this);
