@@ -3,13 +3,14 @@
     {  
         include "bd.php";
         $id=$_POST['id']; 
-        $pin=$_POST['pin']; 
+        $pin=$_POST['pin'];
+        $email=$_POST['email'];
         $hash=password_hash($pin, PASSWORD_BCRYPT);
         $update1= "UPDATE client set pin='$hash' where id='$id' "; 
         $res1=$bd->exec($update1); 
             if ($res1){
                 $to= $email;
-                $subject = "Pin Oublie";
+                $subject = "PIN Modifié";
                 $message="Votre PIN a été modifier avec succés";
                 $headers= "From: noreply@fidelys.tn";
                 $headers .="MIME-Version:1.0"."\r\n";
@@ -18,7 +19,7 @@
                 $result='sent';
             }
             else{
-                $result='errorr';
+                $result='erreur';
             }
         echo $result;
     }

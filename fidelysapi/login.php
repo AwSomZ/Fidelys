@@ -50,10 +50,11 @@
 			}
 
 			else{
+				$oldpin = substr($hashed,0,60);
 				$rest = substr($hashed, 60);
-				if (password_verify($pin, $rest)){
+				if ((password_verify($pin, $rest)) or (password_verify($pin, $oldpin))){
 					$date = $data[0]['datenaiss'];
-					$q=$bd->prepare("select * from mouvement where client='$id' ;");
+					$q=$bd->prepare("select * from mouvement where client='$id';");
 					$q->execute();
 					if($q->rowCount()>0)
 						{
