@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ import retrofit.GsonConverterFactory;
 import retrofit.Response;
 import retrofit.Retrofit;
 
-public class ChangePinActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChangePinActivity extends AppCompatActivity implements View.OnClickListener, View.OnFocusChangeListener {
 
     private EditText pin;
     private EditText cpin;
@@ -36,12 +37,14 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
         getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         int height = dm.heightPixels;
-        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.33));
+        getWindow().setLayout((int) (width * 0.9), (int) (height * 0.38));
         sharedPreferences = this.getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         id = sharedPreferences.getString("id", "");
         email = sharedPreferences.getString("email", "");
         pin = (EditText) findViewById(R.id.npin);
         cpin = (EditText) findViewById(R.id.cpin);
+        pin.setOnFocusChangeListener(this);
+        cpin.setOnFocusChangeListener(this);
         ((Button) findViewById(R.id.maj)).setOnClickListener(this);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Veuillez patienter ...");
@@ -92,6 +95,15 @@ public class ChangePinActivity extends AppCompatActivity implements View.OnClick
                     progressDialog.dismiss();
                 }
             });
+        }
+
+    }
+
+    @Override
+    public void onFocusChange(View view, boolean b) {
+        if(!b){
+            InputMethodManager inputMethodManager =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
 
     }

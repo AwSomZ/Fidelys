@@ -13,6 +13,8 @@
         android:layout_marginLeft="5sp"
         android:layout_marginRight="5sp"
         android:layout_marginBottom="5sp"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
         android:layout_marginTop="170dp"
         tools:context=".Profile2Fragment">
 
@@ -79,9 +81,10 @@
                         android:autofillHints="@string/hide_bottom_view_on_scroll_behavior"
                         android:background="@drawable/input"
                         android:ems="10"
+                        android:focusableInTouchMode="false"
                         android:fontFamily="@font/soda"
                         android:hint="@string/cin"
-                        android:inputType="number"
+                        android:inputType="none"
                         android:padding="10dp" />
 
                     <Spinner

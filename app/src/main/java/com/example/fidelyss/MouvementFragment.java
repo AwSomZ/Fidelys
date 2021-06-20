@@ -1,7 +1,6 @@
 package com.example.fidelyss;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -76,12 +75,6 @@ public class MouvementFragment extends Fragment {
         sharedPreferences = this.getContext().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
         String sexe = sharedPreferences.getString("sexe", "");
-        String changed = sharedPreferences.getString("changed", "");
-        if (changed.equals("false")){
-            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
-            startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-        }
         String npp = sharedPreferences.getString("nom", "") + " " + sharedPreferences.getString("prenom", "");
 
         Call<mouvement> find = api.getMvt(id);

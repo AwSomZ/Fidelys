@@ -51,12 +51,6 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
         acheter.setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
-        String changed = sharedPreferences.getString("changed", "");
-        if (changed.equals("false")){
-            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
-            startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-        }
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
         Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);

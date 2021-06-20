@@ -2,7 +2,6 @@ package com.example.fidelyss;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -78,12 +77,6 @@ public class Profile2Fragment extends Fragment implements View.OnClickListener, 
         String telmadd = sharedPreferences.getString("telm", "");
         String villeadd = sharedPreferences.getString("ville", "");
         String cpadd = sharedPreferences.getString("cp", "");
-        String changed = sharedPreferences.getString("changed", "");
-        if (changed.equals("false")){
-            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
-            startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-        }
         cin.setText(cinadd);
         adr.setText(adradd);
         nationalite.setText(nationaliteadd);

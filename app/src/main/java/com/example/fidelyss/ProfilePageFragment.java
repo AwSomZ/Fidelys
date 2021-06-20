@@ -74,13 +74,17 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
         String nationaliteadd = sharedPreferences.getString("nationalite", "");
         String emailadd = sharedPreferences.getString("email", "");
         String npadd = sharedPreferences.getString("nom", "")+" "+sharedPreferences.getString("prenom", "");
-        String changed = sharedPreferences.getString("changed", "");
-        if (changed.equals("false")){
-            Intent intent = new Intent(getActivity(), ChangePinActivity.class);
-            startActivity(intent);
-            getActivity().overridePendingTransition(R.anim.zoom_in, R.anim.zoom_out);
-        }
-        logout.setOnClickListener(this);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("LOGIN");
+                editor.apply();
+                intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
         np.setText(npadd);
         datenaiss.setText(dateadd);
         sexe.setText(sexeadd);
@@ -115,15 +119,6 @@ public class ProfilePageFragment extends Fragment implements View.OnClickListene
                 break;
             case R.id.adresseid:
                 unFrgment = new Profile2Fragment();
-                break;
-            case R.id.logout:
-                unFrgment = new ProfilePageFragment();
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.remove("LOGIN");
-                editor.apply();
-                intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
                 break;
         }
 
