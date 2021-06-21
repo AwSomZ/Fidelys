@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Global extends Application {
-    private String BaseUrl ="http://192.168.1.27:80/";
+    private String BaseUrl ="http://192.168.1.15:80/";
     private static final Map<String, Integer> mileprice = new HashMap<String, Integer>() {{
         put("Abidjan",24000);
         put("Alger",5000);

@@ -198,7 +198,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog dialog;
-                dialog = new DatePickerDialog(AchatBilletActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateAllerSetListener, year, month+1, day);
+                dialog = new DatePickerDialog(AchatBilletActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateAllerSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
 
@@ -208,7 +208,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         DateAllerSetListener= new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day){
-                String date = year + "-" + month + "-" + day;
+                String date = year + "-" + (month+1) + "-" + day;
                 datealler.setText(date);
                 dateallerString=date;
 
@@ -224,7 +224,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
                 DatePickerDialog dialog;
-                dialog = new DatePickerDialog(AchatBilletActivity.this , android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateRetourSetListener, year, month+1, day);
+                dialog = new DatePickerDialog(AchatBilletActivity.this , android.R.style.Theme_Holo_Light_Dialog_MinWidth, DateRetourSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 dialog.show();
@@ -233,7 +233,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
         DateRetourSetListener= new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day){
-                String date = year + "-" + month + "-" + day;
+                String date = year + "-" + (month+1) + "-" + day;
                 dateretour.setText(date);
                 dateretourString=date;
 
@@ -300,7 +300,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                 }
                 if (date1.compareTo(date2) >= 0) {
                     ok = false;
-                    Toast.makeText(AchatBilletActivity.this, "La date de retour doit etre apres la date d aller "+dateretourString+dateallerString, Toast.LENGTH_LONG).show();
+                    Toast.makeText(AchatBilletActivity.this, "La date de retour doit etre apres la date d\'aller ", Toast.LENGTH_LONG).show();
                     dateretourString="";
                     dateallerString="";
                     dateretour.setText("");
