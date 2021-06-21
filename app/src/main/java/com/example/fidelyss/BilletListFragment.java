@@ -51,7 +51,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
         acheter.setOnClickListener(this);
         sharedPreferences = this.getActivity().getSharedPreferences("clientfidelys", Context.MODE_PRIVATE);
         String id = sharedPreferences.getString("id", "");
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
         ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
         Call<List<billet>> getBillet = api.getBillet(id);
@@ -84,7 +84,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                String ref = sharedPreferences.getString("refresh", "");
+                String ref = sharedPreferences.getString("refreshbillet", "");
                 if (ref.equals("yes")){
                     Call<List<billet>> getBillet = api.getBillet(id);
 
@@ -113,7 +113,7 @@ public class BilletListFragment extends Fragment implements View.OnClickListener
                         }
                     });
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("refresh","no");
+                    editor.putString("refreshbillet","no");
                     editor.commit();
                 }
 

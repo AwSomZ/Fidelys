@@ -324,7 +324,7 @@ public class AchatBilletActivity extends AppCompatActivity  implements RadioGrou
                     solde=solde-p;
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("milesprime",String.valueOf(solde));
-                    editor.putString("refresh","yes");
+                    editor.putString("refreshbillet","yes");
                     editor.commit();
                     Toast.makeText(AchatBilletActivity.this, "Achat validé ", Toast.LENGTH_LONG).show();
                     progressDialog.dismiss();

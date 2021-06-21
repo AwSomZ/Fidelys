@@ -131,7 +131,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
                                   Toast.makeText(MilesFragment.this.getActivity(), "Client non trouvé ", Toast.LENGTH_LONG).show();
                               }
                               else {
-                                  Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();
+                                  Toast.makeText(MilesFragment.this.getActivity(), "Achat avec successs", Toast.LENGTH_LONG).show();
                               }
                               progressDialog.dismiss();
 
@@ -149,7 +149,7 @@ public class MilesFragment extends Fragment implements View.OnClickListener, Ada
                progressDialog.show();
                Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) this.getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create()).build();
                ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-               Call<String> buy = api.buyMiles(id, quantite, milestype, client);
+               Call<String> buy = api.buyMiles(sharedPreferences.getString("id", ""), quantite, milestype, sharedPreferences.getString("id", ""));
                buy.enqueue(new retrofit.Callback<String>() {
                    public void onResponse(Response<String> response, Retrofit retrofit) {
                        Toast.makeText(MilesFragment.this.getActivity(), "Achat avec success ", Toast.LENGTH_LONG).show();

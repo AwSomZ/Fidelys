@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="16dp">
 
                 <TextView
                     android:id="@+id/datealler"
@@ -78,7 +78,7 @@
                     android:textAlignment="center"
                     android:textSize="20dp"
                     android:textColor="@color/lred"
-                    android:text="2020-02-05"/>
+                    android:text="2020-02-05 20:00 AM"/>
 
                 <ImageView
                     android:id="@+id/arrow"
@@ -97,21 +97,21 @@
                     android:textSize="20dp"
                     android:textColor="@color/lred"
                     android:textAlignment="center"
-                    android:text="2020-03-05"/>
+                    android:text="2020-03-05 20:00 AM"/>
 
             </LinearLayout>
 
             <TextView
                 android:id="@+id/classe"
-                android:layout_width="100dp"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/soda"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="5dp"
                 android:text="Classe Affaires"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

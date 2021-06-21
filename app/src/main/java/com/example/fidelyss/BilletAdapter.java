@@ -113,7 +113,7 @@ public class BilletAdapter extends RecyclerView.Adapter<BilletAdapter.BilletView
         String versString = billet.getDestination();
         String typeString = billet.getType();
         String classeString = billet.getClasse();
-        SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdft = new SimpleDateFormat("yyyy-MM-dd hh:mm aaa");
         String dateallerString = sdft.format(datealler);
         String dateretourString = sdft.format(dateretour);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(

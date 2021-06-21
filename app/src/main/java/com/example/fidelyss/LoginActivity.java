@@ -112,6 +112,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putString("cp", response.body().getCodepostal());
                         editor.putString("ville", response.body().getVille());
                         editor.putString("LOGIN", response.body().getId());
+                        editor.putString("refresh", "non");
+                        editor.putString("refreshbillet", "non");
                         editor.apply();
                         Intent intent = new Intent(LoginActivity.this, MouvementActivity.class);
                         startActivity(intent);
