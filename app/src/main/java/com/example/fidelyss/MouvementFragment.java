@@ -100,35 +100,36 @@ public class MouvementFragment extends Fragment {
                     editor.putString("milesprime",sp);
                     editor.apply();
                     // api call on response on failure
-                    Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                    Retrofit Rf = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson)).build();
-                    ApiHandler api = (ApiHandler) Rf.create(ApiHandler.class);
-                    Call<List<transaction>>tr = api.getTransaction(id);
-                    tr.enqueue(new Callback<List<transaction>>(){
-                        public void onResponse(Response<List<transaction>> response, Retrofit retrofit) {
-                            List<transaction> listtransaction =new ArrayList<transaction>();
-                            if(response.body()!= null) {
-                                error.setVisibility(View.GONE);
-                                listtransaction= (List<transaction>)response.body();
-                                recyclerViewUser = v.findViewById(R.id.rv1);
-                                layoutManager = new LinearLayoutManager(getActivity());
-                                recyclerViewUser.setLayoutManager(layoutManager);
-                                recyclerViewUser.setHasFixedSize(true);
-                                TransactionAdapter adapter=new TransactionAdapter(getActivity(),listtransaction);
-                                recyclerViewUser.setAdapter(adapter);
-                            }
-                            else {error.setVisibility(View.VISIBLE);}
 
-
-                        }
-                        public void onFailure(Throwable t) {
-                            Toast.makeText(MouvementFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
                 }
             }
             public void onFailure(Throwable t) {
                 Toast.makeText(MouvementFragment.this.getActivity(), "Erreur " + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        Gson gson1 = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        Retrofit Rf1 = new Retrofit.Builder().baseUrl(((Global) getActivity().getApplication()).getBaseUrl()).addConverterFactory(GsonConverterFactory.create(gson1)).build();
+        ApiHandler api1 = (ApiHandler) Rf1.create(ApiHandler.class);
+        Call<List<transaction>>tr = api1.getTransaction(id);
+        tr.enqueue(new Callback<List<transaction>>(){
+            public void onResponse(Response<List<transaction>> response, Retrofit retrofit) {
+                List<transaction> listtransaction =new ArrayList<transaction>();
+                if(response.body()!= null) {
+                    error.setVisibility(View.GONE);
+                    listtransaction= (List<transaction>)response.body();
+                    recyclerViewUser = v.findViewById(R.id.rv1);
+                    layoutManager = new LinearLayoutManager(getActivity());
+                    recyclerViewUser.setLayoutManager(layoutManager);
+                    recyclerViewUser.setHasFixedSize(true);
+                    TransactionAdapter adapter=new TransactionAdapter(getActivity(),listtransaction);
+                    recyclerViewUser.setAdapter(adapter);
+                }
+                else {error.setVisibility(View.VISIBLE);}
+
+
+            }
+            public void onFailure(Throwable t) {
+                Toast.makeText(MouvementFragment.this.getActivity(), "Erreur" + t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
             }
         });
         return v;
